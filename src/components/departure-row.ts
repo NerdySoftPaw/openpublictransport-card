@@ -15,15 +15,8 @@ export class DepartureRow extends LitElement {
   @property({ type: Boolean, attribute: "show-realtime" }) showRealtime = true;
 
   private _formatTime(timeStr: string): string {
-    try {
-      const date = new Date(timeStr);
-      return date.toLocaleTimeString("de-DE", {
-        hour: "2-digit",
-        minute: "2-digit",
-      });
-    } catch {
-      return timeStr;
-    }
+    // Time is already in HH:MM format from the integration
+    return timeStr || "";
   }
 
   private _renderCountdown(): string {

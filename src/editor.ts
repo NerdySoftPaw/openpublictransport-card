@@ -29,9 +29,17 @@ export class OpenpublictransportCardEditor extends LitElement {
       font-weight: 400;
     }
     ha-entity-picker,
-    ha-select,
     ha-textfield {
       width: 100%;
+    }
+    select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid var(--divider-color, #ccc);
+      border-radius: 4px;
+      background: var(--card-background-color, #fff);
+      color: var(--primary-text-color, #333);
+      font-size: 14px;
     }
     .section-title {
       font-size: 12px;
@@ -65,15 +73,19 @@ export class OpenpublictransportCardEditor extends LitElement {
     this._fireConfigChanged();
   }
 
-  private _layoutChanged(ev: CustomEvent): void {
-    if (!this._config || !ev.detail.value) return;
-    this._config = { ...this._config, layout: ev.detail.value };
+  private _layoutChanged(ev: Event): void {
+    const target = ev.target as any;
+    const value = target.value;
+    if (!this._config || !value) return;
+    this._config = { ...this._config, layout: value };
     this._fireConfigChanged();
   }
 
-  private _themeChanged(ev: CustomEvent): void {
-    if (!this._config || !ev.detail.value) return;
-    this._config = { ...this._config, theme: ev.detail.value };
+  private _themeChanged(ev: Event): void {
+    const target = ev.target as any;
+    const value = target.value;
+    if (!this._config || !value) return;
+    this._config = { ...this._config, theme: value };
     this._fireConfigChanged();
   }
 
@@ -117,28 +129,20 @@ export class OpenpublictransportCardEditor extends LitElement {
 
         <div class="config-row">
           <label>Layout</label>
-          <ha-select
-            .value=${this._config.layout}
-            @selected=${this._layoutChanged}
-            @closed=${(e: Event) => e.stopPropagation()}
-          >
-            <mwc-list-item value="table">Table (Abfahrtstafel)</mwc-list-item>
-            <mwc-list-item value="compact">Compact (Chips)</mwc-list-item>
-            <mwc-list-item value="trip">Trip (Journey)</mwc-list-item>
-          </ha-select>
+          <select .value=${this._config.layout} @change=${this._layoutChanged}>
+            <option value="table" ?selected=${this._config.layout === "table"}>Table (Abfahrtstafel)</option>
+            <option value="compact" ?selected=${this._config.layout === "compact"}>Compact (Chips)</option>
+            <option value="trip" ?selected=${this._config.layout === "trip"}>Trip (Journey)</option>
+          </select>
         </div>
 
         <div class="config-row">
           <label>Theme</label>
-          <ha-select
-            .value=${this._config.theme}
-            @selected=${this._themeChanged}
-            @closed=${(e: Event) => e.stopPropagation()}
-          >
-            <mwc-list-item value="auto">Auto</mwc-list-item>
-            <mwc-list-item value="dark">Dark</mwc-list-item>
-            <mwc-list-item value="light">Light</mwc-list-item>
-          </ha-select>
+          <select .value=${this._config.theme} @change=${this._themeChanged}>
+            <option value="auto" ?selected=${this._config.theme === "auto"}>Auto</option>
+            <option value="dark" ?selected=${this._config.theme === "dark"}>Dark</option>
+            <option value="light" ?selected=${this._config.theme === "light"}>Light</option>
+          </select>
         </div>
 
         <div class="config-row">
