@@ -1,0 +1,32 @@
+{
+  "name": "openpublictransport-card",
+  "version": "1.0.0",
+  "description": "Custom Home Assistant Lovelace card for public transport departures",
+  "main": "dist/openpublictransport-card.js",
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c --watch"
+  },
+  "keywords": [
+    "home-assistant",
+    "lovelace",
+    "custom-card",
+    "public-transport",
+    "departures"
+  ],
+  "author": "NerdySoftPaw",
+  "license": "MIT",
+  "dependencies": {
+    "lit": "^3.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.0",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-typescript": "^12.0.0",
+    "rollup": "^4.0.0",
+    "@rollup/plugin-terser": "^0.4.0",
+    "tslib": "^2.6.0",
+    "typescript": "^5.3.0"
+  }
+}
