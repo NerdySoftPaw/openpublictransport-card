@@ -14,15 +14,7 @@ export class TripLayout extends LitElement {
   @property({ attribute: false }) trip: TripData | null = null;
 
   private _formatTime(timeStr: string): string {
-    try {
-      const date = new Date(timeStr);
-      return date.toLocaleTimeString("de-DE", {
-        hour: "2-digit",
-        minute: "2-digit",
-      });
-    } catch {
-      return timeStr;
-    }
+    return timeStr || "";
   }
 
   private _getRiskClass(risk: string): string {

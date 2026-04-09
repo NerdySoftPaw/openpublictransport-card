@@ -103,10 +103,21 @@ export class OpenpublictransportCard extends LitElement {
     const stateObj = this.hass.states[this._config.entity];
     if (!stateObj) return null;
 
-    const trip = stateObj.attributes["trip"];
-    if (!trip) return null;
+    const attrs = stateObj.attributes;
+    // Trip sensor exposes data directly as attributes
+    if (!attrs["departure"] || !attrs["legs"]) return null;
 
-    return trip as TripData;
+    return {
+      departure: attrs["departure"] as string,
+      arrival: attrs["arrival"] as string,
+      duration_minutes: attrs["duration_minutes"] as number,
+      transfers: attrs["transfers"] as number,
+      connection_feasible: attrs["connection_feasible"] as boolean,
+      transfer_risk: attrs["transfer_risk"] as string,
+      min_transfer_time: attrs["min_transfer_time"] as number,
+      legs: attrs["legs"] as any[],
+      next_journeys: attrs["next_journeys"] as any[] | undefined,
+    };
   }
 
   private _getStationName(): string {
