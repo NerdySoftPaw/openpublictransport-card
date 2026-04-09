@@ -67,10 +67,26 @@ export class OpenpublictransportCardEditor extends LitElement {
     this.dispatchEvent(event);
   }
 
-  private _entityChanged(ev: CustomEvent): void {
-    if (!this._config || !ev.detail.value) return;
-    this._config = { ...this._config, entity: ev.detail.value };
+  private _entityChanged(ev: Event): void {
+    const target = ev.target as HTMLSelectElement;
+    if (!this._config || !target.value) return;
+    this._config = { ...this._config, entity: target.value };
     this._fireConfigChanged();
+  }
+
+  private _getEntityOptions(): { id: string; name: string }[] {
+    if (!this.hass) return [];
+    // Show all sensors that have a "departures" or "legs" attribute (our integration)
+    return Object.keys(this.hass.states)
+      .filter((id) => {
+        if (!id.startsWith("sensor.")) return false;
+        const attrs = this.hass.states[id].attributes;
+        return attrs["departures"] !== undefined || attrs["legs"] !== undefined;
+      })
+      .map((id) => ({
+        id,
+        name: this.hass.states[id].attributes.friendly_name || id,
+      }));
   }
 
   private _layoutChanged(ev: Event): void {
@@ -118,13 +134,12 @@ export class OpenpublictransportCardEditor extends LitElement {
       <div class="card-config">
         <div class="config-row">
           <label>Entity</label>
-          <ha-entity-picker
-            .hass=${this.hass}
-            .value=${this._config.entity || ""}
-            .includeDomains=${["sensor"]}
-            @value-changed=${this._entityChanged}
-            allow-custom-entity
-          ></ha-entity-picker>
+          <select .value=${this._config.entity || ""} @change=${this._entityChanged}>
+            <option value="">-- Select Entity --</option>
+            ${this._getEntityOptions().map(
+              (e) => html`<option value=${e.id} ?selected=${this._config.entity === e.id}>${e.name}</option>`
+            )}
+          </select>
         </div>
 
         <div class="config-row">
