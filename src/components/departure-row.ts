@@ -2,6 +2,7 @@ import { LitElement, html, nothing } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { cardStyles } from "../styles";
 import { Departure } from "../types";
+import { localize } from "../localize";
 import "./delay-badge";
 import "./transport-icon";
 
@@ -10,6 +11,7 @@ export class DepartureRow extends LitElement {
   static styles = cardStyles;
 
   @property({ attribute: false }) departure!: Departure;
+  @property({ type: String }) lang = "en";
   @property({ type: Boolean, attribute: "show-platform" }) showPlatform = true;
   @property({ type: Boolean, attribute: "show-delay" }) showDelay = true;
   @property({ type: Boolean, attribute: "show-realtime" }) showRealtime = true;
@@ -21,9 +23,9 @@ export class DepartureRow extends LitElement {
 
   private _renderCountdown(): string {
     const mins = this.departure.minutes_until_departure;
-    if (mins <= 0) return "jetzt";
-    if (mins === 1) return "in 1 min";
-    return `in ${mins} min`;
+    if (mins <= 0) return localize(this.lang, "now");
+    if (mins === 1) return localize(this.lang, "in_1_min");
+    return localize(this.lang, "in_min", { min: mins });
   }
 
   private _renderPlatform() {

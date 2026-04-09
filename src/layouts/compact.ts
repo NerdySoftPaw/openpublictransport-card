@@ -2,6 +2,7 @@ import { LitElement, html, nothing } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { cardStyles } from "../styles";
 import { Departure, CardConfig, HomeAssistant } from "../types";
+import { localize } from "../localize";
 import "../components/transport-icon";
 
 @customElement("openpublictransport-compact-layout")
@@ -24,7 +25,7 @@ export class CompactLayout extends LitElement {
   }
 
   private _renderCountdown(mins: number): string {
-    if (mins <= 0) return "jetzt";
+    if (mins <= 0) return localize(this.hass.language, "now");
     return `${mins}'`;
   }
 
@@ -50,7 +51,7 @@ export class CompactLayout extends LitElement {
     if (displayDepartures.length === 0) {
       return html`
         ${this._renderHeader()}
-        <div class="card-empty">No departures available</div>
+        <div class="card-empty">${localize(this.hass.language, "no_departures")}</div>
       `;
     }
 

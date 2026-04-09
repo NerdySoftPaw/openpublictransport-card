@@ -2,6 +2,7 @@ import { LitElement, html, css } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { CardConfig, HomeAssistant } from "./types";
 import { DEFAULT_CONFIG } from "./const";
+import { localize } from "./localize";
 
 @customElement("openpublictransport-card-editor")
 export class OpenpublictransportCardEditor extends LitElement {
@@ -130,10 +131,11 @@ export class OpenpublictransportCardEditor extends LitElement {
       return html``;
     }
 
+    const lang = this.hass.language;
     return html`
       <div class="card-config">
         <div class="config-row">
-          <label>Entity</label>
+          <label>${localize(lang, "entity")}</label>
           <select .value=${this._config.entity || ""} @change=${this._entityChanged}>
             <option value="">-- Select Entity --</option>
             ${this._getEntityOptions().map(
@@ -143,16 +145,16 @@ export class OpenpublictransportCardEditor extends LitElement {
         </div>
 
         <div class="config-row">
-          <label>Layout</label>
+          <label>${localize(lang, "layout")}</label>
           <select .value=${this._config.layout} @change=${this._layoutChanged}>
-            <option value="table" ?selected=${this._config.layout === "table"}>Table (Abfahrtstafel)</option>
-            <option value="compact" ?selected=${this._config.layout === "compact"}>Compact (Chips)</option>
-            <option value="trip" ?selected=${this._config.layout === "trip"}>Trip (Journey)</option>
+            <option value="table" ?selected=${this._config.layout === "table"}>${localize(lang, "table_layout")}</option>
+            <option value="compact" ?selected=${this._config.layout === "compact"}>${localize(lang, "compact_layout")}</option>
+            <option value="trip" ?selected=${this._config.layout === "trip"}>${localize(lang, "trip_layout")}</option>
           </select>
         </div>
 
         <div class="config-row">
-          <label>Theme</label>
+          <label>${localize(lang, "theme")}</label>
           <select .value=${this._config.theme} @change=${this._themeChanged}>
             <option value="auto" ?selected=${this._config.theme === "auto"}>Auto</option>
             <option value="dark" ?selected=${this._config.theme === "dark"}>Dark</option>
@@ -161,7 +163,7 @@ export class OpenpublictransportCardEditor extends LitElement {
         </div>
 
         <div class="config-row">
-          <label>Max Departures</label>
+          <label>${localize(lang, "max_departures")}</label>
           <ha-textfield
             type="number"
             .value=${String(this._config.max_departures)}
@@ -171,10 +173,10 @@ export class OpenpublictransportCardEditor extends LitElement {
           ></ha-textfield>
         </div>
 
-        <div class="section-title">Display Options</div>
+        <div class="section-title">${localize(lang, "display_options")}</div>
 
         <div class="toggle-row">
-          <label>Show Header</label>
+          <label>${localize(lang, "show_header")}</label>
           <ha-switch
             .checked=${this._config.show_header}
             @change=${this._toggleChanged("show_header")}
@@ -182,7 +184,7 @@ export class OpenpublictransportCardEditor extends LitElement {
         </div>
 
         <div class="toggle-row">
-          <label>Show Platform</label>
+          <label>${localize(lang, "show_platform")}</label>
           <ha-switch
             .checked=${this._config.show_platform}
             @change=${this._toggleChanged("show_platform")}
@@ -190,7 +192,7 @@ export class OpenpublictransportCardEditor extends LitElement {
         </div>
 
         <div class="toggle-row">
-          <label>Show Delay</label>
+          <label>${localize(lang, "show_delay")}</label>
           <ha-switch
             .checked=${this._config.show_delay}
             @change=${this._toggleChanged("show_delay")}
@@ -198,7 +200,7 @@ export class OpenpublictransportCardEditor extends LitElement {
         </div>
 
         <div class="toggle-row">
-          <label>Show Realtime Indicator</label>
+          <label>${localize(lang, "show_realtime")}</label>
           <ha-switch
             .checked=${this._config.show_realtime_indicator}
             @change=${this._toggleChanged("show_realtime_indicator")}

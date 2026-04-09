@@ -2,6 +2,7 @@ import { LitElement, html, nothing } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { cardStyles } from "../styles";
 import { Departure, CardConfig, HomeAssistant } from "../types";
+import { localize } from "../localize";
 import "../components/departure-row";
 
 @customElement("openpublictransport-table-layout")
@@ -64,7 +65,7 @@ export class TableLayout extends LitElement {
     if (displayDepartures.length === 0) {
       return html`
         ${this._renderHeader()}
-        <div class="card-empty">No departures available</div>
+        <div class="card-empty">${localize(this.hass.language, "no_departures")}</div>
       `;
     }
 
@@ -75,10 +76,10 @@ export class TableLayout extends LitElement {
         <table class="departure-table">
           <thead>
             <tr>
-              <th>Zeit</th>
-              <th>Linie</th>
-              <th>Ziel</th>
-              ${this.config.show_platform ? html`<th>Gleis</th>` : nothing}
+              <th>${localize(this.hass.language, "time")}</th>
+              <th>${localize(this.hass.language, "line")}</th>
+              <th>${localize(this.hass.language, "destination")}</th>
+              ${this.config.show_platform ? html`<th>${localize(this.hass.language, "track")}</th>` : nothing}
             </tr>
           </thead>
           <tbody>
@@ -86,6 +87,7 @@ export class TableLayout extends LitElement {
               (dep) => html`
                 <openpublictransport-departure-row
                   .departure=${dep}
+                  .lang=${this.hass.language}
                   ?show-platform=${this.config.show_platform}
                   ?show-delay=${this.config.show_delay}
                   ?show-realtime=${this.config.show_realtime_indicator}

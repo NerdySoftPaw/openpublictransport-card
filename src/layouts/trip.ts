@@ -2,6 +2,7 @@ import { LitElement, html, nothing } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { cardStyles } from "../styles";
 import { TripData, TripLeg, CardConfig, HomeAssistant } from "../types";
+import { localize } from "../localize";
 import "../components/transport-icon";
 import "../components/delay-badge";
 
@@ -57,15 +58,16 @@ export class TripLayout extends LitElement {
   }
 
   private _renderMeta(trip: TripData) {
+    const lang = this.hass.language;
     return html`
       <div class="trip-meta">
         <div class="trip-meta-item">
           <ha-icon icon="mdi:swap-horizontal"></ha-icon>
-          <span>${trip.transfers} transfer${trip.transfers !== 1 ? "s" : ""}</span>
+          <span>${trip.transfers} ${trip.transfers !== 1 ? localize(lang, "transfers") : localize(lang, "transfer")}</span>
         </div>
         <div class="trip-meta-item ${this._getRiskClass(trip.transfer_risk)}">
           <ha-icon icon=${this._getRiskIcon(trip.transfer_risk)}></ha-icon>
-          <span>${trip.transfer_risk} risk</span>
+          <span>${trip.transfer_risk} ${localize(lang, "risk")}</span>
         </div>
         ${trip.min_transfer_time > 0
           ? html`
@@ -79,7 +81,7 @@ export class TripLayout extends LitElement {
           ? html`
               <div class="trip-meta-item risk-high">
                 <ha-icon icon="mdi:close-circle"></ha-icon>
-                <span>Connection at risk</span>
+                <span>${localize(lang, "connection_at_risk")}</span>
               </div>
             `
           : nothing}
@@ -108,12 +110,12 @@ export class TripLayout extends LitElement {
           ></openpublictransport-transport-icon>
           <span>${leg.line}</span>
           ${leg.platform
-            ? html`<span>&middot; Gl. ${leg.platform}</span>`
+            ? html`<span>&middot; ${localize(this.hass.language, "platform")} ${leg.platform}</span>`
             : nothing}
           <span>&middot; ${leg.duration_minutes} min</span>
         </div>
         ${leg.transfer
-          ? html`<div class="leg-transfer-info">Transfer</div>`
+          ? html`<div class="leg-transfer-info">${localize(this.hass.language, "transfer")}</div>`
           : nothing}
       </div>
     `;
@@ -142,9 +144,10 @@ export class TripLayout extends LitElement {
   private _renderAlternatives(trip: TripData) {
     if (!trip.next_journeys || trip.next_journeys.length === 0) return nothing;
 
+    const lang = this.hass.language;
     return html`
       <div class="alt-journeys">
-        <div class="alt-journeys-title">Alternative Connections</div>
+        <div class="alt-journeys-title">${localize(lang, "alternative_connections")}</div>
         ${trip.next_journeys.map(
           (alt) => html`
             <div class="alt-journey">
@@ -152,7 +155,7 @@ export class TripLayout extends LitElement {
               <span class="trip-arrow">&rarr;</span>
               <span class="leg-time">${this._formatTime(alt.arrival)}</span>
               <span>${alt.duration_minutes} min</span>
-              <span>${alt.transfers} transfer${alt.transfers !== 1 ? "s" : ""}</span>
+              <span>${alt.transfers} ${alt.transfers !== 1 ? localize(lang, "transfers") : localize(lang, "transfer")}</span>
               <span class=${this._getRiskClass(alt.transfer_risk)}>
                 <ha-icon icon=${this._getRiskIcon(alt.transfer_risk)} style="--mdc-icon-size:14px;"></ha-icon>
               </span>
@@ -165,7 +168,7 @@ export class TripLayout extends LitElement {
 
   protected render() {
     if (!this.trip) {
-      return html`<div class="card-empty">No trip data available</div>`;
+      return html`<div class="card-empty">${localize(this.hass.language, "no_trip_data")}</div>`;
     }
 
     return html`

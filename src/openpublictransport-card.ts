@@ -3,6 +3,7 @@ import { customElement, property, state } from "lit/decorators.js";
 import { cardStyles } from "./styles";
 import { CardConfig, Departure, TripData, HomeAssistant } from "./types";
 import { CARD_VERSION, DEFAULT_CONFIG } from "./const";
+import { localize } from "./localize";
 
 import "./layouts/table";
 import "./layouts/compact";
@@ -36,7 +37,7 @@ export class OpenpublictransportCard extends LitElement {
 
   public setConfig(config: Partial<CardConfig>): void {
     if (!config.entity) {
-      throw new Error("Please define an entity");
+      throw new Error(localize("en", "please_define_entity"));
     }
     this._config = { ...DEFAULT_CONFIG, ...config } as CardConfig;
   }
@@ -157,7 +158,7 @@ export class OpenpublictransportCard extends LitElement {
     }
 
     if (stateObj.state === "unavailable") {
-      return this._renderError("Entity is unavailable");
+      return this._renderError(localize(this.hass.language, "entity_unavailable"));
     }
 
     return html`
