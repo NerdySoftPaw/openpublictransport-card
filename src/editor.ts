@@ -86,7 +86,10 @@ export class OpenpublictransportCardEditor extends LitElement {
       })
       .map((id) => ({
         id,
-        name: this.hass.states[id].attributes.friendly_name || id,
+        name:
+          typeof this.hass.states[id].attributes["friendly_name"] === "string"
+            ? (this.hass.states[id].attributes["friendly_name"] as string)
+            : id,
       }));
   }
 

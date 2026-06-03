@@ -77,6 +77,13 @@ const pt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
     font-family: "Roboto Mono", "Courier New", monospace;
   }
 
+  /* Icon sizing fallback: keeps legacy mdc variable and explicit dimensions in sync. */
+  ha-icon {
+    --mdc-icon-size: var(--opt-icon-size, 24px);
+    width: var(--opt-icon-size, 24px);
+    height: var(--opt-icon-size, 24px);
+  }
+
   .card-header {
     display: flex;
     justify-content: space-between;
@@ -120,7 +127,7 @@ const pt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
   }
 
   .disruption-banner ha-icon {
-    --mdc-icon-size: 16px;
+    --opt-icon-size: 16px;
   }
 
   /* Table layout */
@@ -224,7 +231,7 @@ const pt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
 
   /* Notices */
   .notice-icon {
-    --mdc-icon-size: 16px;
+    --opt-icon-size: 16px;
     color: var(--opt-delay-yellow);
     cursor: help;
   }
@@ -275,7 +282,7 @@ const pt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
   }
 
   .compact-chip ha-icon {
-    --mdc-icon-size: 18px;
+    --opt-icon-size: 18px;
   }
 
   /* Trip layout */
@@ -320,7 +327,7 @@ const pt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
   }
 
   .trip-meta-item ha-icon {
-    --mdc-icon-size: 14px;
+    --opt-icon-size: 14px;
   }
 
   /* Transfer risk badges */
@@ -385,7 +392,7 @@ const pt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
   }
 
   .leg-details ha-icon {
-    --mdc-icon-size: 14px;
+    --opt-icon-size: 14px;
   }
 
   .leg-time {
@@ -443,7 +450,7 @@ const pt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
   }
 
   .card-error ha-icon {
-    --mdc-icon-size: 40px;
+    --opt-icon-size: 40px;
     display: block;
     margin: 0 auto 12px;
   }
@@ -676,7 +683,7 @@ const pt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
               <span>${t.duration_minutes} min</span>
               <span>${t.transfers} ${1!==t.transfers?yt(e,"transfers"):yt(e,"transfer")}</span>
               <span class=${this._getRiskClass(t.transfer_risk)}>
-                <ha-icon icon=${this._getRiskIcon(t.transfer_risk)} style="--mdc-icon-size:14px;"></ha-icon>
+                <ha-icon icon=${this._getRiskIcon(t.transfer_risk)} style="--opt-icon-size:14px;"></ha-icon>
               </span>
             </div>
           `)}
@@ -688,7 +695,7 @@ const pt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
         ${this._renderTimeline(this.trip)}
         ${this._renderAlternatives(this.trip)}
       </div>
-    `:V`<div class="card-empty">${yt(this.hass.language,"no_trip_data")}</div>`}};At.styles=gt,t([ht({attribute:!1})],At.prototype,"hass",void 0),t([ht({attribute:!1})],At.prototype,"config",void 0),t([ht({attribute:!1})],At.prototype,"trip",void 0),At=t([pt("openpublictransport-trip-layout")],At);let kt=class extends ot{setConfig(t){this._config={...ft,...t}}_fireConfigChanged(){const t=new CustomEvent("config-changed",{detail:{config:this._config},bubbles:!0,composed:!0});this.dispatchEvent(t)}_entityChanged(t){const e=t.target;this._config&&e.value&&(this._config={...this._config,entity:e.value},this._fireConfigChanged())}_getEntityOptions(){return this.hass?Object.keys(this.hass.states).filter(t=>{if(!t.startsWith("sensor."))return!1;const e=this.hass.states[t].attributes;return void 0!==e.departures||void 0!==e.legs}).map(t=>({id:t,name:this.hass.states[t].attributes.friendly_name||t})):[]}_layoutChanged(t){const e=t.target.value;this._config&&e&&(this._config={...this._config,layout:e},this._fireConfigChanged())}_themeChanged(t){const e=t.target.value;this._config&&e&&(this._config={...this._config,theme:e},this._fireConfigChanged())}_maxDeparturesChanged(t){if(!this._config)return;const e=t.target,i=parseInt(e.value,10);isNaN(i)||i<1||(this._config={...this._config,max_departures:i},this._fireConfigChanged())}_toggleChanged(t){return e=>{this._config&&(this._config={...this._config,[t]:e.target.checked},this._fireConfigChanged())}}render(){if(!this.hass||!this._config)return V``;const t=this.hass.language;return V`
+    `:V`<div class="card-empty">${yt(this.hass.language,"no_trip_data")}</div>`}};At.styles=gt,t([ht({attribute:!1})],At.prototype,"hass",void 0),t([ht({attribute:!1})],At.prototype,"config",void 0),t([ht({attribute:!1})],At.prototype,"trip",void 0),At=t([pt("openpublictransport-trip-layout")],At);let kt=class extends ot{setConfig(t){this._config={...ft,...t}}_fireConfigChanged(){const t=new CustomEvent("config-changed",{detail:{config:this._config},bubbles:!0,composed:!0});this.dispatchEvent(t)}_entityChanged(t){const e=t.target;this._config&&e.value&&(this._config={...this._config,entity:e.value},this._fireConfigChanged())}_getEntityOptions(){return this.hass?Object.keys(this.hass.states).filter(t=>{if(!t.startsWith("sensor."))return!1;const e=this.hass.states[t].attributes;return void 0!==e.departures||void 0!==e.legs}).map(t=>({id:t,name:"string"==typeof this.hass.states[t].attributes.friendly_name?this.hass.states[t].attributes.friendly_name:t})):[]}_layoutChanged(t){const e=t.target.value;this._config&&e&&(this._config={...this._config,layout:e},this._fireConfigChanged())}_themeChanged(t){const e=t.target.value;this._config&&e&&(this._config={...this._config,theme:e},this._fireConfigChanged())}_maxDeparturesChanged(t){if(!this._config)return;const e=t.target,i=parseInt(e.value,10);isNaN(i)||i<1||(this._config={...this._config,max_departures:i},this._fireConfigChanged())}_toggleChanged(t){return e=>{this._config&&(this._config={...this._config,[t]:e.target.checked},this._fireConfigChanged())}}render(){if(!this.hass||!this._config)return V``;const t=this.hass.language;return V`
       <div class="card-config">
         <div class="config-row">
           <label>${yt(t,"entity")}</label>
@@ -836,4 +843,4 @@ const pt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
             .departures=${this._getDepartures()}
             .stationName=${this._getStationName()}
           ></openpublictransport-table-layout>
-        `}}};Ct.styles=gt,t([ht({attribute:!1})],Ct.prototype,"hass",void 0),t([ut()],Ct.prototype,"_config",void 0),t([ut()],Ct.prototype,"_timeInterval",void 0),Ct=t([pt("openpublictransport-card")],Ct);const Et=window;Et.customCards=Et.customCards||[],Et.customCards.push({type:"openpublictransport-card",name:"Public Transport Departures",description:"Display public transport departures in table, compact, or trip layout",preview:!0});export{Ct as OpenpublictransportCard};
+        `}}};Ct.styles=gt,t([ht({attribute:!1})],Ct.prototype,"hass",void 0),t([ut()],Ct.prototype,"_config",void 0),t([ut()],Ct.prototype,"_timeInterval",void 0),Ct=t([pt("openpublictransport-card")],Ct);const Et=window;Et.customCards=Et.customCards||[],Et.customCards.push({type:"openpublictransport-card",name:"Public Transport Departures",description:"Display public transport departures in table, compact, or trip layout",preview:!0,getEntitySuggestion:function(t,e){const[i]=e.split(".");if("sensor"!==i)return null;const r=t.states[e];if(!r)return null;const n=r.attributes,s=Array.isArray(n.departures),a=Boolean(n.departure)&&Array.isArray(n.legs);if(!s&&!a)return null;const o=[];return s&&(o.push({label:"Table layout",config:{type:"custom:openpublictransport-card",entity:e,layout:"table"}}),o.push({label:"Compact layout",config:{type:"custom:openpublictransport-card",entity:e,layout:"compact",max_departures:6}})),a&&o.push({label:"Trip layout",config:{type:"custom:openpublictransport-card",entity:e,layout:"trip"}}),1===o.length?o[0]:o}});export{Ct as OpenpublictransportCard};

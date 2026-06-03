@@ -157,7 +157,7 @@ export class TripLayout extends LitElement {
               <span>${alt.duration_minutes} min</span>
               <span>${alt.transfers} ${alt.transfers !== 1 ? localize(lang, "transfers") : localize(lang, "transfer")}</span>
               <span class=${this._getRiskClass(alt.transfer_risk)}>
-                <ha-icon icon=${this._getRiskIcon(alt.transfer_risk)} style="--mdc-icon-size:14px;"></ha-icon>
+                <ha-icon icon=${this._getRiskIcon(alt.transfer_risk)} style="--opt-icon-size:14px;"></ha-icon>
               </span>
             </div>
           `

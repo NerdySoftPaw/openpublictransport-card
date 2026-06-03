@@ -209,6 +209,73 @@ interface CustomCardEntry {
   name: string;
   description: string;
   preview: boolean;
+  getEntitySuggestion?: (
+    hass: HomeAssistant,
+    entityId: string
+  ) => CustomCardSuggestion | CustomCardSuggestion[] | null;
+}
+
+interface CustomCardSuggestion {
+  config: {
+    type: string;
+    entity: string;
+    layout?: CardConfig["layout"];
+    max_departures?: number;
+  };
+  label?: string;
+}
+
+function getEntitySuggestion(
+  hass: HomeAssistant,
+  entityId: string
+): CustomCardSuggestion | CustomCardSuggestion[] | null {
+  const [domain] = entityId.split(".");
+  if (domain !== "sensor") return null;
+
+  const stateObj = hass.states[entityId];
+  if (!stateObj) return null;
+
+  const attrs = stateObj.attributes;
+  const hasDepartures = Array.isArray(attrs["departures"]);
+  const hasTripData = Boolean(attrs["departure"]) && Array.isArray(attrs["legs"]);
+
+  if (!hasDepartures && !hasTripData) return null;
+
+  const suggestions: CustomCardSuggestion[] = [];
+
+  if (hasDepartures) {
+    suggestions.push({
+      label: "Table layout",
+      config: {
+        type: "custom:openpublictransport-card",
+        entity: entityId,
+        layout: "table",
+      },
+    });
+
+    suggestions.push({
+      label: "Compact layout",
+      config: {
+        type: "custom:openpublictransport-card",
+        entity: entityId,
+        layout: "compact",
+        max_departures: 6,
+      },
+    });
+  }
+
+  if (hasTripData) {
+    suggestions.push({
+      label: "Trip layout",
+      config: {
+        type: "custom:openpublictransport-card",
+        entity: entityId,
+        layout: "trip",
+      },
+    });
+  }
+
+  return suggestions.length === 1 ? suggestions[0] : suggestions;
 }
 
 const windowWithCards = window as unknown as { customCards: CustomCardEntry[] };
@@ -218,6 +285,7 @@ windowWithCards.customCards.push({
   name: "Public Transport Departures",
   description: "Display public transport departures in table, compact, or trip layout",
   preview: true,
+  getEntitySuggestion,
 });
 
 declare global {

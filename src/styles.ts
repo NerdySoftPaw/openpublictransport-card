@@ -41,6 +41,13 @@ export const cardStyles = css`
     font-family: "Roboto Mono", "Courier New", monospace;
   }
 
+  /* Icon sizing fallback: keeps legacy mdc variable and explicit dimensions in sync. */
+  ha-icon {
+    --mdc-icon-size: var(--opt-icon-size, 24px);
+    width: var(--opt-icon-size, 24px);
+    height: var(--opt-icon-size, 24px);
+  }
+
   .card-header {
     display: flex;
     justify-content: space-between;
@@ -84,7 +91,7 @@ export const cardStyles = css`
   }
 
   .disruption-banner ha-icon {
-    --mdc-icon-size: 16px;
+    --opt-icon-size: 16px;
   }
 
   /* Table layout */
@@ -188,7 +195,7 @@ export const cardStyles = css`
 
   /* Notices */
   .notice-icon {
-    --mdc-icon-size: 16px;
+    --opt-icon-size: 16px;
     color: var(--opt-delay-yellow);
     cursor: help;
   }
@@ -239,7 +246,7 @@ export const cardStyles = css`
   }
 
   .compact-chip ha-icon {
-    --mdc-icon-size: 18px;
+    --opt-icon-size: 18px;
   }
 
   /* Trip layout */
@@ -284,7 +291,7 @@ export const cardStyles = css`
   }
 
   .trip-meta-item ha-icon {
-    --mdc-icon-size: 14px;
+    --opt-icon-size: 14px;
   }
 
   /* Transfer risk badges */
@@ -349,7 +356,7 @@ export const cardStyles = css`
   }
 
   .leg-details ha-icon {
-    --mdc-icon-size: 14px;
+    --opt-icon-size: 14px;
   }
 
   .leg-time {
@@ -407,7 +414,7 @@ export const cardStyles = css`
   }
 
   .card-error ha-icon {
-    --mdc-icon-size: 40px;
+    --opt-icon-size: 40px;
     display: block;
     margin: 0 auto 12px;
   }
