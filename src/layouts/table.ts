@@ -15,7 +15,7 @@ export class TableLayout extends LitElement {
   @property({ type: String }) stationName = "";
 
   private _getCurrentTime(): string {
-    return new Date().toLocaleTimeString("de-DE", {
+    return new Date().toLocaleTimeString(this.hass?.language || "de-DE", {
       hour: "2-digit",
       minute: "2-digit",
       second: "2-digit",
