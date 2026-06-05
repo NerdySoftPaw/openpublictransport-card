@@ -22,9 +22,11 @@ A custom Home Assistant Lovelace card for displaying public transport departures
    - URL: `/local/openpublictransport-card.js`
    - Type: JavaScript Module
 
-## Configuration
+## Layouts
 
 ### Table Layout (Abfahrtstafel)
+
+Classic departure board with time, line, destination, and platform columns.
 
 ```yaml
 type: custom:openpublictransport-card
@@ -40,6 +42,8 @@ show_realtime_indicator: true
 
 ### Compact Layout (Chips)
 
+Space-efficient chip-based view — ideal for dashboards with limited space.
+
 ```yaml
 type: custom:openpublictransport-card
 entity: sensor.dusseldorf_hbf_departures
@@ -48,7 +52,22 @@ max_departures: 6
 theme: auto
 ```
 
+### Next Departure (Widget)
+
+Single large next departure — perfect for a glanceable dashboard widget.
+
+```yaml
+type: custom:openpublictransport-card
+entity: sensor.dusseldorf_hbf_departures
+layout: next
+theme: auto
+show_platform: true
+show_delay: true
+```
+
 ### Trip Layout (Journey)
+
+Multi-leg journey view for A→B trip planning sensors.
 
 ```yaml
 type: custom:openpublictransport-card
@@ -60,16 +79,35 @@ show_header: true
 
 ## Options
 
-| Option                   | Type    | Default | Description                              |
-| ------------------------ | ------- | ------- | ---------------------------------------- |
-| `entity`                 | string  | **required** | Entity ID of the transport sensor   |
-| `layout`                 | string  | `table` | Card layout: `table`, `compact`, `trip`  |
-| `max_departures`         | number  | `10`    | Maximum number of departures to display  |
-| `show_header`            | boolean | `true`  | Show the card header with station name   |
-| `show_platform`          | boolean | `true`  | Show platform/track column               |
-| `show_delay`             | boolean | `true`  | Show delay badges                        |
-| `show_realtime_indicator`| boolean | `true`  | Show green checkmark for on-time realtime|
-| `theme`                  | string  | `auto`  | Theme: `dark`, `light`, `auto`           |
+| Option                    | Type    | Default | Description                                                                 |
+| ------------------------- | ------- | ------- | --------------------------------------------------------------------------- |
+| `entity`                  | string  | **required** | Entity ID of the transport sensor                                      |
+| `layout`                  | string  | `table` | Card layout: `table`, `compact`, `next`, `trip`                             |
+| `max_departures`          | number  | `10`    | Maximum number of departures to display                                     |
+| `line_filter`             | string  | `""`    | Show only specific lines, comma-separated (e.g. `U6, S1, RE5`). Empty = all |
+| `show_header`             | boolean | `true`  | Show the card header with station name                                      |
+| `show_platform`           | boolean | `true`  | Show platform/track column                                                  |
+| `show_delay`              | boolean | `true`  | Show delay badges                                                           |
+| `show_realtime_indicator` | boolean | `true`  | Show green checkmark for on-time realtime                                   |
+| `theme`                   | string  | `auto`  | Theme: `dark`, `light`, `auto`                                              |
+
+## Line Colors
+
+Line badge colors are applied automatically when the provider supplies them (e.g. VBB, BVG in Berlin). No configuration needed — if the integration returns `line_color` and `line_text_color`, the badge uses them; otherwise it falls back to the card's accent color.
+
+## Line Filter
+
+The `line_filter` option filters departures directly in the card, independently of the integration's own `line_filter` setting. Both can be combined:
+
+- **Integration filter** (`line_filter` in HA config): reduces API load, affects all entities using that stop
+- **Card filter** (`line_filter` in card YAML): visual only, useful when you want different views of the same sensor
+
+```yaml
+type: custom:openpublictransport-card
+entity: sensor.dusseldorf_hbf_departures
+layout: table
+line_filter: "U79, U75"   # show only U79 and U75
+```
 
 ## Development
 

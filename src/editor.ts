@@ -153,6 +153,7 @@ export class OpenpublictransportCardEditor extends LitElement {
             <option value="table" ?selected=${this._config.layout === "table"}>${localize(lang, "table_layout")}</option>
             <option value="compact" ?selected=${this._config.layout === "compact"}>${localize(lang, "compact_layout")}</option>
             <option value="trip" ?selected=${this._config.layout === "trip"}>${localize(lang, "trip_layout")}</option>
+            <option value="next" ?selected=${this._config.layout === "next"}>${localize(lang, "next_layout")}</option>
           </select>
         </div>
 
@@ -208,6 +209,22 @@ export class OpenpublictransportCardEditor extends LitElement {
             .checked=${this._config.show_realtime_indicator}
             @change=${this._toggleChanged("show_realtime_indicator")}
           ></ha-switch>
+        </div>
+
+        <div class="section-title">${localize(lang, "line_filter")}</div>
+        <div class="config-row">
+          <ha-textfield
+            type="text"
+            .value=${this._config.line_filter || ""}
+            placeholder="U6, S1, RE5"
+            helper=${localize(lang, "line_filter_hint")}
+            @change=${(ev: Event) => {
+              if (!this._config) return;
+              this._config = { ...this._config, line_filter: (ev.target as HTMLInputElement).value };
+              this._fireConfigChanged();
+            }}
+            style="width:100%"
+          ></ha-textfield>
         </div>
       </div>
     `;

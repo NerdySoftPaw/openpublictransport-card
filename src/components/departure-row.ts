@@ -60,6 +60,10 @@ export class DepartureRow extends LitElement {
     const dep = this.departure;
     if (!dep) return nothing;
 
+    const badgeStyle = dep.line_color
+      ? `background:${dep.line_color};color:${dep.line_text_color || "#000"}`
+      : "";
+
     return html`
       <tr>
         <td class="time-cell">
@@ -79,7 +83,7 @@ export class DepartureRow extends LitElement {
             <openpublictransport-transport-icon
               transport-type=${dep.transportation_type}
             ></openpublictransport-transport-icon>
-            <span class="line-badge">${dep.line}</span>
+            <span class="line-badge" style=${badgeStyle}>${dep.line}</span>
             ${this._renderNotices()}
           </span>
         </td>

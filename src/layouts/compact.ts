@@ -59,16 +59,21 @@ export class CompactLayout extends LitElement {
       ${this._renderHeader()}
       <div class="compact-container">
         ${displayDepartures.map(
-          (dep) => html`
-            <div class=${this._getChipClass(dep)}>
-              <openpublictransport-transport-icon
-                transport-type=${dep.transportation_type}
-              ></openpublictransport-transport-icon>
-              <span class="chip-line">${dep.line}</span>
-              <span class="chip-destination">${this._shortenDestination(dep.destination)}</span>
-              <span class="chip-countdown">${this._renderCountdown(dep.minutes_until_departure)}</span>
-            </div>
-          `
+          (dep) => {
+            const badgeStyle = dep.line_color
+              ? `background:${dep.line_color};color:${dep.line_text_color || "#000"}`
+              : "";
+            return html`
+              <div class=${this._getChipClass(dep)}>
+                <openpublictransport-transport-icon
+                  transport-type=${dep.transportation_type}
+                ></openpublictransport-transport-icon>
+                <span class="chip-line" style=${badgeStyle}>${dep.line}</span>
+                <span class="chip-destination">${this._shortenDestination(dep.destination)}</span>
+                <span class="chip-countdown">${this._renderCountdown(dep.minutes_until_departure)}</span>
+              </div>
+            `;
+          }
         )}
       </div>
     `;

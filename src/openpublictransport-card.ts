@@ -8,6 +8,7 @@ import { localize } from "./localize";
 import "./layouts/table";
 import "./layouts/compact";
 import "./layouts/trip";
+import "./layouts/next";
 import "./editor";
 
 console.info(
@@ -49,6 +50,8 @@ export class OpenpublictransportCard extends LitElement {
         return 2;
       case "trip":
         return 5;
+      case "next":
+        return 2;
       case "table":
       default:
         return Math.min(2 + (this._config.max_departures || 10), 12);
@@ -57,10 +60,10 @@ export class OpenpublictransportCard extends LitElement {
 
   connectedCallback(): void {
     super.connectedCallback();
-    // Update every 30 seconds for the clock and countdown
+    // Update every 10 seconds for the clock and countdown
     this._timeInterval = setInterval(() => {
       this.requestUpdate();
-    }, 30000);
+    }, 10000);
   }
 
   disconnectedCallback(): void {
@@ -95,7 +98,15 @@ export class OpenpublictransportCard extends LitElement {
     const departures = stateObj.attributes["departures"];
     if (!Array.isArray(departures)) return [];
 
-    return departures as Departure[];
+    let deps = departures as Departure[];
+
+    const filter = (this._config.line_filter || "").trim();
+    if (filter) {
+      const lines = filter.split(",").map((l) => l.trim().toLowerCase()).filter(Boolean);
+      deps = deps.filter((d) => lines.some((l) => d.line.toLowerCase() === l));
+    }
+
+    return deps;
   }
 
   private _getTripData(): TripData | null {
@@ -189,6 +200,16 @@ export class OpenpublictransportCard extends LitElement {
           ></openpublictransport-trip-layout>
         `;
 
+      case "next":
+        return html`
+          <openpublictransport-next-layout
+            .hass=${this.hass}
+            .config=${this._config}
+            .departures=${this._getDepartures()}
+            .stationName=${this._getStationName()}
+          ></openpublictransport-next-layout>
+        `;
+
       case "table":
       default:
         return html`
@@ -260,6 +281,15 @@ function getEntitySuggestion(
         entity: entityId,
         layout: "compact",
         max_departures: 6,
+      },
+    });
+
+    suggestions.push({
+      label: "Next departure",
+      config: {
+        type: "custom:openpublictransport-card",
+        entity: entityId,
+        layout: "next",
       },
     });
   }

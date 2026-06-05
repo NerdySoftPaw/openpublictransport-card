@@ -10,6 +10,7 @@ export const DEFAULT_CONFIG: Omit<CardConfig, "entity"> = {
   show_delay: true,
   show_realtime_indicator: true,
   theme: "auto",
+  line_filter: "",
 };
 
 export const TRANSPORT_ICONS: Record<string, string> = {

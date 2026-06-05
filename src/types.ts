@@ -12,6 +12,8 @@ export interface Departure {
   notices?: string[];
   planned_platform?: string;
   platform_changed?: boolean;
+  line_color?: string;
+  line_text_color?: string;
 }
 
 export interface TripLeg {
@@ -43,13 +45,14 @@ export interface TripData {
 
 export interface CardConfig {
   entity: string;
-  layout: "table" | "compact" | "trip";
+  layout: "table" | "compact" | "trip" | "next";
   max_departures: number;
   show_header: boolean;
   show_platform: boolean;
   show_delay: boolean;
   show_realtime_indicator: boolean;
   theme: "dark" | "light" | "auto";
+  line_filter?: string;
 }
 
 // Home Assistant types (minimal declarations for type safety)
