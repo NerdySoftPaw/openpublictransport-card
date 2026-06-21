@@ -1,4 +1,9 @@
-# Public Transport Departures Card
+# OpenPublicTransport Card
+
+[![HACS][hacsbadge]][hacs]
+
+[hacs]: https://github.com/hacs/integration
+[hacsbadge]: https://img.shields.io/badge/HACS-Default-blue.svg?style=for-the-badge
 
 A custom Home Assistant Lovelace card for displaying public transport departures. Works with the [openpublictransport](https://github.com/NerdySoftPaw/hacs-publictransport) integration.
 
@@ -10,7 +15,7 @@ A custom Home Assistant Lovelace card for displaying public transport departures
 
 1. Open HACS in your Home Assistant instance.
 2. Go to **Frontend** > **+ Explore & Download Repositories**.
-3. Search for **Public Transport Departures Card**.
+3. Search for **OpenPublicTransport Card**.
 4. Click **Download**.
 5. Restart Home Assistant.
 
