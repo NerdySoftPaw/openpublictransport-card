@@ -106,6 +106,12 @@ export class OpenpublictransportCard extends LitElement {
       deps = deps.filter((d) => lines.some((l) => d.line.toLowerCase() === l));
     }
 
+    const destFilter = (this._config.destination_filter || "").trim();
+    if (destFilter) {
+      const destinations = destFilter.split(",").map((d) => d.trim().toLowerCase()).filter(Boolean);
+      deps = deps.filter((d) => destinations.some((dest) => (d.destination || "").toLowerCase().includes(dest)));
+    }
+
     return deps;
   }
 

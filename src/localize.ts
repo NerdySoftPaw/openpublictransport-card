@@ -37,6 +37,8 @@ const translations: Record<string, Record<string, string>> = {
     display_options: "Display Options",
     line_filter: "Line Filter",
     line_filter_hint: "Show only these lines (comma-separated, e.g. U6, S1, RE5). Leave empty to show all.",
+    destination_filter: "Destination Filter",
+    destination_filter_hint: "Show only departures whose destination matches (comma-separated, partial match, e.g. Duisburg, Flughafen). Leave empty to show all.",
   },
   de: {
     now: "jetzt",
@@ -71,6 +73,8 @@ const translations: Record<string, Record<string, string>> = {
     display_options: "Anzeigeoptionen",
     line_filter: "Linienfilter",
     line_filter_hint: "Nur diese Linien anzeigen (kommagetrennt, z.B. U6, S1, RE5). Leer lassen für alle.",
+    destination_filter: "Zielfilter",
+    destination_filter_hint: "Nur Abfahrten mit passendem Ziel anzeigen (kommagetrennt, Teiltreffer, z.B. Duisburg, Flughafen). Leer lassen für alle.",
   },
   fr: {
     now: "maintenant",
@@ -105,6 +109,8 @@ const translations: Record<string, Record<string, string>> = {
     display_options: "Options d'affichage",
     line_filter: "Filtre de lignes",
     line_filter_hint: "Afficher uniquement ces lignes (séparées par des virgules, ex. U6, S1, RE5). Laisser vide pour tout afficher.",
+    destination_filter: "Filtre de destination",
+    destination_filter_hint: "Afficher uniquement les départs dont la destination correspond (séparées par des virgules, correspondance partielle, ex. Duisburg, Aéroport). Laisser vide pour tout afficher.",
   },
   nl: {
     now: "nu",
@@ -139,6 +145,8 @@ const translations: Record<string, Record<string, string>> = {
     display_options: "Weergaveopties",
     line_filter: "Lijnfilter",
     line_filter_hint: "Toon alleen deze lijnen (kommagescheiden, bijv. U6, S1, RE5). Leeg laten voor alles.",
+    destination_filter: "Bestemmingsfilter",
+    destination_filter_hint: "Toon alleen vertrekken met een overeenkomende bestemming (kommagescheiden, gedeeltelijke overeenkomst, bijv. Duisburg, Luchthaven). Leeg laten voor alles.",
   },
   sv: {
     now: "nu",
@@ -173,6 +181,8 @@ const translations: Record<string, Record<string, string>> = {
     display_options: "Visningsalternativ",
     line_filter: "Linjefilter",
     line_filter_hint: "Visa bara dessa linjer (kommaseparerade, t.ex. U6, S1, RE5). Lämna tomt för alla.",
+    destination_filter: "Destinationsfilter",
+    destination_filter_hint: "Visa bara avgångar vars destination matchar (kommaseparerade, delvis matchning, t.ex. Duisburg, Flygplats). Lämna tomt för alla.",
   },
   pl: {
     now: "teraz",
@@ -207,6 +217,8 @@ const translations: Record<string, Record<string, string>> = {
     display_options: "Opcje wyświetlania",
     line_filter: "Filtr linii",
     line_filter_hint: "Pokaż tylko te linie (oddzielone przecinkami, np. U6, S1, RE5). Zostaw puste, aby pokazać wszystkie.",
+    destination_filter: "Filtr kierunku",
+    destination_filter_hint: "Pokaż tylko odjazdy z pasującym kierunkiem (oddzielone przecinkami, częściowe dopasowanie, np. Duisburg, Lotnisko). Zostaw puste, aby pokazać wszystkie.",
   },
   it: {
     now: "adesso",
@@ -241,6 +253,8 @@ const translations: Record<string, Record<string, string>> = {
     display_options: "Opzioni di visualizzazione",
     line_filter: "Filtro linee",
     line_filter_hint: "Mostra solo queste linee (separate da virgola, es. U6, S1, RE5). Lascia vuoto per mostrare tutto.",
+    destination_filter: "Filtro destinazione",
+    destination_filter_hint: "Mostra solo le partenze con destinazione corrispondente (separate da virgola, corrispondenza parziale, es. Duisburg, Aeroporto). Lascia vuoto per mostrare tutto.",
   },
 };
 
