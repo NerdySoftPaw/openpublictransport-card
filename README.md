@@ -90,6 +90,7 @@ show_header: true
 | `layout`                  | string  | `table` | Card layout: `table`, `compact`, `next`, `trip`                             |
 | `max_departures`          | number  | `10`    | Maximum number of departures to display                                     |
 | `line_filter`             | string  | `""`    | Show only specific lines, comma-separated (e.g. `U6, S1, RE5`). Empty = all |
+| `destination_filter`      | string  | `""`    | Show only departures heading to matching destinations, comma-separated substring match (e.g. `Duisburg, Flughafen`). Empty = all |
 | `show_header`             | boolean | `true`  | Show the card header with station name                                      |
 | `show_platform`           | boolean | `true`  | Show platform/track column                                                  |
 | `show_delay`              | boolean | `true`  | Show delay badges                                                           |
@@ -112,6 +113,23 @@ type: custom:openpublictransport-card
 entity: sensor.dusseldorf_hbf_departures
 layout: table
 line_filter: "U79, U75"   # show only U79 and U75
+```
+
+## Destination Filter
+
+The `destination_filter` option shows only departures heading toward one or more destinations/directions — handy when a stop is served in both directions and you only care about one. Matching is **case-insensitive substring**, comma-separated (any match wins):
+
+- `Duisburg` matches `Duisburg Hbf` and `Duisburg Hbf via Stadtmitte`
+- `Duisburg, Flughafen` matches either destination
+- Empty = show all destinations
+
+It can be combined freely with `line_filter`, and like the line filter it works independently of the integration's own filter — point several cards at the same sensor, each showing a different direction:
+
+```yaml
+type: custom:openpublictransport-card
+entity: sensor.dusseldorf_hbf_departures
+layout: table
+destination_filter: "Duisburg"   # only departures toward Duisburg
 ```
 
 ## Development
