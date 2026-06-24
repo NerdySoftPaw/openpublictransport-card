@@ -226,6 +226,22 @@ export class OpenpublictransportCardEditor extends LitElement {
             style="width:100%"
           ></ha-textfield>
         </div>
+
+        <div class="section-title">${localize(lang, "destination_filter")}</div>
+        <div class="config-row">
+          <ha-textfield
+            type="text"
+            .value=${this._config.destination_filter || ""}
+            placeholder="Duisburg, Flughafen"
+            helper=${localize(lang, "destination_filter_hint")}
+            @change=${(ev: Event) => {
+              if (!this._config) return;
+              this._config = { ...this._config, destination_filter: (ev.target as HTMLInputElement).value };
+              this._fireConfigChanged();
+            }}
+            style="width:100%"
+          ></ha-textfield>
+        </div>
       </div>
     `;
   }

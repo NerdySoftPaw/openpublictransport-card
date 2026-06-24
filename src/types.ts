@@ -53,6 +53,7 @@ export interface CardConfig {
   show_realtime_indicator: boolean;
   theme: "dark" | "light" | "auto";
   line_filter?: string;
+  destination_filter?: string;
 }
 
 // Home Assistant types (minimal declarations for type safety)
