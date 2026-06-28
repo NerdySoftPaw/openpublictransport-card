@@ -12,6 +12,8 @@ export const cardStyles = css`
     --opt-header-bg: rgba(0, 0, 0, 0.2);
     --opt-row-hover: rgba(255, 255, 255, 0.05);
     --opt-accent: var(--accent-color, #ffd700);
+
+    height: 100%;
   }
 
   /* Dark theme */
@@ -39,6 +41,25 @@ export const cardStyles = css`
     color: var(--opt-text);
     overflow: hidden;
     font-family: "Roboto Mono", "Courier New", monospace;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Each layout fills the card so its body (not the whole card) can scroll */
+  openpublictransport-table-layout,
+  openpublictransport-next-layout,
+  openpublictransport-compact-layout,
+  openpublictransport-trip-layout {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  .card-header,
+  .disruption-banner {
+    flex-shrink: 0;
   }
 
   /* Icon sizing fallback: keeps legacy mdc variable and explicit dimensions in sync. */
@@ -76,7 +97,11 @@ export const cardStyles = css`
   }
 
   .card-content {
-    padding: 0;
+    /* left/right inset aligns columns with the header; bottom gap below last row */
+    padding: 0 4px 12px;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
   }
 
   /* Disruption banner */
@@ -107,8 +132,14 @@ export const cardStyles = css`
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    opacity: 0.6;
-    border-bottom: 1px solid var(--opt-border);
+    color: var(--opt-text-secondary);
+    /* keep the header row pinned at the top of the scrolling list */
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: var(--opt-bg);
+    /* divider that stays attached to the cell (border-bottom can detach with collapse) */
+    box-shadow: inset 0 -1px 0 var(--opt-border);
   }
 
   .departure-table tbody tr {
