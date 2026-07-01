@@ -1,6 +1,6 @@
 {
   "name": "openpublictransport-card",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Custom Home Assistant Lovelace card for public transport departures",
   "main": "dist/openpublictransport-card.js",
   "type": "module",

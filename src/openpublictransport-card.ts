@@ -58,6 +58,11 @@ export class OpenpublictransportCard extends LitElement {
     }
   }
 
+  // Resizable in Sections dashboards; the CSS makes it fill the slot and scroll.
+  public getGridOptions() {
+    return { rows: this.getCardSize(), min_rows: 2, columns: 12 };
+  }
+
   connectedCallback(): void {
     super.connectedCallback();
     // Update every 10 seconds for the clock and countdown
