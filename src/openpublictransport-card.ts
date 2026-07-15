@@ -4,6 +4,7 @@ import { cardStyles } from "./styles";
 import { CardConfig, Departure, TripData, HomeAssistant } from "./types";
 import { CARD_VERSION, DEFAULT_CONFIG } from "./const";
 import { localize } from "./localize";
+import { isOptSensor, getOptEntities, detectModel, layoutForModel } from "./detect";
 
 import "./layouts/table";
 import "./layouts/compact";
@@ -29,11 +30,19 @@ export class OpenpublictransportCard extends LitElement {
     return document.createElement("openpublictransport-card-editor");
   }
 
-  public static getStubConfig(): Partial<CardConfig> {
-    return {
-      entity: "",
-      ...DEFAULT_CONFIG,
-    };
+  public static getStubConfig(
+    hass: HomeAssistant,
+    entities: string[],
+    entitiesFallback: string[]
+  ): Partial<CardConfig> {
+    // Prefer an unused entity, then fall back to one already on the dashboard.
+    const pick =
+      getOptEntities(hass, entities)[0] ??
+      getOptEntities(hass, entitiesFallback)[0] ??
+      "";
+    const model = pick ? detectModel(hass, pick) : "unknown";
+    // Spread defaults first so the model-derived layout wins over "table".
+    return { ...DEFAULT_CONFIG, entity: pick, layout: layoutForModel(model) };
   }
 
   public setConfig(config: Partial<CardConfig>): void {
@@ -261,21 +270,12 @@ function getEntitySuggestion(
   hass: HomeAssistant,
   entityId: string
 ): CustomCardSuggestion | CustomCardSuggestion[] | null {
-  const [domain] = entityId.split(".");
-  if (domain !== "sensor") return null;
+  if (!isOptSensor(hass, entityId)) return null;
 
-  const stateObj = hass.states[entityId];
-  if (!stateObj) return null;
-
-  const attrs = stateObj.attributes;
-  const hasDepartures = Array.isArray(attrs["departures"]);
-  const hasTripData = Boolean(attrs["departure"]) && Array.isArray(attrs["legs"]);
-
-  if (!hasDepartures && !hasTripData) return null;
-
+  const model = detectModel(hass, entityId);
   const suggestions: CustomCardSuggestion[] = [];
 
-  if (hasDepartures) {
+  if (model === "departures") {
     suggestions.push({
       label: "Table layout",
       config: {
@@ -303,15 +303,24 @@ function getEntitySuggestion(
         layout: "next",
       },
     });
-  }
-
-  if (hasTripData) {
+  } else if (model === "trip") {
     suggestions.push({
       label: "Trip layout",
       config: {
         type: "custom:openpublictransport-card",
         entity: entityId,
         layout: "trip",
+      },
+    });
+  } else {
+    // Confirmed OPT sensor but shape not yet known (e.g. trip sensor with no
+    // current connection) — offer a single sensible default.
+    suggestions.push({
+      label: "Table layout",
+      config: {
+        type: "custom:openpublictransport-card",
+        entity: entityId,
+        layout: layoutForModel(model),
       },
     });
   }

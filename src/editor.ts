@@ -3,6 +3,7 @@ import { customElement, property, state } from "lit/decorators.js";
 import { CardConfig, HomeAssistant } from "./types";
 import { DEFAULT_CONFIG } from "./const";
 import { localize } from "./localize";
+import { isOptSensor } from "./detect";
 
 @customElement("openpublictransport-card-editor")
 export class OpenpublictransportCardEditor extends LitElement {
@@ -68,30 +69,17 @@ export class OpenpublictransportCardEditor extends LitElement {
     this.dispatchEvent(event);
   }
 
-  private _entityChanged(ev: Event): void {
-    const target = ev.target as HTMLSelectElement;
-    if (!this._config || !target.value) return;
-    this._config = { ...this._config, entity: target.value };
+  private _entityChanged(ev: CustomEvent): void {
+    if (!this._config) return;
+    const value = (ev.detail?.value as string) ?? "";
+    this._config = { ...this._config, entity: value };
     this._fireConfigChanged();
   }
 
-  private _getEntityOptions(): { id: string; name: string }[] {
-    if (!this.hass) return [];
-    // Show all sensors that have a "departures" or "legs" attribute (our integration)
-    return Object.keys(this.hass.states)
-      .filter((id) => {
-        if (!id.startsWith("sensor.")) return false;
-        const attrs = this.hass.states[id].attributes;
-        return attrs["departures"] !== undefined || attrs["legs"] !== undefined;
-      })
-      .map((id) => ({
-        id,
-        name:
-          typeof this.hass.states[id].attributes["friendly_name"] === "string"
-            ? (this.hass.states[id].attributes["friendly_name"] as string)
-            : id,
-      }));
-  }
+  // ha-entity-picker passes the state object; platform matching happens inside
+  // isOptSensor via the hass.entities closure.
+  private _entityFilter = (entity: { entity_id: string }): boolean =>
+    isOptSensor(this.hass, entity.entity_id);
 
   private _layoutChanged(ev: Event): void {
     const target = ev.target as any;
@@ -139,12 +127,14 @@ export class OpenpublictransportCardEditor extends LitElement {
       <div class="card-config">
         <div class="config-row">
           <label>${localize(lang, "entity")}</label>
-          <select .value=${this._config.entity || ""} @change=${this._entityChanged}>
-            <option value="">-- Select Entity --</option>
-            ${this._getEntityOptions().map(
-              (e) => html`<option value=${e.id} ?selected=${this._config.entity === e.id}>${e.name}</option>`
-            )}
-          </select>
+          <ha-entity-picker
+            .hass=${this.hass}
+            .value=${this._config.entity}
+            .includeDomains=${["sensor"]}
+            .entityFilter=${this._entityFilter}
+            allow-custom-entity
+            @value-changed=${this._entityChanged}
+          ></ha-entity-picker>
         </div>
 
         <div class="config-row">
@@ -163,6 +153,7 @@ export class OpenpublictransportCardEditor extends LitElement {
             <option value="auto" ?selected=${this._config.theme === "auto"}>Auto</option>
             <option value="dark" ?selected=${this._config.theme === "dark"}>Dark</option>
             <option value="light" ?selected=${this._config.theme === "light"}>Light</option>
+            <option value="ha" ?selected=${this._config.theme === "ha"}>${localize(lang, "theme_ha")}</option>
           </select>
         </div>
 
