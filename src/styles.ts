@@ -36,6 +36,20 @@ export const cardStyles = css`
     --opt-border: rgba(0, 0, 0, 0.12);
   }
 
+  /* Native Home Assistant theme — blend into the active dashboard theme */
+  :host([data-theme="ha"]) {
+    --opt-bg: var(--ha-card-background, var(--card-background-color, #fff));
+    --opt-text: var(--primary-text-color);
+    --opt-text-secondary: var(--secondary-text-color);
+    --opt-border: var(--divider-color);
+    --opt-header-bg: var(--secondary-background-color);
+    --opt-row-hover: var(--secondary-background-color);
+    --opt-accent: var(--primary-color, var(--accent-color));
+    --opt-delay-red: var(--error-color, #e53935);
+    --opt-delay-green: var(--success-color, #43a047);
+    --opt-delay-yellow: var(--warning-color, #fdd835);
+  }
+
   ha-card {
     background: var(--opt-bg);
     color: var(--opt-text);

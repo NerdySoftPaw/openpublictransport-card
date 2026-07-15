@@ -51,14 +51,23 @@ export interface CardConfig {
   show_platform: boolean;
   show_delay: boolean;
   show_realtime_indicator: boolean;
-  theme: "dark" | "light" | "auto";
+  theme: "dark" | "light" | "auto" | "ha";
   line_filter?: string;
   destination_filter?: string;
 }
 
 // Home Assistant types (minimal declarations for type safety)
+export interface EntityRegistryDisplayEntry {
+  entity_id: string;
+  platform?: string;
+  translation_key?: string;
+  name?: string;
+}
+
 export interface HomeAssistant {
   states: Record<string, HassEntity>;
+  // Entity registry (optional: absent on older HA versions).
+  entities?: Record<string, EntityRegistryDisplayEntry>;
   themes: {
     darkMode: boolean;
   };
