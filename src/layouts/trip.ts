@@ -45,10 +45,8 @@ export class TripLayout extends LitElement {
 
   @query("dialog.journey-dialog") private _dialog?: HTMLDialogElement;
 
-  /* The row that opened the dialog, so focus can go back to it on close, and a
-     token that tells a late answer from the current one — a second row opened
+  /* A token that tells a late answer from the current one — a second row opened
      while the first was still loading must not be filled in with the first. */
-  private _opener: HTMLElement | null = null;
   private _request = 0;
 
   private _formatTime(timeStr: string): string {
@@ -404,7 +402,7 @@ export class TripLayout extends LitElement {
                   class="alt-journey"
                   aria-haspopup="dialog"
                   aria-label=${`${localize(lang, "show_details")}: ${this._altSummary(alt, lang).join(", ")}`}
-                  @click=${(ev: MouseEvent) => this._open(alt, ev.currentTarget as HTMLElement)}
+                  @click=${() => this._open(alt)}
                 >
                   ${this._renderAltRow(alt, lang)}
                 </button>
@@ -427,9 +425,8 @@ export class TripLayout extends LitElement {
      on their schedule. `showModal()` brings focus trapping, Escape and a
      backdrop with it. */
 
-  private _open(alt: TripData, opener: HTMLElement) {
+  private _open(alt: TripData) {
     const token = ++this._request;
-    this._opener = opener;
     this._openSummary = alt;
     this._openError = "";
     /* An integration that already sent the legs needs no asking. */
@@ -531,11 +528,16 @@ export class TripLayout extends LitElement {
     this._openSummary = null;
     this._openJourney = null;
     this._openError = "";
-    /* Focus goes back to the row it came from. The browser restores it too,
-       but only while that row is still in the document — after a refresh
-       rebuilt the list it may not be. */
-    if (this._opener?.isConnected) this._opener.focus();
-    this._opener = null;
+    /* Focus is the browser's to restore, and it does: closing a dialog returns
+       it to whatever was focused when it opened. Measured in Chrome and in the
+       pane, on Escape and on a click, with this handler not yet run — the row
+       had focus either way, so calling focus() here only repeated the work.
+
+       It was not harmless, though. A programmatic focus() is what decides
+       whether a focus ring is painted: Safari showed the row ringed after a
+       connection had been opened and closed with the mouse, where Chrome did
+       not. Letting the browser restore focus keeps the ring for the keyboard,
+       which is the only place it means anything. */
   }
 
   private _renderDialogBody() {
