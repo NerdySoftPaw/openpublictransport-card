@@ -69,6 +69,11 @@ export interface TripData {
   next_journeys?: TripData[];
 }
 
+/** The `get_journeys` response: every connection the trip sensor holds. */
+export interface JourneysResponse {
+  journeys?: TripData[];
+}
+
 export interface CardConfig {
   entity: string;
   layout: "table" | "compact" | "trip" | "next";
@@ -100,11 +105,27 @@ export interface HomeAssistant {
   states: Record<string, HassEntity>;
   // Entity registry (optional: absent on older HA versions).
   entities?: Record<string, EntityRegistryDisplayEntry>;
+  // The service registry, by domain and then service name. The card reads it to
+  // find out whether the integration behind an entity can answer a question
+  // before it asks — an older integration simply has no entry here.
+  services?: Record<string, Record<string, unknown>>;
   themes: {
     darkMode: boolean;
   };
   localize: (key: string) => string;
   language: string;
+  callService?: (
+    domain: string,
+    service: string,
+    serviceData?: Record<string, unknown>,
+    target?: Record<string, unknown>,
+    notifyOnError?: boolean,
+    returnResponse?: boolean
+  ) => Promise<ServiceCallResponse>;
+}
+
+export interface ServiceCallResponse {
+  response?: unknown;
 }
 
 export interface HassEntity {

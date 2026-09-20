@@ -7,7 +7,8 @@
  */
 import { CardConfig, HomeAssistant } from "./types";
 
-const OPT_PLATFORM = "openpublictransport";
+/** The integration's platform, which is also its service domain. */
+export const OPT_PLATFORM = "openpublictransport";
 
 /**
  * True if the entity is an OpenPublicTransport sensor.
