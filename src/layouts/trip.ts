@@ -440,20 +440,27 @@ export class TripLayout extends LitElement {
   /**
    * Whether an answer's journey is the one a summary row describes.
    *
-   * Every fact the row carries has to agree, not just when it leaves. A live
-   * VVS board made the reason plain: of seven connections, two left at 17:36,
-   * two at 17:51 and two at 18:36, so matching on the departure alone returned
-   * the earliest journey with that departure — for the first alternative, the
-   * card's own main connection. The dialog was then titled "17:36 → 18:33,
-   * 1 Umstieg" from the row while its body described 17:36 → 18:31 with three
-   * changes and a high transfer risk. A wrong answer under a right heading.
+   * The integration names each connection, so normally this is a selection and
+   * not a guess. Everything below it is for an integration too old to send a
+   * name, and it is a guess: a live VVS board held seven connections of which
+   * two left at 17:36, two at 17:51 and two at 18:36, so matching on the
+   * departure alone returned the earliest journey with that departure — for the
+   * first alternative, the card's own main connection. The dialog was headed
+   * "17:36 → 18:33, 1 Umstieg" from the row while its body described
+   * 17:36 → 18:31 with three changes and a high transfer risk. A wrong answer
+   * under a right heading.
    *
-   * The timestamps are preferred because `HH:MM` cannot tell tonight from
-   * tomorrow; where an older integration sends none, the clock times stand in.
-   * Two connections that agree on all four of these are ones the row cannot
-   * tell apart anyway.
+   * Requiring every fact the row carries fixes that case, and it is as far as a
+   * summary can go: two routes on parallel lines can leave and arrive together
+   * with one change each and still be different journeys. That is what the id
+   * is for, and why it is worth having.
+   *
+   * The timestamps are preferred over the clock times because `HH:MM` cannot
+   * tell tonight from tomorrow.
    */
   private _isSameJourney(a: TripData, b: TripData): boolean {
+    if (a.id && b.id) return a.id === b.id;
+
     const leaves =
       a.departure_timestamp && b.departure_timestamp
         ? a.departure_timestamp === b.departure_timestamp

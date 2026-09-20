@@ -47,6 +47,11 @@ export interface TripLeg {
 }
 
 export interface TripData {
+  // The connection's own identity, from the integration. Present on a journey
+  // returned by `get_journeys` and on each alternative summary, so the card can
+  // say which connection it means rather than describe one and hope. Absent on
+  // integrations older than the action itself.
+  id?: string;
   departure: string;
   arrival: string;
   // ISO timestamp of the journey start — the walk to the stop, when there is

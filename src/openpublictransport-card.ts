@@ -154,6 +154,7 @@ export class OpenpublictransportCard extends LitElement {
     if (!attrs["departure"] || !attrs["legs"]) return null;
 
     return {
+      id: attrs["id"] as string | undefined,
       departure: attrs["departure"] as string,
       arrival: attrs["arrival"] as string,
       departure_timestamp: attrs["departure_timestamp"] as string | null | undefined,
