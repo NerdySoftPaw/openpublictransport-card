@@ -441,15 +441,43 @@ export class TripLayout extends LitElement {
   }
 
   /**
+   * Whether an answer's journey is the one a summary row describes.
+   *
+   * Every fact the row carries has to agree, not just when it leaves. A live
+   * VVS board made the reason plain: of seven connections, two left at 17:36,
+   * two at 17:51 and two at 18:36, so matching on the departure alone returned
+   * the earliest journey with that departure — for the first alternative, the
+   * card's own main connection. The dialog was then titled "17:36 → 18:33,
+   * 1 Umstieg" from the row while its body described 17:36 → 18:31 with three
+   * changes and a high transfer risk. A wrong answer under a right heading.
+   *
+   * The timestamps are preferred because `HH:MM` cannot tell tonight from
+   * tomorrow; where an older integration sends none, the clock times stand in.
+   * Two connections that agree on all four of these are ones the row cannot
+   * tell apart anyway.
+   */
+  private _isSameJourney(a: TripData, b: TripData): boolean {
+    const leaves =
+      a.departure_timestamp && b.departure_timestamp
+        ? a.departure_timestamp === b.departure_timestamp
+        : a.departure === b.departure;
+    const arrives =
+      a.arrival_timestamp && b.arrival_timestamp
+        ? a.arrival_timestamp === b.arrival_timestamp
+        : a.arrival === b.arrival;
+    return (
+      leaves && arrives && a.transfers === b.transfers && a.duration_minutes === b.duration_minutes
+    );
+  }
+
+  /**
    * Ask the integration for the connection behind the row.
    *
    * The action answers with every journey the sensor is holding, so the right
-   * one still has to be found. `departure_timestamp` is what identifies it: a
-   * position in the list does not, because the first connection rolls off as
-   * it departs, and `HH:MM` alone cannot tell tonight from tomorrow. Where the
-   * integration sends no timestamps, both ends of the journey have to agree
-   * instead. No match means the connection is gone — which is said plainly,
-   * rather than showing whatever journey happened to be in its place.
+   * one still has to be found — and a position in the list will not find it,
+   * because the first connection rolls off as it departs. No match means the
+   * connection is gone, which is said plainly rather than showing whatever
+   * journey happened to be in its place.
    */
   private async _fetch(alt: TripData, token: number) {
     try {
@@ -464,11 +492,7 @@ export class TripLayout extends LitElement {
       if (token !== this._request) return;
 
       const journeys = (result?.response as JourneysResponse | undefined)?.journeys ?? [];
-      const match =
-        (alt.departure_timestamp
-          ? journeys.find((j) => j.departure_timestamp === alt.departure_timestamp)
-          : undefined) ??
-        journeys.find((j) => j.departure === alt.departure && j.arrival === alt.arrival);
+      const match = journeys.find((j) => this._isSameJourney(j, alt));
 
       if (match?.legs?.length) {
         this._openJourney = match;

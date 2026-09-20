@@ -938,8 +938,13 @@ export const cardStyles = css`
      has. On the dashboard's 374px a headsign like "Echterdingen
      Flughafen/Messe …" is cut off, and that cut is what the dialog exists to
      undo — here the direction wraps instead. */
+  /* The row keeps its one line; it is the headsign inside it that wraps. Letting
+     the row wrap instead put the leg's arrival on a line of its own with the
+     rest of the row empty beside it — measured, 46px against the 38px it takes
+     when the direction wraps in its own box and the duration and the arrival
+     stay with the leg they belong to. */
   .journey-dialog .leg-details {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }
 
   .journey-dialog .leg-service {

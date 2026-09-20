@@ -52,7 +52,8 @@ export interface TripData {
   // ISO timestamp of the journey start — the walk to the stop, when there is
   // one. Absent on integrations older than 2026.8.2.
   departure_timestamp?: string | null;
-  // ISO timestamp of the journey's end, sent alongside the start.
+  // ISO timestamp of the journey end. Absent on integrations older than
+  // 2026.8.2, like its departure counterpart.
   arrival_timestamp?: string | null;
   // Minutes until that start, as the sensor last computed it.
   in_minutes?: number | null;
