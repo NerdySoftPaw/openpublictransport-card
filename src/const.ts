@@ -25,5 +25,15 @@ export const TRANSPORT_ICONS: Record<string, string> = {
   "u-bahn": "mdi:subway-variant",
   regional: "mdi:train",
   express: "mdi:train",
+  /* A journey can start or end on foot, and a leg then carries the unified type
+     "walk" — or, when the integration has no type for it, the provider's own
+     product name. Without these a footpath fell through to the default icon and
+     the walk to the first stop looked like another vehicle. */
+  walk: "mdi:walk",
+  footpath: "mdi:walk",
+  fussweg: "mdi:walk",
+  "fußweg": "mdi:walk",
+  bicycle: "mdi:bike",
+  fahrrad: "mdi:bike",
   default: "mdi:transit-connection-variant",
 };

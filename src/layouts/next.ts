@@ -8,6 +8,13 @@ import "../components/delay-badge";
 
 @customElement("openpublictransport-next-layout")
 export class NextLayout extends LitElement {
+  /**
+   * Sizes are steps of Home Assistant's type scale rather than rem. In a
+   * dashboard rem is the page's 14px root, so 0.7rem, 1.1rem, 1.8rem and the
+   * rest drew 9.8px, 15.4px, 25.2px — sizes between Home Assistant's steps, on
+   * a scale of their own beside every other card. Each is now the nearest step,
+   * or the card's label size for the two labels.
+   */
   static styles = [
     cardStyles,
     css`
@@ -18,12 +25,17 @@ export class NextLayout extends LitElement {
         gap: 8px;
       }
 
+      /* The station: one line, like the station name in the other layouts'
+         header. Secondary text rather than a faded copy of it — at 80%
+         opacity it measured 3.7:1 on the light board. */
       .next-station {
-        font-size: 0.7rem;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
+        font-size: var(--opt-font-size-label);
+        text-transform: var(--opt-caps);
+        letter-spacing: calc(var(--opt-tracking) * 0.08em);
         color: var(--opt-text-secondary);
-        opacity: 0.8;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .next-main {
@@ -38,11 +50,13 @@ export class NextLayout extends LitElement {
         opacity: 0.85;
       }
 
+      /* Text on the badge is the palette's text-on-accent; it was black on
+         every theme, whatever the badge's colour. */
       .next-line-badge {
-        font-size: 1rem;
-        font-weight: bold;
-        background: var(--opt-accent, #ffd700);
-        color: #000;
+        font-size: var(--ha-font-size-m, 14px);
+        font-weight: 700;
+        background: var(--opt-accent);
+        color: var(--opt-on-accent);
         padding: 3px 8px;
         border-radius: 4px;
         flex-shrink: 0;
@@ -50,9 +64,10 @@ export class NextLayout extends LitElement {
       }
 
       .next-destination {
-        font-size: 1.1rem;
-        font-weight: 600;
+        font-size: var(--ha-font-size-l, 16px);
+        font-weight: var(--opt-font-weight-medium);
         flex: 1;
+        min-width: 0;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -66,24 +81,24 @@ export class NextLayout extends LitElement {
       }
 
       .next-time {
-        font-size: 0.85rem;
+        font-size: var(--ha-font-size-s, 12px);
         color: var(--opt-text-secondary);
         font-variant-numeric: tabular-nums;
       }
 
       .next-countdown {
-        font-size: 1.8rem;
-        font-weight: bold;
+        font-size: var(--ha-font-size-2xl, 24px);
+        font-weight: 700;
         font-variant-numeric: tabular-nums;
         line-height: 1;
       }
 
       .next-countdown.imminent {
-        color: var(--opt-delay-red, #e53935);
+        color: var(--opt-delay-red);
       }
 
       .next-platform {
-        font-size: 0.75rem;
+        font-size: var(--opt-font-size-label);
         color: var(--opt-text-secondary);
         margin-left: auto;
         white-space: nowrap;
@@ -93,7 +108,7 @@ export class NextLayout extends LitElement {
         padding: 24px 16px;
         text-align: center;
         color: var(--opt-text-secondary);
-        font-size: 0.85rem;
+        font-size: var(--ha-font-size-s, 12px);
       }
     `,
   ];
@@ -144,15 +159,18 @@ export class NextLayout extends LitElement {
 
         <div class="next-bottom">
           <span class=${countdownClass}>${this._renderCountdown(mins)}</span>
-          <span class="next-time">${dep.planned_time}</span>
-          ${this.config.show_delay
-            ? html`<openpublictransport-delay-badge
-                .delay=${dep.delay}
-                ?is-realtime=${dep.is_realtime}
-              ></openpublictransport-delay-badge>`
-            : nothing}
+          <span class="time-line">
+            <span class="next-time">${dep.departure_time || dep.planned_time}</span>
+            ${this.config.show_delay
+              ? html`<openpublictransport-delay-badge
+                  .delay=${dep.delay}
+                  ?is-realtime=${dep.is_realtime}
+                  .language=${lang}
+                ></openpublictransport-delay-badge>`
+              : nothing}
+          </span>
           ${this.config.show_platform && dep.platform
-            ? html`<span class="next-platform">Gl. ${dep.platform}</span>`
+            ? html`<span class="next-platform">${localize(lang, "platform")} ${dep.platform}</span>`
             : nothing}
         </div>
       </div>

@@ -31,7 +31,15 @@ export interface TripLeg {
   delay: number;
   duration_minutes: number;
   platform: string;
-  transfer?: boolean;
+  // Where the vehicle itself is headed (its headsign) — "Herrenberg" for an S1
+  // that passes through. Sent by integrations new enough to expose it.
+  direction?: string;
+  // The provider's description of the change out of this leg ("Fussweg"), or
+  // just a flag. Truthy means: change vehicles here.
+  transfer?: boolean | string;
+  // Minutes between this vehicle's arrival and the next one's departure — the
+  // wait on the platform after this leg.
+  transfer_minutes?: number;
 }
 
 export interface TripData {
@@ -40,10 +48,14 @@ export interface TripData {
   // ISO timestamp of the journey start — the walk to the stop, when there is
   // one. Absent on integrations older than 2026.8.2.
   departure_timestamp?: string | null;
+  // ISO timestamp of the journey's end, sent alongside the start.
+  arrival_timestamp?: string | null;
   // Minutes until that start, as the sensor last computed it.
   in_minutes?: number | null;
   // Where the trip ends, e.g. "Reinoldikirche, Dortmund".
   destination?: string;
+  // The provider's own total, which is not always arrival minus departure —
+  // the trip layout shows the span instead and uses this only without it.
   duration_minutes: number;
   transfers: number;
   connection_feasible: boolean;
@@ -61,6 +73,12 @@ export interface CardConfig {
   show_platform: boolean;
   show_delay: boolean;
   show_realtime_indicator: boolean;
+  /**
+   * The card's look. `dark` and `light` are the departure board, gold on
+   * black or ink on white, in a monospace face; `auto` picks one of the two by
+   * the dashboard's mode. `ha` takes colours and type from the Home Assistant
+   * theme instead, so the card looks like the dashboard around it.
+   */
   theme: "dark" | "light" | "auto" | "ha";
   line_filter?: string;
   destination_filter?: string;

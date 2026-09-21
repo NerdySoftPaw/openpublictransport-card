@@ -1,6 +1,6 @@
 import { LitElement, html, nothing, PropertyValues } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import { cardStyles } from "./styles";
+import { cardStyles, hostStyles } from "./styles";
 import { CardConfig, Departure, TripData, HomeAssistant } from "./types";
 import { CARD_VERSION, DEFAULT_CONFIG } from "./const";
 import { localize } from "./localize";
@@ -20,7 +20,7 @@ console.info(
 
 @customElement("openpublictransport-card")
 export class OpenpublictransportCard extends LitElement {
-  static styles = cardStyles;
+  static styles = [hostStyles, cardStyles];
 
   @property({ attribute: false }) hass!: HomeAssistant;
   @state() private _config!: CardConfig;
@@ -67,9 +67,23 @@ export class OpenpublictransportCard extends LitElement {
     }
   }
 
-  // Resizable in Sections dashboards; the CSS makes it fill the slot and scroll.
+  /**
+   * The card is as tall as what it has to say — a journey with five legs and a
+   * list of alternatives is taller than a direct one — so a section grid is
+   * asked to measure it rather than told a row count in advance.
+   *
+   * It used to name a fixed number, which was true while the stylesheet made
+   * the card fill its slot and scroll inside it. It no longer does, so a fixed
+   * number was a promise the card could not keep: anything taller than the
+   * rows it had claimed was drawn outside its own cell and over the card
+   * below. A narrow column reaches that point readily, which is why it showed
+   * on a phone first.
+   *
+   * `min_rows` still keeps a card that is waiting for data from collapsing to
+   * nothing.
+   */
   public getGridOptions() {
-    return { rows: this.getCardSize(), min_rows: 2, columns: 12 };
+    return { rows: "auto", min_rows: 2, columns: 12 };
   }
 
   connectedCallback(): void {
@@ -143,6 +157,7 @@ export class OpenpublictransportCard extends LitElement {
       departure: attrs["departure"] as string,
       arrival: attrs["arrival"] as string,
       departure_timestamp: attrs["departure_timestamp"] as string | null | undefined,
+      arrival_timestamp: attrs["arrival_timestamp"] as string | null | undefined,
       in_minutes: attrs["in_minutes"] as number | null | undefined,
       destination: attrs["destination"] as string | undefined,
       duration_minutes: attrs["duration_minutes"] as number,
