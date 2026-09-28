@@ -373,6 +373,15 @@ function getEntitySuggestion(
         layout: "trip",
       },
     });
+
+    suggestions.push({
+      label: "Next departure",
+      config: {
+        type: "custom:openpublictransport-card",
+        entity: entityId,
+        layout: "next",
+      },
+    });
   } else {
     // Confirmed OPT sensor but shape not yet known (e.g. trip sensor with no
     // current connection) — offer a single sensible default.
