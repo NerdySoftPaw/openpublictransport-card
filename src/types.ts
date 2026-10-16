@@ -10,6 +10,10 @@ export interface Departure {
   minutes_until_departure: number;
   description?: string;
   notices?: string[];
+  // The notices that report an actual disruption, without routine information
+  // such as bicycle rules or accessibility; added by integration 2026.10.5.
+  // Older versions only send `notices`.
+  disruptions?: string[];
   planned_platform?: string;
   platform_changed?: boolean;
   line_color?: string;

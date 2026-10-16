@@ -437,6 +437,10 @@ export const cardStyles = css`
     cursor: help;
   }
 
+  .notice-icon.notice-info {
+    color: var(--opt-text-secondary);
+  }
+
   /* Compact layout. The chips start on Home Assistant's 16px inset, where the
      header's text starts. */
   .compact-container {
