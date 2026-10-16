@@ -23,16 +23,24 @@ export class TableLayout extends LitElement {
     });
   }
 
-  private _collectNotices(): string[] {
-    const notices: string[] = [];
+  /**
+   * A departure's actual disruptions. Notices also carry routine information
+   * ("behindertengerechtes Fahrzeug", "Bordrestaurant"), which does not belong
+   * in a red warning; an integration older than 2026.10.5 does not tell them
+   * apart, so there every notice still counts.
+   */
+  private _disruptions(dep: Departure): string[] {
+    return dep.disruptions ?? dep.notices ?? [];
+  }
+
+  private _collectDisruptions(): string[] {
+    const disruptions: string[] = [];
     for (const dep of this.departures) {
-      if (dep.notices) {
-        for (const notice of dep.notices) {
-          if (!notices.includes(notice)) notices.push(notice);
-        }
+      for (const disruption of this._disruptions(dep)) {
+        if (!disruptions.includes(disruption)) disruptions.push(disruption);
       }
     }
-    return notices;
+    return disruptions;
   }
 
   /**
@@ -67,22 +75,25 @@ export class TableLayout extends LitElement {
   }
 
   private _renderDisruptionBanner() {
-    const notices = this._collectNotices();
-    if (notices.length === 0) return nothing;
+    const disruptions = this._collectDisruptions();
+    if (disruptions.length === 0) return nothing;
     return html`
       <div class="disruption-banner">
         <ha-icon icon="mdi:alert"></ha-icon>
-        <span>${notices[0]}${notices.length > 1 ? ` (+${notices.length - 1} more)` : ""}</span>
+        <span>${disruptions[0]}${disruptions.length > 1 ? ` (+${disruptions.length - 1} more)` : ""}</span>
       </div>
     `;
   }
 
   private _renderNotices(dep: Departure) {
     if (!dep.notices || dep.notices.length === 0) return nothing;
+    // Routine information stays available on hover, but only a disruption
+    // gets the warning mark.
+    const disrupted = this._disruptions(dep).length > 0;
     return html`
       <ha-icon
-        class="notice-icon"
-        icon="mdi:alert-circle-outline"
+        class="notice-icon ${disrupted ? "" : "notice-info"}"
+        icon=${disrupted ? "mdi:alert-circle-outline" : "mdi:information-outline"}
         title=${dep.notices.join(", ")}
       ></ha-icon>
     `;
