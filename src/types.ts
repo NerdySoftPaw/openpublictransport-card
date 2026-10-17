@@ -47,12 +47,18 @@ export interface TripLeg {
 }
 
 export interface TripData {
+  // The connection's own identity, from the integration. Present on a journey
+  // returned by `get_journeys` and on each alternative summary, so the card can
+  // say which connection it means rather than describe one and hope. Absent on
+  // integrations older than the action itself.
+  id?: string;
   departure: string;
   arrival: string;
   // ISO timestamp of the journey start — the walk to the stop, when there is
   // one. Absent on integrations older than 2026.8.2.
   departure_timestamp?: string | null;
-  // ISO timestamp of the journey's end, sent alongside the start.
+  // ISO timestamp of the journey end. Absent on integrations older than
+  // 2026.8.2, like its departure counterpart.
   arrival_timestamp?: string | null;
   // Minutes until that start, as the sensor last computed it.
   in_minutes?: number | null;
@@ -67,6 +73,11 @@ export interface TripData {
   min_transfer_time: number;
   legs: TripLeg[];
   next_journeys?: TripData[];
+}
+
+/** The `get_journeys` response: every connection the trip sensor holds. */
+export interface JourneysResponse {
+  journeys?: TripData[];
 }
 
 export interface CardConfig {
@@ -100,11 +111,27 @@ export interface HomeAssistant {
   states: Record<string, HassEntity>;
   // Entity registry (optional: absent on older HA versions).
   entities?: Record<string, EntityRegistryDisplayEntry>;
+  // The service registry, by domain and then service name. The card reads it to
+  // find out whether the integration behind an entity can answer a question
+  // before it asks — an older integration simply has no entry here.
+  services?: Record<string, Record<string, unknown>>;
   themes: {
     darkMode: boolean;
   };
   localize: (key: string) => string;
   language: string;
+  callService?: (
+    domain: string,
+    service: string,
+    serviceData?: Record<string, unknown>,
+    target?: Record<string, unknown>,
+    notifyOnError?: boolean,
+    returnResponse?: boolean
+  ) => Promise<ServiceCallResponse>;
+}
+
+export interface ServiceCallResponse {
+  response?: unknown;
 }
 
 export interface HassEntity {

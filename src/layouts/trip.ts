@@ -1,8 +1,9 @@
 import { LitElement, html, nothing } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, state, query } from "lit/decorators.js";
 import { cardStyles } from "../styles";
-import { TripData, TripLeg, CardConfig, HomeAssistant } from "../types";
+import { TripData, TripLeg, CardConfig, HomeAssistant, JourneysResponse } from "../types";
 import { localize } from "../localize";
+import { OPT_PLATFORM } from "../detect";
 import "../components/transport-icon";
 import "../components/delay-badge";
 
@@ -19,6 +20,9 @@ const ARROW = html`<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"
   <path d="M3.5 12h15M13.5 6.5 19 12l-5.5 5.5" />
 </svg>`;
 
+/** The action that hands out every connection the trip sensor is holding. */
+const SERVICE_GET_JOURNEYS = "get_journeys";
+
 @customElement("openpublictransport-trip-layout")
 export class TripLayout extends LitElement {
   static styles = cardStyles;
@@ -26,6 +30,24 @@ export class TripLayout extends LitElement {
   @property({ attribute: false }) hass!: HomeAssistant;
   @property({ attribute: false }) config!: CardConfig;
   @property({ attribute: false }) trip: TripData | null = null;
+
+  /* The connection the dialog is describing, held as two pieces: the summary
+     from the row that was clicked, which is available at once and names the
+     connection in the title, and the full journey, which arrives afterwards.
+
+     Both are snapshots. The coordinator refreshes every couple of minutes and
+     the card behind the dialog follows it, but these two references do not —
+     so an open dialog goes on describing the connection it was opened for
+     instead of quietly becoming a different one. */
+  @state() private _openSummary: TripData | null = null;
+  @state() private _openJourney: TripData | null = null;
+  @state() private _openError = "";
+
+  @query("dialog.journey-dialog") private _dialog?: HTMLDialogElement;
+
+  /* A token that tells a late answer from the current one — a second row opened
+     while the first was still loading must not be filled in with the first. */
+  private _request = 0;
 
   private _formatTime(timeStr: string): string {
     return timeStr || "";
@@ -130,15 +152,24 @@ export class TripLayout extends LitElement {
 
   private _renderHeader(trip: TripData) {
     if (!this.config.show_header) return nothing;
+    return this._renderJourneyHeader(trip);
+  }
 
+  /**
+   * When a journey leaves, when it gets in and how long it takes. The card
+   * shows it for the connection it is watching; the dialog shows it for the
+   * one that was picked, where it also names what the dialog is about — which
+   * is why the markup lives here and not behind the card's header option.
+   */
+  private _renderJourneyHeader(journey: TripData, id?: string) {
     return html`
-      <div class="trip-header">
+      <div class="trip-header" id=${id ?? nothing}>
         <span class="time-span">
-          <span>${trip.departure}</span>
+          <span>${journey.departure}</span>
           <span class="trip-arrow">${ARROW}</span>
-          <span>${trip.arrival}</span>
+          <span>${journey.arrival}</span>
         </span>
-        <span class="trip-duration">${this._formatDuration(this._journeyMinutes(trip))}</span>
+        <span class="trip-duration">${this._formatDuration(this._journeyMinutes(journey))}</span>
       </div>
     `;
   }
@@ -269,12 +300,18 @@ export class TripLayout extends LitElement {
     `;
   }
 
-  private _renderTimeline(trip: TripData) {
-    const lastLeg = trip.legs[trip.legs.length - 1];
+  /**
+   * The journey, leg by leg. It takes the legs rather than the trip sensor's
+   * own connection, which is what lets the dialog draw a chosen alternative
+   * with it: one renderer, so the card and the dialog cannot come to disagree
+   * about what a journey looks like.
+   */
+  private _renderTimeline(legs: TripLeg[]) {
+    const lastLeg = legs[legs.length - 1];
 
     return html`
       <div class="trip-timeline">
-        ${trip.legs.map((leg, i) => this._renderLeg(leg, trip.legs[i + 1], trip.legs[i - 1]))}
+        ${legs.map((leg, i) => this._renderLeg(leg, legs[i + 1], legs[i - 1]))}
         ${lastLeg
           ? html`
               <div class="trip-leg" style="border-left-color: transparent; padding-bottom: 0;">
@@ -293,6 +330,59 @@ export class TripLayout extends LitElement {
     `;
   }
 
+  /**
+   * A journey's full detail: the facts that describe it, then its legs. The
+   * card draws the connection it is watching with this; the dialog draws the
+   * alternative somebody picked with the same call.
+   */
+  private _renderJourney(journey: TripData) {
+    return html`
+      ${this._renderMeta(journey)}
+      ${this._renderTimeline(journey.legs || [])}
+    `;
+  }
+
+  /**
+   * Whether an alternative's detail can be had at all.
+   *
+   * An integration new enough to send the legs with the summary needs nothing
+   * further. Otherwise the detail comes from the `get_journeys` action, and on
+   * an integration that does not register it the rows are simply not
+   * selectable — the card goes on reading exactly as it did before.
+   */
+  private _canOpen(alt: TripData): boolean {
+    if (alt.legs && alt.legs.length > 0) return true;
+    return !!this.hass?.callService && !!this.hass?.services?.[OPT_PLATFORM]?.[SERVICE_GET_JOURNEYS];
+  }
+
+  private _altSummary(alt: TripData, lang: string): string[] {
+    return [
+      `${this._formatTime(alt.departure)} \u2013 ${this._formatTime(alt.arrival)}`,
+      this._formatDuration(this._journeyMinutes(alt)),
+      `${alt.transfers} ${alt.transfers !== 1 ? localize(lang, "transfers") : localize(lang, "transfer")}`,
+      this._riskLabel(alt.transfer_risk, lang),
+    ];
+  }
+
+  private _renderAltRow(alt: TripData, lang: string) {
+    return html`
+      <span class="time-span">
+        <span class="leg-time">${this._formatTime(alt.departure)}</span>
+        <span class="trip-arrow">${ARROW}</span>
+        <span class="leg-time">${this._formatTime(alt.arrival)}</span>
+      </span>
+      <span>${this._formatDuration(this._journeyMinutes(alt))}</span>
+      <span>${alt.transfers} ${alt.transfers !== 1 ? localize(lang, "transfers") : localize(lang, "transfer")}</span>
+      <span class="alt-risk ${this._getRiskClass(alt.transfer_risk)}">
+        <ha-icon
+          icon=${this._getRiskIcon(alt.transfer_risk)}
+          title=${this._riskLabel(alt.transfer_risk, lang)}
+          style="--opt-icon-size:16px;"
+        ></ha-icon>
+      </span>
+    `;
+  }
+
   private _renderAlternatives(trip: TripData) {
     if (!trip.next_journeys || trip.next_journeys.length === 0) return nothing;
 
@@ -300,42 +390,230 @@ export class TripLayout extends LitElement {
     return html`
       <div class="alt-journeys">
         <div class="alt-journeys-title">${localize(lang, "alternative_connections")}</div>
-        ${trip.next_journeys.map(
-          (alt) => html`
-            <div class="alt-journey">
-              <span class="time-span">
-                <span class="leg-time">${this._formatTime(alt.departure)}</span>
-                <span class="trip-arrow">${ARROW}</span>
-                <span class="leg-time">${this._formatTime(alt.arrival)}</span>
-              </span>
-              <span>${this._formatDuration(this._journeyMinutes(alt))}</span>
-              <span>${alt.transfers} ${alt.transfers !== 1 ? localize(lang, "transfers") : localize(lang, "transfer")}</span>
-              <span class="alt-risk ${this._getRiskClass(alt.transfer_risk)}">
-                <ha-icon
-                  icon=${this._getRiskIcon(alt.transfer_risk)}
-                  title=${this._riskLabel(alt.transfer_risk, lang)}
-                  style="--opt-icon-size:16px;"
-                ></ha-icon>
-              </span>
-            </div>
-          `
+        ${trip.next_journeys.map((alt) =>
+          this._canOpen(alt)
+            ? /* A real button, so it takes focus, answers Enter and Space and
+                 announces what it opens. A div with a click handler would do
+                 none of that, and a dashboard is reached by keyboard as often
+                 as by pointer. */
+              html`
+                <button
+                  type="button"
+                  class="alt-journey"
+                  aria-haspopup="dialog"
+                  aria-label=${`${localize(lang, "show_details")}: ${this._altSummary(alt, lang).join(", ")}`}
+                  @click=${() => this._open(alt)}
+                >
+                  ${this._renderAltRow(alt, lang)}
+                </button>
+              `
+            : html`<div class="alt-journey">${this._renderAltRow(alt, lang)}</div>`
         )}
       </div>
     `;
   }
 
-  protected render() {
-    if (!this.trip) {
-      return html`<div class="card-empty">${localize(this.hass.language, "no_trip_data")}</div>`;
+  /* ── The chosen connection, in a dialog ──────────────────────────────────
+     A dialog rather than a row that expands: the card's main home is a kiosk
+     whose dashboard is tuned to fit without scrolling, and anything that
+     changes the card's height reflows the section around it. This leaves the
+     card's layout untouched, and it can be wider than the card — wide enough
+     for a headsign the card has to cut short.
+
+     The native element, not Home Assistant's: `ha-dialog` is mid-migration to
+     `ha-md-dialog`, and a custom card that leans on frontend internals breaks
+     on their schedule. `showModal()` brings focus trapping, Escape and a
+     backdrop with it. */
+
+  private _open(alt: TripData) {
+    const token = ++this._request;
+    this._openSummary = alt;
+    this._openError = "";
+    /* An integration that already sent the legs needs no asking. */
+    this._openJourney = alt.legs && alt.legs.length > 0 ? alt : null;
+
+    this._dialog?.showModal();
+
+    if (!this._openJourney) this._fetch(alt, token);
+  }
+
+  /**
+   * Whether an answer's journey is the one a summary row describes.
+   *
+   * The integration names each connection, so normally this is a selection and
+   * not a guess. Everything below it is for an integration too old to send a
+   * name, and it is a guess: a live VVS board held seven connections of which
+   * two left at 17:36, two at 17:51 and two at 18:36, so matching on the
+   * departure alone returned the earliest journey with that departure — for the
+   * first alternative, the card's own main connection. The dialog was headed
+   * "17:36 → 18:33, 1 Umstieg" from the row while its body described
+   * 17:36 → 18:31 with three changes and a high transfer risk. A wrong answer
+   * under a right heading.
+   *
+   * Requiring every fact the row carries fixes that case, and it is as far as a
+   * summary can go: two routes on parallel lines can leave and arrive together
+   * with one change each and still be different journeys. That is what the id
+   * is for, and why it is worth having.
+   *
+   * The timestamps are preferred over the clock times because `HH:MM` cannot
+   * tell tonight from tomorrow.
+   */
+  private _isSameJourney(a: TripData, b: TripData): boolean {
+    if (a.id && b.id) return a.id === b.id;
+
+    const leaves =
+      a.departure_timestamp && b.departure_timestamp
+        ? a.departure_timestamp === b.departure_timestamp
+        : a.departure === b.departure;
+    const arrives =
+      a.arrival_timestamp && b.arrival_timestamp
+        ? a.arrival_timestamp === b.arrival_timestamp
+        : a.arrival === b.arrival;
+    return (
+      leaves && arrives && a.transfers === b.transfers && a.duration_minutes === b.duration_minutes
+    );
+  }
+
+  /**
+   * Ask the integration for the connection behind the row.
+   *
+   * The action answers with every journey the sensor is holding, so the right
+   * one still has to be found — and a position in the list will not find it,
+   * because the first connection rolls off as it departs. No match means the
+   * connection is gone, which is said plainly rather than showing whatever
+   * journey happened to be in its place.
+   */
+  private async _fetch(alt: TripData, token: number) {
+    try {
+      const result = await this.hass.callService!(
+        OPT_PLATFORM,
+        SERVICE_GET_JOURNEYS,
+        { entity_id: this.config.entity },
+        undefined,
+        /* notifyOnError */ false,
+        /* returnResponse */ true
+      );
+      if (token !== this._request) return;
+
+      const journeys = (result?.response as JourneysResponse | undefined)?.journeys ?? [];
+      const match = journeys.find((j) => this._isSameJourney(j, alt));
+
+      if (match?.legs?.length) {
+        this._openJourney = match;
+      } else {
+        this._openError = localize(this.hass.language, "connection_gone");
+      }
+    } catch (err) {
+      if (token !== this._request) return;
+      this._openError = localize(this.hass.language, "details_failed");
+      // eslint-disable-next-line no-console
+      console.error("openpublictransport-card: could not load connection detail", err);
+    }
+  }
+
+  private _close() {
+    this._dialog?.close();
+  }
+
+  /** A click that lands on the dialog itself came from the backdrop. */
+  private _onDialogClick(ev: MouseEvent) {
+    if (ev.target === ev.currentTarget) this._close();
+  }
+
+  private _onDialogClose() {
+    /* The event is queued rather than delivered on the spot, so it can arrive
+       after another row has opened the dialog again — measured: closing and
+       reopening within one task emptied the dialog that was up and stranded
+       the answer on its way to it, because the clearing below had by then
+       invalidated the request it belonged to. An open dialog means this close
+       belongs to a dialog that is no longer the current one. */
+    if (this._dialog?.open) return;
+
+    /* Nothing is in flight any more, and nothing arriving late may fill in a
+       dialog that is no longer open. */
+    this._request++;
+    this._openSummary = null;
+    this._openJourney = null;
+    this._openError = "";
+    /* Focus is the browser's to restore, and it does: closing a dialog returns
+       it to whatever was focused when it opened. Measured in Chrome and in the
+       pane, on Escape and on a click, with this handler not yet run — the row
+       had focus either way, so calling focus() here only repeated the work.
+
+       It was not harmless, though. A programmatic focus() is what decides
+       whether a focus ring is painted: Safari showed the row ringed after a
+       connection had been opened and closed with the mouse, where Chrome did
+       not. Letting the browser restore focus keeps the ring for the keyboard,
+       which is the only place it means anything. */
+  }
+
+  private _renderDialogBody() {
+    if (this._openJourney) return this._renderJourney(this._openJourney);
+
+    if (this._openError) {
+      return html`
+        <div class="journey-dialog-status is-error">
+          <ha-icon icon="mdi:alert-circle-outline"></ha-icon>
+          <span>${this._openError}</span>
+        </div>
+      `;
     }
 
     return html`
-      <div class="trip-container">
-        ${this._renderHeader(this.trip)}
-        ${this._renderMeta(this.trip)}
-        ${this._renderTimeline(this.trip)}
-        ${this._renderAlternatives(this.trip)}
+      <div class="journey-dialog-status">
+        <span class="journey-dialog-spinner" aria-hidden="true"></span>
+        <span>${localize(this.hass.language, "loading_details")}</span>
       </div>
+    `;
+  }
+
+  private _renderDialog() {
+    const lang = this.hass.language;
+    /* Always in the template, opened and closed through the element's own API.
+       Rendering it only while open would hand Lit a different element each
+       time, and the one in the top layer would be the one thrown away. */
+    return html`
+      <dialog
+        class="journey-dialog"
+        aria-labelledby="journey-dialog-title"
+        @click=${this._onDialogClick}
+        @close=${this._onDialogClose}
+      >
+        <div class="journey-dialog-head">
+          ${this._openSummary
+            ? this._renderJourneyHeader(this._openSummary, "journey-dialog-title")
+            : html`<div class="trip-header" id="journey-dialog-title"></div>`}
+          <button
+            type="button"
+            class="journey-dialog-close"
+            aria-label=${localize(lang, "close")}
+            @click=${this._close}
+          >
+            <ha-icon icon="mdi:close"></ha-icon>
+          </button>
+        </div>
+        <div class="journey-dialog-content">${this._renderDialogBody()}</div>
+      </dialog>
+    `;
+  }
+
+  protected render() {
+    /* One template, with the empty state inside it rather than returned early:
+       a poll that comes back with no connections then replaces the card's
+       content without taking an open dialog down with it. The dialog is showing
+       a snapshot, and it names the connection it is showing, so it can outlive
+       the list it was opened from. */
+    return html`
+      ${this.trip
+        ? html`
+            <div class="trip-container">
+              ${this._renderHeader(this.trip)}
+              ${this._renderJourney(this.trip)}
+              ${this._renderAlternatives(this.trip)}
+            </div>
+          `
+        : html`<div class="card-empty">${localize(this.hass.language, "no_trip_data")}</div>`}
+      ${this._renderDialog()}
     `;
   }
 }

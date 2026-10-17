@@ -820,7 +820,185 @@ export const cardStyles = css`
     border-bottom: none;
   }
 
-  /* Error / Empty states, set back by colour rather than opacity: the error's
+  /* An alternative whose detail can be shown is a real button, not a row that
+     happens to answer a click: it takes focus, responds to Enter and Space, and
+     tells a screen reader that a dialog follows. Its box is the row's exactly —
+     same padding, same rule underneath — so a list of buttons and a list of
+     plain rows occupy the same space, and the card does not change shape on an
+     integration too old to answer. */
+  button.alt-journey {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+    margin: 0;
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--opt-border);
+    border-radius: 0;
+    font-family: inherit;
+    font-size: var(--ha-font-size-s, 12px);
+    color: var(--opt-text-secondary);
+    text-align: left;
+    cursor: pointer;
+  }
+
+  /* The tint reaches 8px past the row on both sides, into the card's own
+     padding, the way Home Assistant highlights a list row — with two offset
+     shadows rather than a wider box, so nothing moves and the row's text stays
+     on the card's column. */
+  button.alt-journey:hover {
+    background: var(--opt-row-hover);
+    box-shadow: -8px 0 0 var(--opt-row-hover), 8px 0 0 var(--opt-row-hover);
+  }
+
+  button.alt-journey:focus-visible {
+    outline: 2px solid var(--opt-accent);
+    outline-offset: -1px;
+  }
+
+  /* The chosen connection's dialog. It is painted in the browser's top layer,
+     which inherits none of the dashboard's appearance — not even the background
+     a card is given for free — so every colour is set here, from the same Home
+     Assistant variables the card is painted with. */
+  .journey-dialog {
+    width: min(calc(100vw - 32px), 460px);
+    max-height: min(calc(100vh - 32px), 640px);
+    padding: 0;
+    border: 1px solid var(--opt-border);
+    border-radius: var(--ha-card-border-radius, 12px);
+    background: var(--opt-bg);
+    color: var(--opt-text);
+    font-family: var(--opt-font-family);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+  }
+
+  /* Only while open: a dialog is display:none until then, and laying it out
+     unconditionally would leave it on the page with nothing to close it. */
+  .journey-dialog[open] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* A plain tint rather than a themed one. ::backdrop inherited from the root
+     element rather than from the dialog until Chrome 122, where a --opt-*
+     defined on the card's host does not reach it; dimming reads correctly on a
+     light and on a dark theme alike. */
+  .journey-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.55);
+  }
+
+  .journey-dialog-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    flex-shrink: 0;
+    padding: 16px 16px 0;
+  }
+
+  /* The title carries the journey's own header, which already has the margin
+     that separates it from what follows; inside the head that margin would
+     push the close button out of line with it. */
+  .journey-dialog-head .trip-header {
+    margin-bottom: 0;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .journey-dialog-close {
+    appearance: none;
+    -webkit-appearance: none;
+    display: inline-flex;
+    padding: 4px;
+    margin: -4px -4px 0 0;
+    background: none;
+    border: none;
+    border-radius: 50%;
+    color: var(--opt-text-secondary);
+    cursor: pointer;
+  }
+
+  .journey-dialog-close:hover {
+    background: var(--opt-row-hover);
+  }
+
+  .journey-dialog-close:focus-visible {
+    outline: 2px solid var(--opt-accent);
+    outline-offset: 0;
+  }
+
+  /* The journey scrolls, the title does not: a connection with many legs stays
+     readable without the dialog growing past the screen. */
+  .journey-dialog-content {
+    padding: 8px 16px 16px;
+    overflow-y: auto;
+  }
+
+  /* The dialog is not held to the card's column, so a leg says everything it
+     has. On the dashboard's 374px a headsign like "Echterdingen
+     Flughafen/Messe …" is cut off, and that cut is what the dialog exists to
+     undo — here the direction wraps instead. */
+  /* The row keeps its one line; it is the headsign inside it that wraps. Letting
+     the row wrap instead put the leg's arrival on a line of its own with the
+     rest of the row empty beside it — measured, 46px against the 38px it takes
+     when the direction wraps in its own box and the duration and the arrival
+     stay with the leg they belong to. */
+  .journey-dialog .leg-details {
+    flex-wrap: nowrap;
+  }
+
+  .journey-dialog .leg-service {
+    overflow: visible;
+  }
+
+  .journey-dialog .leg-direction {
+    overflow: visible;
+    white-space: normal;
+    text-overflow: clip;
+  }
+
+  .journey-dialog-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 24px 0;
+    font-size: var(--ha-font-size-s, 12px);
+    color: var(--opt-text-secondary);
+  }
+
+  .journey-dialog-status.is-error {
+    color: var(--opt-delay-red);
+  }
+
+  .journey-dialog-status ha-icon {
+    --opt-icon-size: 20px;
+  }
+
+  /* A spinner of its own rather than Home Assistant's: the same reason the
+     dialog is the native element and not ha-dialog. */
+  .journey-dialog-spinner {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    border: 2px solid var(--opt-border);
+    border-top-color: var(--opt-accent);
+    border-radius: 50%;
+    animation: opt-spin 0.8s linear infinite;
+  }
+
+  @keyframes opt-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .journey-dialog-spinner {
+      animation-duration: 2.4s;
+    }
+  }
+
+    /* Error / Empty states, set back by colour rather than opacity: the error's
      red at 70% measured 3.2:1 on the light board and 2.8:1 on the dark one. */
   .card-error,
   .card-empty {
