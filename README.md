@@ -97,7 +97,7 @@ show_header: true
 | `show_platform`           | boolean | `true`  | Show platform/track column                                                  |
 | `show_delay`              | boolean | `true`  | Show delay badges                                                           |
 | `show_realtime_indicator` | boolean | `true`  | Show green checkmark for on-time realtime                                   |
-| `theme`                   | string  | `auto`  | Theme: `dark`, `light`, `auto`, `ha`. `dark` and `light` are the departure board — gold on black or dark on white, in a monospace face — and `auto` picks one of the two by the dashboard's dark mode. `ha` takes colours and font from the Home Assistant theme, so the card looks like the cards around it |
+| `theme`                   | string  | `auto`  | Theme: `dark`, `light`, `auto`, `ha`. `dark` and `light` are the departure board — gold on black or dark on white, in a monospace face — and `auto` picks one of the two by the dashboard's dark mode. `ha` takes colours and font from the Home Assistant theme, so the card looks like the cards around it. A card added from the card picker starts on `ha`; a card without the key shows `auto` |
 
 ## Line Colors
 

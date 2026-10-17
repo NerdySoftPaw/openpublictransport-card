@@ -42,7 +42,9 @@ export class OpenpublictransportCard extends LitElement {
       "";
     const model = pick ? detectModel(hass, pick) : "unknown";
     // Spread defaults first so the model-derived layout wins over "table".
-    return { ...DEFAULT_CONFIG, entity: pick, layout: layoutForModel(model) };
+    // A new card starts on the native look; DEFAULT_CONFIG stays "auto", so a
+    // card saved without a theme keeps the departure board it has always shown.
+    return { ...DEFAULT_CONFIG, entity: pick, layout: layoutForModel(model), theme: "ha" };
   }
 
   public setConfig(config: Partial<CardConfig>): void {
