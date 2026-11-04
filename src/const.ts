@@ -1,6 +1,6 @@
 import { CardConfig } from "./types";
 
-export const CARD_VERSION = "1.10.1";
+export const CARD_VERSION = "1.11.0";
 
 export const DEFAULT_CONFIG: Omit<CardConfig, "entity"> = {
   layout: "table",
@@ -12,6 +12,9 @@ export const DEFAULT_CONFIG: Omit<CardConfig, "entity"> = {
   theme: "auto",
   line_filter: "",
   destination_filter: "",
+  show_notices: true,
+  show_disruption_banner: true,
+  show_data_age: false,
 };
 
 export const TRANSPORT_ICONS: Record<string, string> = {

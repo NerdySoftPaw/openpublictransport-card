@@ -3,6 +3,7 @@ import { customElement, property } from "lit/decorators.js";
 import { cardStyles } from "../styles";
 import { Departure, CardConfig, HomeAssistant } from "../types";
 import { localize } from "../localize";
+import { formatCountdown } from "../format";
 import "../components/transport-icon";
 import "../components/delay-badge";
 
@@ -121,10 +122,7 @@ export class NextLayout extends LitElement {
   @property({ type: String }) emptyKey = "no_departures";
 
   private _renderCountdown(mins: number): string {
-    const lang = this.hass?.language || "en";
-    if (mins <= 0) return localize(lang, "now");
-    if (mins === 1) return localize(lang, "in_1_min");
-    return localize(lang, "in_min", { min: mins });
+    return formatCountdown(this.hass?.language || "en", mins);
   }
 
   protected render() {
