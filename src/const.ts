@@ -1,6 +1,6 @@
 import { CardConfig } from "./types";
 
-export const CARD_VERSION = "1.11.0";
+export const CARD_VERSION = "1.12.0";
 
 export const DEFAULT_CONFIG: Omit<CardConfig, "entity"> = {
   layout: "table",
