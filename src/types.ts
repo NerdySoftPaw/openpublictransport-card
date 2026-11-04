@@ -8,6 +8,10 @@ export interface Departure {
   transportation_type: string;
   is_realtime: boolean;
   minutes_until_departure: number;
+  // ISO timestamp of the departure (the estimate when there is one), added by
+  // integration 2026.11.0. Lets the card count down between polls; older
+  // versions only send `minutes_until_departure`, computed at the last poll.
+  departure_timestamp?: string;
   description?: string;
   notices?: string[];
   // The notices that report an actual disruption, without routine information
@@ -97,6 +101,12 @@ export interface CardConfig {
   theme: "dark" | "light" | "auto" | "ha";
   line_filter?: string;
   destination_filter?: string;
+  /** The ⓘ / ⚠ icon beside a destination that opens its notices (table). */
+  show_notices: boolean;
+  /** The red banner above the table naming the current disruptions. */
+  show_disruption_banner: boolean;
+  /** A footer line saying how long ago the integration last fetched the data. */
+  show_data_age: boolean;
 }
 
 // Home Assistant types (minimal declarations for type safety)

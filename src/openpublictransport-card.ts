@@ -4,6 +4,7 @@ import { cardStyles, hostStyles } from "./styles";
 import { CardConfig, Departure, TripData, HomeAssistant } from "./types";
 import { CARD_VERSION, DEFAULT_CONFIG } from "./const";
 import { localize } from "./localize";
+import { minutesUntil, formatAge } from "./format";
 import { isOptSensor, getOptEntities, detectModel, layoutForModel } from "./detect";
 
 import "./layouts/table";
@@ -126,7 +127,17 @@ export class OpenpublictransportCard extends LitElement {
     const departures = stateObj.attributes["departures"];
     if (!Array.isArray(departures)) return [];
 
-    let deps = departures as Departure[];
+    // Count down from each departure's own timestamp, so the board keeps moving
+    // between polls, and drop what has already left: a departure a minute gone
+    // is not "now" until the next poll replaces it (issue #17). Integrations
+    // without the timestamp keep the counts they sent.
+    let deps = (departures as Departure[])
+      .map((d) =>
+        d.departure_timestamp
+          ? { ...d, minutes_until_departure: minutesUntil(d.departure_timestamp, d.minutes_until_departure) }
+          : d
+      )
+      .filter((d) => !d.departure_timestamp || d.minutes_until_departure >= 0);
 
     const filter = (this._config.line_filter || "").trim();
     if (filter) {
@@ -213,13 +224,7 @@ export class OpenpublictransportCard extends LitElement {
    * to the attribute for integrations too old to send a timestamp.
    */
   private _minutesUntilTrip(trip: TripData): number {
-    if (trip.departure_timestamp) {
-      const start = Date.parse(trip.departure_timestamp);
-      if (!Number.isNaN(start)) {
-        return Math.floor((start - Date.now()) / 60000);
-      }
-    }
-    return trip.in_minutes ?? 0;
+    return minutesUntil(trip.departure_timestamp, trip.in_minutes ?? 0);
   }
 
   private _getStationName(): string {
@@ -265,8 +270,24 @@ export class OpenpublictransportCard extends LitElement {
     return html`
       <ha-card>
         ${this._renderLayout()}
+        ${this._renderDataAge(stateObj.attributes)}
       </ha-card>
     `;
+  }
+
+  /**
+   * "Fetched 20 seconds ago" under the layout (issue #18). The age comes from
+   * the integration's `last_fetched`, the time of its last successful request
+   * to the provider; a redraw, a settings change or an unrelated state update
+   * does not move it. A multi-stop sensor reports its oldest source. Without
+   * the attribute — an older integration — nothing is shown rather than an age
+   * the card cannot vouch for. The ten-second render timer keeps it current.
+   */
+  private _renderDataAge(attrs: Record<string, unknown>) {
+    if (!this._config.show_data_age) return nothing;
+    const age = formatAge(this.hass.language, attrs["last_fetched"] as string | undefined);
+    if (!age) return nothing;
+    return html`<div class="data-age">${localize(this.hass.language, "fetched_ago", { age })}</div>`;
   }
 
   private _renderLayout() {
