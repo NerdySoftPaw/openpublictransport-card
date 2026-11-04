@@ -1,10 +1,13 @@
 import { LitElement, html, nothing } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, state, query } from "lit/decorators.js";
 import { cardStyles } from "../styles";
 import { Departure, CardConfig, HomeAssistant } from "../types";
 import { localize } from "../localize";
+import { formatCountdown } from "../format";
 import "../components/transport-icon";
 import "../components/delay-badge";
+import "../components/info-dialog";
+import type { InfoDialog } from "../components/info-dialog";
 
 @customElement("openpublictransport-table-layout")
 export class TableLayout extends LitElement {
@@ -14,6 +17,19 @@ export class TableLayout extends LitElement {
   @property({ attribute: false }) config!: CardConfig;
   @property({ attribute: false }) departures: Departure[] = [];
   @property({ type: String }) stationName = "";
+
+  /** What the info dialog shows; set just before it opens. */
+  @state() private _dialog: { heading: string; disruptions: string[]; notices: string[] } = {
+    heading: "",
+    disruptions: [],
+    notices: [],
+  };
+  @query("openpublictransport-info-dialog") private _dialogEl!: InfoDialog;
+
+  private _openDialog(heading: string, disruptions: string[], notices: string[]): void {
+    this._dialog = { heading, disruptions, notices };
+    this._dialogEl?.open();
+  }
 
   private _getCurrentTime(): string {
     return new Date().toLocaleTimeString(this.hass?.language || "de-DE", {
@@ -58,10 +74,7 @@ export class TableLayout extends LitElement {
   }
 
   private _countdown(dep: Departure): string {
-    const mins = dep.minutes_until_departure;
-    if (mins <= 0) return localize(this.hass.language, "now");
-    if (mins === 1) return localize(this.hass.language, "in_1_min");
-    return localize(this.hass.language, "in_min", { min: mins });
+    return formatCountdown(this.hass.language, dep.minutes_until_departure);
   }
 
   private _renderHeader() {
@@ -74,28 +87,71 @@ export class TableLayout extends LitElement {
     `;
   }
 
+  /**
+   * The first disruption, and how many more there are. The whole banner is a
+   * button that lists them all, so "(+2 more)" is something to open rather
+   * than only a count (issue #19).
+   */
   private _renderDisruptionBanner() {
+    if (!this.config.show_disruption_banner) return nothing;
     const disruptions = this._collectDisruptions();
     if (disruptions.length === 0) return nothing;
+    const lang = this.hass.language;
+    const more = disruptions.length - 1;
     return html`
-      <div class="disruption-banner">
+      <button
+        class="disruption-banner"
+        aria-haspopup="dialog"
+        aria-label=${localize(lang, "show_all_disruptions")}
+        @click=${() => this._openDialog(localize(lang, "disruptions"), disruptions, [])}
+      >
         <ha-icon icon="mdi:alert"></ha-icon>
-        <span>${disruptions[0]}${disruptions.length > 1 ? ` (+${disruptions.length - 1} more)` : ""}</span>
-      </div>
+        <span class="disruption-text">${disruptions[0]}</span>
+        ${more > 0
+          ? html`<span class="disruption-more">${localize(lang, "more_count", { n: more })}</span>`
+          : nothing}
+      </button>
     `;
   }
 
+  /**
+   * The icon beside a destination with notices. It is a button: a tap opens
+   * the departure's notices, disruptions first, which a hover tooltip never
+   * did on a phone (issue #19). The tooltip stays for the mouse. Only a
+   * disruption gets the warning mark.
+   */
   private _renderNotices(dep: Departure) {
+    if (!this.config.show_notices) return nothing;
     if (!dep.notices || dep.notices.length === 0) return nothing;
-    // Routine information stays available on hover, but only a disruption
-    // gets the warning mark.
-    const disrupted = this._disruptions(dep).length > 0;
+    const lang = this.hass.language;
+    const disruptions = this._disruptions(dep);
+    const routine = dep.notices.filter((n) => !disruptions.includes(n));
+    const disrupted = disruptions.length > 0;
+    const heading = localize(lang, "notices_for", { line: dep.line, destination: dep.destination });
     return html`
-      <ha-icon
-        class="notice-icon ${disrupted ? "" : "notice-info"}"
-        icon=${disrupted ? "mdi:alert-circle-outline" : "mdi:information-outline"}
+      <button
+        class="notice-button"
+        aria-haspopup="dialog"
+        aria-label=${heading}
         title=${dep.notices.join(", ")}
-      ></ha-icon>
+        @click=${() => this._openDialog(heading, disruptions, routine)}
+      >
+        <ha-icon
+          class="notice-icon ${disrupted ? "" : "notice-info"}"
+          icon=${disrupted ? "mdi:alert-circle-outline" : "mdi:information-outline"}
+        ></ha-icon>
+      </button>
+    `;
+  }
+
+  private _renderDialog() {
+    return html`
+      <openpublictransport-info-dialog
+        .language=${this.hass.language}
+        .heading=${this._dialog.heading}
+        .disruptions=${this._dialog.disruptions}
+        .notices=${this._dialog.notices}
+      ></openpublictransport-info-dialog>
     `;
   }
 
@@ -188,6 +244,7 @@ export class TableLayout extends LitElement {
           </tbody>
         </table>
       </div>
+      ${this._renderDialog()}
     `;
   }
 }

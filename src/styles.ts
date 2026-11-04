@@ -244,6 +244,47 @@ export const cardStyles = css`
 
   .disruption-banner ha-icon {
     --opt-icon-size: 16px;
+    flex-shrink: 0;
+  }
+
+  /* The banner is a button that lists every disruption: reset the button's
+     own look so it stays the band it was. */
+  button.disruption-banner {
+    width: 100%;
+    border: none;
+    margin: 0;
+    font: inherit;
+    font-size: var(--ha-font-size-s, 12px);
+    text-align: start;
+    cursor: pointer;
+  }
+
+  .disruption-banner .disruption-text {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .disruption-banner .disruption-more {
+    flex-shrink: 0;
+    font-weight: 700;
+    text-decoration: underline;
+  }
+
+  button.disruption-banner:focus-visible,
+  .notice-button:focus-visible {
+    outline: 2px solid var(--opt-accent);
+    outline-offset: -2px;
+  }
+
+  /* How long ago the data was fetched (show_data_age). */
+  .data-age {
+    padding: 0 16px 12px;
+    font-size: var(--opt-font-size-label);
+    color: var(--opt-text-secondary);
+    font-variant-numeric: tabular-nums;
   }
 
   /* Table layout. The table is as wide as the card and never wider: the
@@ -434,7 +475,20 @@ export const cardStyles = css`
     --opt-icon-size: 16px;
     flex-shrink: 0;
     color: var(--opt-delay-yellow);
-    cursor: help;
+  }
+
+  /* A 16px icon with a touch target around it; the negative margin keeps the
+     row as tall as it was. */
+  .notice-button {
+    display: inline-flex;
+    flex-shrink: 0;
+    padding: 6px;
+    margin: -6px;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
   }
 
   .notice-icon.notice-info {

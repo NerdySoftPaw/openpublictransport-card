@@ -211,6 +211,34 @@ export class OpenpublictransportCardEditor extends LitElement {
           ></ha-switch>
         </div>
 
+        ${this._config.layout === "table"
+          ? html`
+              <div class="toggle-row">
+                <label>${localize(lang, "show_notices")}</label>
+                <ha-switch
+                  .checked=${this._config.show_notices !== false}
+                  @change=${this._toggleChanged("show_notices")}
+                ></ha-switch>
+              </div>
+
+              <div class="toggle-row">
+                <label>${localize(lang, "show_disruption_banner")}</label>
+                <ha-switch
+                  .checked=${this._config.show_disruption_banner !== false}
+                  @change=${this._toggleChanged("show_disruption_banner")}
+                ></ha-switch>
+              </div>
+            `
+          : ""}
+
+        <div class="toggle-row">
+          <label>${localize(lang, "show_data_age")}</label>
+          <ha-switch
+            .checked=${this._config.show_data_age === true}
+            @change=${this._toggleChanged("show_data_age")}
+          ></ha-switch>
+        </div>
+
         ${this._isTripEntity() ? this._renderTripFilterNote(lang) : this._renderFilters(lang)}
       </div>
     `;
