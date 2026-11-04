@@ -111,7 +111,7 @@ show_header: true
 | `show_notices`            | boolean | `true`  | Table: show the icon beside a destination with notices. Tap it to read them; disruptions are listed first |
 | `show_disruption_banner`  | boolean | `true`  | Table: show the red banner with the current disruptions. Tap it to read all of them |
 | `show_data_age`           | boolean | `false` | Show how long ago the integration last fetched the data ("Fetched 20 seconds ago"). Needs integration 2026.11.0 or newer; on a multi-stop sensor this is its oldest source |
-| `theme`                   | string  | `auto`  | Theme: `dark`, `light`, `auto`, `ha`. `dark` and `light` are the departure board — gold on black or dark on white, in a monospace face — and `auto` picks one of the two by the dashboard's dark mode. `ha` takes colours and font from the Home Assistant theme, so the card looks like the cards around it |
+| `theme`                   | string  | `auto`  | Theme: `dark`, `light`, `auto`, `ha`. `dark` and `light` are the departure board — gold on black or dark on white, in a monospace face — and `auto` picks one of the two by the dashboard's dark mode. `ha` takes colours and font from the Home Assistant theme, so the card looks like the cards around it. A card added from the card picker starts on `ha`; a card without the key shows `auto` |
 
 ## Line Colors
 
