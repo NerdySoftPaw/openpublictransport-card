@@ -1,42 +1,42 @@
-function t(t,e,i,n){var a,o=arguments.length,s=o<3?e:null===n?n=Object.getOwnPropertyDescriptor(e,i):n;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)s=Reflect.decorate(t,e,i,n);else for(var r=t.length-1;r>=0;r--)(a=t[r])&&(s=(o<3?a(s):o>3?a(e,i,s):a(e,i))||s);return o>3&&s&&Object.defineProperty(e,i,s),s}"function"==typeof SuppressedError&&SuppressedError;
+function e(e,t,i,n){var a,o=arguments.length,r=o<3?t:null===n?n=Object.getOwnPropertyDescriptor(t,i):n;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)r=Reflect.decorate(e,t,i,n);else for(var s=e.length-1;s>=0;s--)(a=e[s])&&(r=(o<3?a(r):o>3?a(t,i,r):a(t,i))||r);return o>3&&r&&Object.defineProperty(t,i,r),r}"function"==typeof SuppressedError&&SuppressedError;
 /**
  * @license
  * Copyright 2019 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const e=globalThis,i=e.ShadowRoot&&(void 0===e.ShadyCSS||e.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,n=Symbol(),a=new WeakMap;let o=class{constructor(t,e,i){if(this._$cssResult$=!0,i!==n)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=t,this.t=e}get styleSheet(){let t=this.o;const e=this.t;if(i&&void 0===t){const i=void 0!==e&&1===e.length;i&&(t=a.get(e)),void 0===t&&((this.o=t=new CSSStyleSheet).replaceSync(this.cssText),i&&a.set(e,t))}return t}toString(){return this.cssText}};const s=(t,...e)=>{const i=1===t.length?t[0]:e.reduce((e,i,n)=>e+(t=>{if(!0===t._$cssResult$)return t.cssText;if("number"==typeof t)return t;throw Error("Value passed to 'css' function must be a 'css' function result: "+t+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(i)+t[n+1],t[0]);return new o(i,t,n)},r=i?t=>t:t=>t instanceof CSSStyleSheet?(t=>{let e="";for(const i of t.cssRules)e+=i.cssText;return(t=>new o("string"==typeof t?t:t+"",void 0,n))(e)})(t):t,{is:l,defineProperty:d,getOwnPropertyDescriptor:h,getOwnPropertyNames:p,getOwnPropertySymbols:c,getPrototypeOf:u}=Object,g=globalThis,f=g.trustedTypes,m=f?f.emptyScript:"",_=g.reactiveElementPolyfillSupport,y=(t,e)=>t,b={toAttribute(t,e){switch(e){case Boolean:t=t?m:null;break;case Object:case Array:t=null==t?t:JSON.stringify(t)}return t},fromAttribute(t,e){let i=t;switch(e){case Boolean:i=null!==t;break;case Number:i=null===t?null:Number(t);break;case Object:case Array:try{i=JSON.parse(t)}catch(t){i=null}}return i}},v=(t,e)=>!l(t,e),w={attribute:!0,type:String,converter:b,reflect:!1,useDefault:!1,hasChanged:v};
+const t=globalThis,i=t.ShadowRoot&&(void 0===t.ShadyCSS||t.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,n=Symbol(),a=new WeakMap;let o=class{constructor(e,t,i){if(this._$cssResult$=!0,i!==n)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=e,this.t=t}get styleSheet(){let e=this.o;const t=this.t;if(i&&void 0===e){const i=void 0!==t&&1===t.length;i&&(e=a.get(t)),void 0===e&&((this.o=e=new CSSStyleSheet).replaceSync(this.cssText),i&&a.set(t,e))}return e}toString(){return this.cssText}};const r=(e,...t)=>{const i=1===e.length?e[0]:t.reduce((t,i,n)=>t+(e=>{if(!0===e._$cssResult$)return e.cssText;if("number"==typeof e)return e;throw Error("Value passed to 'css' function must be a 'css' function result: "+e+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(i)+e[n+1],e[0]);return new o(i,e,n)},s=i?e=>e:e=>e instanceof CSSStyleSheet?(e=>{let t="";for(const i of e.cssRules)t+=i.cssText;return(e=>new o("string"==typeof e?e:e+"",void 0,n))(t)})(e):e,{is:l,defineProperty:d,getOwnPropertyDescriptor:h,getOwnPropertyNames:p,getOwnPropertySymbols:c,getPrototypeOf:u}=Object,g=globalThis,f=g.trustedTypes,m=f?f.emptyScript:"",_=g.reactiveElementPolyfillSupport,y=(e,t)=>e,b={toAttribute(e,t){switch(t){case Boolean:e=e?m:null;break;case Object:case Array:e=null==e?e:JSON.stringify(e)}return e},fromAttribute(e,t){let i=e;switch(t){case Boolean:i=null!==e;break;case Number:i=null===e?null:Number(e);break;case Object:case Array:try{i=JSON.parse(e)}catch(e){i=null}}return i}},v=(e,t)=>!l(e,t),w={attribute:!0,type:String,converter:b,reflect:!1,useDefault:!1,hasChanged:v};
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */Symbol.metadata??=Symbol("metadata"),g.litPropertyMetadata??=new WeakMap;let x=class extends HTMLElement{static addInitializer(t){this._$Ei(),(this.l??=[]).push(t)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(t,e=w){if(e.state&&(e.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(t)&&((e=Object.create(e)).wrapped=!0),this.elementProperties.set(t,e),!e.noAccessor){const i=Symbol(),n=this.getPropertyDescriptor(t,i,e);void 0!==n&&d(this.prototype,t,n)}}static getPropertyDescriptor(t,e,i){const{get:n,set:a}=h(this.prototype,t)??{get(){return this[e]},set(t){this[e]=t}};return{get:n,set(e){const o=n?.call(this);a?.call(this,e),this.requestUpdate(t,o,i)},configurable:!0,enumerable:!0}}static getPropertyOptions(t){return this.elementProperties.get(t)??w}static _$Ei(){if(this.hasOwnProperty(y("elementProperties")))return;const t=u(this);t.finalize(),void 0!==t.l&&(this.l=[...t.l]),this.elementProperties=new Map(t.elementProperties)}static finalize(){if(this.hasOwnProperty(y("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(y("properties"))){const t=this.properties,e=[...p(t),...c(t)];for(const i of e)this.createProperty(i,t[i])}const t=this[Symbol.metadata];if(null!==t){const e=litPropertyMetadata.get(t);if(void 0!==e)for(const[t,i]of e)this.elementProperties.set(t,i)}this._$Eh=new Map;for(const[t,e]of this.elementProperties){const i=this._$Eu(t,e);void 0!==i&&this._$Eh.set(i,t)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(t){const e=[];if(Array.isArray(t)){const i=new Set(t.flat(1/0).reverse());for(const t of i)e.unshift(r(t))}else void 0!==t&&e.push(r(t));return e}static _$Eu(t,e){const i=e.attribute;return!1===i?void 0:"string"==typeof i?i:"string"==typeof t?t.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(t=>this.enableUpdating=t),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(t=>t(this))}addController(t){(this._$EO??=new Set).add(t),void 0!==this.renderRoot&&this.isConnected&&t.hostConnected?.()}removeController(t){this._$EO?.delete(t)}_$E_(){const t=new Map,e=this.constructor.elementProperties;for(const i of e.keys())this.hasOwnProperty(i)&&(t.set(i,this[i]),delete this[i]);t.size>0&&(this._$Ep=t)}createRenderRoot(){const t=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return((t,n)=>{if(i)t.adoptedStyleSheets=n.map(t=>t instanceof CSSStyleSheet?t:t.styleSheet);else for(const i of n){const n=document.createElement("style"),a=e.litNonce;void 0!==a&&n.setAttribute("nonce",a),n.textContent=i.cssText,t.appendChild(n)}})(t,this.constructor.elementStyles),t}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(t=>t.hostConnected?.())}enableUpdating(t){}disconnectedCallback(){this._$EO?.forEach(t=>t.hostDisconnected?.())}attributeChangedCallback(t,e,i){this._$AK(t,i)}_$ET(t,e){const i=this.constructor.elementProperties.get(t),n=this.constructor._$Eu(t,i);if(void 0!==n&&!0===i.reflect){const a=(void 0!==i.converter?.toAttribute?i.converter:b).toAttribute(e,i.type);this._$Em=t,null==a?this.removeAttribute(n):this.setAttribute(n,a),this._$Em=null}}_$AK(t,e){const i=this.constructor,n=i._$Eh.get(t);if(void 0!==n&&this._$Em!==n){const t=i.getPropertyOptions(n),a="function"==typeof t.converter?{fromAttribute:t.converter}:void 0!==t.converter?.fromAttribute?t.converter:b;this._$Em=n;const o=a.fromAttribute(e,t.type);this[n]=o??this._$Ej?.get(n)??o,this._$Em=null}}requestUpdate(t,e,i,n=!1,a){if(void 0!==t){const o=this.constructor;if(!1===n&&(a=this[t]),i??=o.getPropertyOptions(t),!((i.hasChanged??v)(a,e)||i.useDefault&&i.reflect&&a===this._$Ej?.get(t)&&!this.hasAttribute(o._$Eu(t,i))))return;this.C(t,e,i)}!1===this.isUpdatePending&&(this._$ES=this._$EP())}C(t,e,{useDefault:i,reflect:n,wrapped:a},o){i&&!(this._$Ej??=new Map).has(t)&&(this._$Ej.set(t,o??e??this[t]),!0!==a||void 0!==o)||(this._$AL.has(t)||(this.hasUpdated||i||(e=void 0),this._$AL.set(t,e)),!0===n&&this._$Em!==t&&(this._$Eq??=new Set).add(t))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(t){Promise.reject(t)}const t=this.scheduleUpdate();return null!=t&&await t,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[t,e]of this._$Ep)this[t]=e;this._$Ep=void 0}const t=this.constructor.elementProperties;if(t.size>0)for(const[e,i]of t){const{wrapped:t}=i,n=this[e];!0!==t||this._$AL.has(e)||void 0===n||this.C(e,void 0,i,n)}}let t=!1;const e=this._$AL;try{t=this.shouldUpdate(e),t?(this.willUpdate(e),this._$EO?.forEach(t=>t.hostUpdate?.()),this.update(e)):this._$EM()}catch(e){throw t=!1,this._$EM(),e}t&&this._$AE(e)}willUpdate(t){}_$AE(t){this._$EO?.forEach(t=>t.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(t)),this.updated(t)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(t){return!0}update(t){this._$Eq&&=this._$Eq.forEach(t=>this._$ET(t,this[t])),this._$EM()}updated(t){}firstUpdated(t){}};x.elementStyles=[],x.shadowRootOptions={mode:"open"},x[y("elementProperties")]=new Map,x[y("finalized")]=new Map,_?.({ReactiveElement:x}),(g.reactiveElementVersions??=[]).push("2.1.2");
-/**
- * @license
- * Copyright 2017 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */
-const $=globalThis,k=t=>t,z=$.trustedTypes,A=z?z.createPolicy("lit-html",{createHTML:t=>t}):void 0,C="$lit$",T=`lit$${Math.random().toFixed(9).slice(2)}$`,S="?"+T,E=`<${S}>`,j=document,D=()=>j.createComment(""),N=t=>null===t||"object"!=typeof t&&"function"!=typeof t,P=Array.isArray,M="[ \t\n\f\r]",R=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,L=/-->/g,H=/>/g,U=RegExp(`>|${M}(?:([^\\s"'>=/]+)(${M}*=${M}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,"g"),O=/'/g,I=/"/g,F=/^(?:script|style|textarea|title)$/i,B=(t=>(e,...i)=>({_$litType$:t,strings:e,values:i}))(1),V=Symbol.for("lit-noChange"),q=Symbol.for("lit-nothing"),W=new WeakMap,K=j.createTreeWalker(j,129);function G(t,e){if(!P(t)||!t.hasOwnProperty("raw"))throw Error("invalid template strings array");return void 0!==A?A.createHTML(e):e}const Z=(t,e)=>{const i=t.length-1,n=[];let a,o=2===e?"<svg>":3===e?"<math>":"",s=R;for(let e=0;e<i;e++){const i=t[e];let r,l,d=-1,h=0;for(;h<i.length&&(s.lastIndex=h,l=s.exec(i),null!==l);)h=s.lastIndex,s===R?"!--"===l[1]?s=L:void 0!==l[1]?s=H:void 0!==l[2]?(F.test(l[2])&&(a=RegExp("</"+l[2],"g")),s=U):void 0!==l[3]&&(s=U):s===U?">"===l[0]?(s=a??R,d=-1):void 0===l[1]?d=-2:(d=s.lastIndex-l[2].length,r=l[1],s=void 0===l[3]?U:'"'===l[3]?I:O):s===I||s===O?s=U:s===L||s===H?s=R:(s=U,a=void 0);const p=s===U&&t[e+1].startsWith("/>")?" ":"";o+=s===R?i+E:d>=0?(n.push(r),i.slice(0,d)+C+i.slice(d)+T+p):i+T+(-2===d?e:p)}return[G(t,o+(t[i]||"<?>")+(2===e?"</svg>":3===e?"</math>":"")),n]};class J{constructor({strings:t,_$litType$:e},i){let n;this.parts=[];let a=0,o=0;const s=t.length-1,r=this.parts,[l,d]=Z(t,e);if(this.el=J.createElement(l,i),K.currentNode=this.el.content,2===e||3===e){const t=this.el.content.firstChild;t.replaceWith(...t.childNodes)}for(;null!==(n=K.nextNode())&&r.length<s;){if(1===n.nodeType){if(n.hasAttributes())for(const t of n.getAttributeNames())if(t.endsWith(C)){const e=d[o++],i=n.getAttribute(t).split(T),s=/([.?@])?(.*)/.exec(e);r.push({type:1,index:a,name:s[2],strings:i,ctor:"."===s[1]?et:"?"===s[1]?it:"@"===s[1]?nt:tt}),n.removeAttribute(t)}else t.startsWith(T)&&(r.push({type:6,index:a}),n.removeAttribute(t));if(F.test(n.tagName)){const t=n.textContent.split(T),e=t.length-1;if(e>0){n.textContent=z?z.emptyScript:"";for(let i=0;i<e;i++)n.append(t[i],D()),K.nextNode(),r.push({type:2,index:++a});n.append(t[e],D())}}}else if(8===n.nodeType)if(n.data===S)r.push({type:2,index:a});else{let t=-1;for(;-1!==(t=n.data.indexOf(T,t+1));)r.push({type:7,index:a}),t+=T.length-1}a++}}static createElement(t,e){const i=j.createElement("template");return i.innerHTML=t,i}}function Y(t,e,i=t,n){if(e===V)return e;let a=void 0!==n?i._$Co?.[n]:i._$Cl;const o=N(e)?void 0:e._$litDirective$;return a?.constructor!==o&&(a?._$AO?.(!1),void 0===o?a=void 0:(a=new o(t),a._$AT(t,i,n)),void 0!==n?(i._$Co??=[])[n]=a:i._$Cl=a),void 0!==a&&(e=Y(t,a._$AS(t,e.values),a,n)),e}class Q{constructor(t,e){this._$AV=[],this._$AN=void 0,this._$AD=t,this._$AM=e}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(t){const{el:{content:e},parts:i}=this._$AD,n=(t?.creationScope??j).importNode(e,!0);K.currentNode=n;let a=K.nextNode(),o=0,s=0,r=i[0];for(;void 0!==r;){if(o===r.index){let e;2===r.type?e=new X(a,a.nextSibling,this,t):1===r.type?e=new r.ctor(a,r.name,r.strings,this,t):6===r.type&&(e=new at(a,this,t)),this._$AV.push(e),r=i[++s]}o!==r?.index&&(a=K.nextNode(),o++)}return K.currentNode=j,n}p(t){let e=0;for(const i of this._$AV)void 0!==i&&(void 0!==i.strings?(i._$AI(t,i,e),e+=i.strings.length-2):i._$AI(t[e])),e++}}class X{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(t,e,i,n){this.type=2,this._$AH=q,this._$AN=void 0,this._$AA=t,this._$AB=e,this._$AM=i,this.options=n,this._$Cv=n?.isConnected??!0}get parentNode(){let t=this._$AA.parentNode;const e=this._$AM;return void 0!==e&&11===t?.nodeType&&(t=e.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,e=this){t=Y(this,t,e),N(t)?t===q||null==t||""===t?(this._$AH!==q&&this._$AR(),this._$AH=q):t!==this._$AH&&t!==V&&this._(t):void 0!==t._$litType$?this.$(t):void 0!==t.nodeType?this.T(t):(t=>P(t)||"function"==typeof t?.[Symbol.iterator])(t)?this.k(t):this._(t)}O(t){return this._$AA.parentNode.insertBefore(t,this._$AB)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t))}_(t){this._$AH!==q&&N(this._$AH)?this._$AA.nextSibling.data=t:this.T(j.createTextNode(t)),this._$AH=t}$(t){const{values:e,_$litType$:i}=t,n="number"==typeof i?this._$AC(t):(void 0===i.el&&(i.el=J.createElement(G(i.h,i.h[0]),this.options)),i);if(this._$AH?._$AD===n)this._$AH.p(e);else{const t=new Q(n,this),i=t.u(this.options);t.p(e),this.T(i),this._$AH=t}}_$AC(t){let e=W.get(t.strings);return void 0===e&&W.set(t.strings,e=new J(t)),e}k(t){P(this._$AH)||(this._$AH=[],this._$AR());const e=this._$AH;let i,n=0;for(const a of t)n===e.length?e.push(i=new X(this.O(D()),this.O(D()),this,this.options)):i=e[n],i._$AI(a),n++;n<e.length&&(this._$AR(i&&i._$AB.nextSibling,n),e.length=n)}_$AR(t=this._$AA.nextSibling,e){for(this._$AP?.(!1,!0,e);t!==this._$AB;){const e=k(t).nextSibling;k(t).remove(),t=e}}setConnected(t){void 0===this._$AM&&(this._$Cv=t,this._$AP?.(t))}}class tt{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(t,e,i,n,a){this.type=1,this._$AH=q,this._$AN=void 0,this.element=t,this.name=e,this._$AM=n,this.options=a,i.length>2||""!==i[0]||""!==i[1]?(this._$AH=Array(i.length-1).fill(new String),this.strings=i):this._$AH=q}_$AI(t,e=this,i,n){const a=this.strings;let o=!1;if(void 0===a)t=Y(this,t,e,0),o=!N(t)||t!==this._$AH&&t!==V,o&&(this._$AH=t);else{const n=t;let s,r;for(t=a[0],s=0;s<a.length-1;s++)r=Y(this,n[i+s],e,s),r===V&&(r=this._$AH[s]),o||=!N(r)||r!==this._$AH[s],r===q?t=q:t!==q&&(t+=(r??"")+a[s+1]),this._$AH[s]=r}o&&!n&&this.j(t)}j(t){t===q?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,t??"")}}class et extends tt{constructor(){super(...arguments),this.type=3}j(t){this.element[this.name]=t===q?void 0:t}}class it extends tt{constructor(){super(...arguments),this.type=4}j(t){this.element.toggleAttribute(this.name,!!t&&t!==q)}}class nt extends tt{constructor(t,e,i,n,a){super(t,e,i,n,a),this.type=5}_$AI(t,e=this){if((t=Y(this,t,e,0)??q)===V)return;const i=this._$AH,n=t===q&&i!==q||t.capture!==i.capture||t.once!==i.once||t.passive!==i.passive,a=t!==q&&(i===q||n);n&&this.element.removeEventListener(this.name,this,i),a&&this.element.addEventListener(this.name,this,t),this._$AH=t}handleEvent(t){"function"==typeof this._$AH?this._$AH.call(this.options?.host??this.element,t):this._$AH.handleEvent(t)}}class at{constructor(t,e,i){this.element=t,this.type=6,this._$AN=void 0,this._$AM=e,this.options=i}get _$AU(){return this._$AM._$AU}_$AI(t){Y(this,t)}}const ot=$.litHtmlPolyfillSupport;ot?.(J,X),($.litHtmlVersions??=[]).push("3.3.2");const st=globalThis;
-/**
- * @license
- * Copyright 2017 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */class rt extends x{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){const t=super.createRenderRoot();return this.renderOptions.renderBefore??=t.firstChild,t}update(t){const e=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(t),this._$Do=((t,e,i)=>{const n=i?.renderBefore??e;let a=n._$litPart$;if(void 0===a){const t=i?.renderBefore??null;n._$litPart$=a=new X(e.insertBefore(D(),t),t,void 0,i??{})}return a._$AI(t),a})(e,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return V}}rt._$litElement$=!0,rt.finalized=!0,st.litElementHydrateSupport?.({LitElement:rt});const lt=st.litElementPolyfillSupport;lt?.({LitElement:rt}),(st.litElementVersions??=[]).push("4.2.2");
+ */Symbol.metadata??=Symbol("metadata"),g.litPropertyMetadata??=new WeakMap;let x=class extends HTMLElement{static addInitializer(e){this._$Ei(),(this.l??=[]).push(e)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(e,t=w){if(t.state&&(t.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(e)&&((t=Object.create(t)).wrapped=!0),this.elementProperties.set(e,t),!t.noAccessor){const i=Symbol(),n=this.getPropertyDescriptor(e,i,t);void 0!==n&&d(this.prototype,e,n)}}static getPropertyDescriptor(e,t,i){const{get:n,set:a}=h(this.prototype,e)??{get(){return this[t]},set(e){this[t]=e}};return{get:n,set(t){const o=n?.call(this);a?.call(this,t),this.requestUpdate(e,o,i)},configurable:!0,enumerable:!0}}static getPropertyOptions(e){return this.elementProperties.get(e)??w}static _$Ei(){if(this.hasOwnProperty(y("elementProperties")))return;const e=u(this);e.finalize(),void 0!==e.l&&(this.l=[...e.l]),this.elementProperties=new Map(e.elementProperties)}static finalize(){if(this.hasOwnProperty(y("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(y("properties"))){const e=this.properties,t=[...p(e),...c(e)];for(const i of t)this.createProperty(i,e[i])}const e=this[Symbol.metadata];if(null!==e){const t=litPropertyMetadata.get(e);if(void 0!==t)for(const[e,i]of t)this.elementProperties.set(e,i)}this._$Eh=new Map;for(const[e,t]of this.elementProperties){const i=this._$Eu(e,t);void 0!==i&&this._$Eh.set(i,e)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(e){const t=[];if(Array.isArray(e)){const i=new Set(e.flat(1/0).reverse());for(const e of i)t.unshift(s(e))}else void 0!==e&&t.push(s(e));return t}static _$Eu(e,t){const i=t.attribute;return!1===i?void 0:"string"==typeof i?i:"string"==typeof e?e.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(e=>this.enableUpdating=e),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(e=>e(this))}addController(e){(this._$EO??=new Set).add(e),void 0!==this.renderRoot&&this.isConnected&&e.hostConnected?.()}removeController(e){this._$EO?.delete(e)}_$E_(){const e=new Map,t=this.constructor.elementProperties;for(const i of t.keys())this.hasOwnProperty(i)&&(e.set(i,this[i]),delete this[i]);e.size>0&&(this._$Ep=e)}createRenderRoot(){const e=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return((e,n)=>{if(i)e.adoptedStyleSheets=n.map(e=>e instanceof CSSStyleSheet?e:e.styleSheet);else for(const i of n){const n=document.createElement("style"),a=t.litNonce;void 0!==a&&n.setAttribute("nonce",a),n.textContent=i.cssText,e.appendChild(n)}})(e,this.constructor.elementStyles),e}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(e=>e.hostConnected?.())}enableUpdating(e){}disconnectedCallback(){this._$EO?.forEach(e=>e.hostDisconnected?.())}attributeChangedCallback(e,t,i){this._$AK(e,i)}_$ET(e,t){const i=this.constructor.elementProperties.get(e),n=this.constructor._$Eu(e,i);if(void 0!==n&&!0===i.reflect){const a=(void 0!==i.converter?.toAttribute?i.converter:b).toAttribute(t,i.type);this._$Em=e,null==a?this.removeAttribute(n):this.setAttribute(n,a),this._$Em=null}}_$AK(e,t){const i=this.constructor,n=i._$Eh.get(e);if(void 0!==n&&this._$Em!==n){const e=i.getPropertyOptions(n),a="function"==typeof e.converter?{fromAttribute:e.converter}:void 0!==e.converter?.fromAttribute?e.converter:b;this._$Em=n;const o=a.fromAttribute(t,e.type);this[n]=o??this._$Ej?.get(n)??o,this._$Em=null}}requestUpdate(e,t,i,n=!1,a){if(void 0!==e){const o=this.constructor;if(!1===n&&(a=this[e]),i??=o.getPropertyOptions(e),!((i.hasChanged??v)(a,t)||i.useDefault&&i.reflect&&a===this._$Ej?.get(e)&&!this.hasAttribute(o._$Eu(e,i))))return;this.C(e,t,i)}!1===this.isUpdatePending&&(this._$ES=this._$EP())}C(e,t,{useDefault:i,reflect:n,wrapped:a},o){i&&!(this._$Ej??=new Map).has(e)&&(this._$Ej.set(e,o??t??this[e]),!0!==a||void 0!==o)||(this._$AL.has(e)||(this.hasUpdated||i||(t=void 0),this._$AL.set(e,t)),!0===n&&this._$Em!==e&&(this._$Eq??=new Set).add(e))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(e){Promise.reject(e)}const e=this.scheduleUpdate();return null!=e&&await e,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[e,t]of this._$Ep)this[e]=t;this._$Ep=void 0}const e=this.constructor.elementProperties;if(e.size>0)for(const[t,i]of e){const{wrapped:e}=i,n=this[t];!0!==e||this._$AL.has(t)||void 0===n||this.C(t,void 0,i,n)}}let e=!1;const t=this._$AL;try{e=this.shouldUpdate(t),e?(this.willUpdate(t),this._$EO?.forEach(e=>e.hostUpdate?.()),this.update(t)):this._$EM()}catch(t){throw e=!1,this._$EM(),t}e&&this._$AE(t)}willUpdate(e){}_$AE(e){this._$EO?.forEach(e=>e.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(e)),this.updated(e)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(e){return!0}update(e){this._$Eq&&=this._$Eq.forEach(e=>this._$ET(e,this[e])),this._$EM()}updated(e){}firstUpdated(e){}};x.elementStyles=[],x.shadowRootOptions={mode:"open"},x[y("elementProperties")]=new Map,x[y("finalized")]=new Map,_?.({ReactiveElement:x}),(g.reactiveElementVersions??=[]).push("2.1.2");
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}):customElements.define(t,e)},ht={attribute:!0,type:String,converter:b,reflect:!1,hasChanged:v},pt=(t=ht,e,i)=>{const{kind:n,metadata:a}=i;let o=globalThis.litPropertyMetadata.get(a);if(void 0===o&&globalThis.litPropertyMetadata.set(a,o=new Map),"setter"===n&&((t=Object.create(t)).wrapped=!0),o.set(i.name,t),"accessor"===n){const{name:n}=i;return{set(i){const a=e.get.call(this);e.set.call(this,i),this.requestUpdate(n,a,t,!0,i)},init(e){return void 0!==e&&this.C(n,void 0,t,e),e}}}if("setter"===n){const{name:n}=i;return function(i){const a=this[n];e.call(this,i),this.requestUpdate(n,a,t,!0,i)}}throw Error("Unsupported decorator location: "+n)};
+const $=globalThis,k=e=>e,z=$.trustedTypes,A=z?z.createPolicy("lit-html",{createHTML:e=>e}):void 0,C="$lit$",T=`lit$${Math.random().toFixed(9).slice(2)}$`,S="?"+T,E=`<${S}>`,j=document,D=()=>j.createComment(""),N=e=>null===e||"object"!=typeof e&&"function"!=typeof e,P=Array.isArray,M="[ \t\n\f\r]",R=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,L=/-->/g,H=/>/g,O=RegExp(`>|${M}(?:([^\\s"'>=/]+)(${M}*=${M}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,"g"),U=/'/g,I=/"/g,F=/^(?:script|style|textarea|title)$/i,B=(e=>(t,...i)=>({_$litType$:e,strings:t,values:i}))(1),V=Symbol.for("lit-noChange"),q=Symbol.for("lit-nothing"),W=new WeakMap,J=j.createTreeWalker(j,129);function K(e,t){if(!P(e)||!e.hasOwnProperty("raw"))throw Error("invalid template strings array");return void 0!==A?A.createHTML(t):t}const G=(e,t)=>{const i=e.length-1,n=[];let a,o=2===t?"<svg>":3===t?"<math>":"",r=R;for(let t=0;t<i;t++){const i=e[t];let s,l,d=-1,h=0;for(;h<i.length&&(r.lastIndex=h,l=r.exec(i),null!==l);)h=r.lastIndex,r===R?"!--"===l[1]?r=L:void 0!==l[1]?r=H:void 0!==l[2]?(F.test(l[2])&&(a=RegExp("</"+l[2],"g")),r=O):void 0!==l[3]&&(r=O):r===O?">"===l[0]?(r=a??R,d=-1):void 0===l[1]?d=-2:(d=r.lastIndex-l[2].length,s=l[1],r=void 0===l[3]?O:'"'===l[3]?I:U):r===I||r===U?r=O:r===L||r===H?r=R:(r=O,a=void 0);const p=r===O&&e[t+1].startsWith("/>")?" ":"";o+=r===R?i+E:d>=0?(n.push(s),i.slice(0,d)+C+i.slice(d)+T+p):i+T+(-2===d?t:p)}return[K(e,o+(e[i]||"<?>")+(2===t?"</svg>":3===t?"</math>":"")),n]};class Z{constructor({strings:e,_$litType$:t},i){let n;this.parts=[];let a=0,o=0;const r=e.length-1,s=this.parts,[l,d]=G(e,t);if(this.el=Z.createElement(l,i),J.currentNode=this.el.content,2===t||3===t){const e=this.el.content.firstChild;e.replaceWith(...e.childNodes)}for(;null!==(n=J.nextNode())&&s.length<r;){if(1===n.nodeType){if(n.hasAttributes())for(const e of n.getAttributeNames())if(e.endsWith(C)){const t=d[o++],i=n.getAttribute(e).split(T),r=/([.?@])?(.*)/.exec(t);s.push({type:1,index:a,name:r[2],strings:i,ctor:"."===r[1]?te:"?"===r[1]?ie:"@"===r[1]?ne:ee}),n.removeAttribute(e)}else e.startsWith(T)&&(s.push({type:6,index:a}),n.removeAttribute(e));if(F.test(n.tagName)){const e=n.textContent.split(T),t=e.length-1;if(t>0){n.textContent=z?z.emptyScript:"";for(let i=0;i<t;i++)n.append(e[i],D()),J.nextNode(),s.push({type:2,index:++a});n.append(e[t],D())}}}else if(8===n.nodeType)if(n.data===S)s.push({type:2,index:a});else{let e=-1;for(;-1!==(e=n.data.indexOf(T,e+1));)s.push({type:7,index:a}),e+=T.length-1}a++}}static createElement(e,t){const i=j.createElement("template");return i.innerHTML=e,i}}function Q(e,t,i=e,n){if(t===V)return t;let a=void 0!==n?i._$Co?.[n]:i._$Cl;const o=N(t)?void 0:t._$litDirective$;return a?.constructor!==o&&(a?._$AO?.(!1),void 0===o?a=void 0:(a=new o(e),a._$AT(e,i,n)),void 0!==n?(i._$Co??=[])[n]=a:i._$Cl=a),void 0!==a&&(t=Q(e,a._$AS(e,t.values),a,n)),t}class Y{constructor(e,t){this._$AV=[],this._$AN=void 0,this._$AD=e,this._$AM=t}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(e){const{el:{content:t},parts:i}=this._$AD,n=(e?.creationScope??j).importNode(t,!0);J.currentNode=n;let a=J.nextNode(),o=0,r=0,s=i[0];for(;void 0!==s;){if(o===s.index){let t;2===s.type?t=new X(a,a.nextSibling,this,e):1===s.type?t=new s.ctor(a,s.name,s.strings,this,e):6===s.type&&(t=new ae(a,this,e)),this._$AV.push(t),s=i[++r]}o!==s?.index&&(a=J.nextNode(),o++)}return J.currentNode=j,n}p(e){let t=0;for(const i of this._$AV)void 0!==i&&(void 0!==i.strings?(i._$AI(e,i,t),t+=i.strings.length-2):i._$AI(e[t])),t++}}class X{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(e,t,i,n){this.type=2,this._$AH=q,this._$AN=void 0,this._$AA=e,this._$AB=t,this._$AM=i,this.options=n,this._$Cv=n?.isConnected??!0}get parentNode(){let e=this._$AA.parentNode;const t=this._$AM;return void 0!==t&&11===e?.nodeType&&(e=t.parentNode),e}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(e,t=this){e=Q(this,e,t),N(e)?e===q||null==e||""===e?(this._$AH!==q&&this._$AR(),this._$AH=q):e!==this._$AH&&e!==V&&this._(e):void 0!==e._$litType$?this.$(e):void 0!==e.nodeType?this.T(e):(e=>P(e)||"function"==typeof e?.[Symbol.iterator])(e)?this.k(e):this._(e)}O(e){return this._$AA.parentNode.insertBefore(e,this._$AB)}T(e){this._$AH!==e&&(this._$AR(),this._$AH=this.O(e))}_(e){this._$AH!==q&&N(this._$AH)?this._$AA.nextSibling.data=e:this.T(j.createTextNode(e)),this._$AH=e}$(e){const{values:t,_$litType$:i}=e,n="number"==typeof i?this._$AC(e):(void 0===i.el&&(i.el=Z.createElement(K(i.h,i.h[0]),this.options)),i);if(this._$AH?._$AD===n)this._$AH.p(t);else{const e=new Y(n,this),i=e.u(this.options);e.p(t),this.T(i),this._$AH=e}}_$AC(e){let t=W.get(e.strings);return void 0===t&&W.set(e.strings,t=new Z(e)),t}k(e){P(this._$AH)||(this._$AH=[],this._$AR());const t=this._$AH;let i,n=0;for(const a of e)n===t.length?t.push(i=new X(this.O(D()),this.O(D()),this,this.options)):i=t[n],i._$AI(a),n++;n<t.length&&(this._$AR(i&&i._$AB.nextSibling,n),t.length=n)}_$AR(e=this._$AA.nextSibling,t){for(this._$AP?.(!1,!0,t);e!==this._$AB;){const t=k(e).nextSibling;k(e).remove(),e=t}}setConnected(e){void 0===this._$AM&&(this._$Cv=e,this._$AP?.(e))}}class ee{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(e,t,i,n,a){this.type=1,this._$AH=q,this._$AN=void 0,this.element=e,this.name=t,this._$AM=n,this.options=a,i.length>2||""!==i[0]||""!==i[1]?(this._$AH=Array(i.length-1).fill(new String),this.strings=i):this._$AH=q}_$AI(e,t=this,i,n){const a=this.strings;let o=!1;if(void 0===a)e=Q(this,e,t,0),o=!N(e)||e!==this._$AH&&e!==V,o&&(this._$AH=e);else{const n=e;let r,s;for(e=a[0],r=0;r<a.length-1;r++)s=Q(this,n[i+r],t,r),s===V&&(s=this._$AH[r]),o||=!N(s)||s!==this._$AH[r],s===q?e=q:e!==q&&(e+=(s??"")+a[r+1]),this._$AH[r]=s}o&&!n&&this.j(e)}j(e){e===q?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,e??"")}}class te extends ee{constructor(){super(...arguments),this.type=3}j(e){this.element[this.name]=e===q?void 0:e}}class ie extends ee{constructor(){super(...arguments),this.type=4}j(e){this.element.toggleAttribute(this.name,!!e&&e!==q)}}class ne extends ee{constructor(e,t,i,n,a){super(e,t,i,n,a),this.type=5}_$AI(e,t=this){if((e=Q(this,e,t,0)??q)===V)return;const i=this._$AH,n=e===q&&i!==q||e.capture!==i.capture||e.once!==i.once||e.passive!==i.passive,a=e!==q&&(i===q||n);n&&this.element.removeEventListener(this.name,this,i),a&&this.element.addEventListener(this.name,this,e),this._$AH=e}handleEvent(e){"function"==typeof this._$AH?this._$AH.call(this.options?.host??this.element,e):this._$AH.handleEvent(e)}}class ae{constructor(e,t,i){this.element=e,this.type=6,this._$AN=void 0,this._$AM=t,this.options=i}get _$AU(){return this._$AM._$AU}_$AI(e){Q(this,e)}}const oe=$.litHtmlPolyfillSupport;oe?.(Z,X),($.litHtmlVersions??=[]).push("3.3.2");const re=globalThis;
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */function ct(t){return(e,i)=>"object"==typeof i?pt(t,e,i):((t,e,i)=>{const n=e.hasOwnProperty(i);return e.constructor.createProperty(i,t),n?Object.getOwnPropertyDescriptor(e,i):void 0})(t,e,i)}
+ */class se extends x{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){const e=super.createRenderRoot();return this.renderOptions.renderBefore??=e.firstChild,e}update(e){const t=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(e),this._$Do=((e,t,i)=>{const n=i?.renderBefore??t;let a=n._$litPart$;if(void 0===a){const e=i?.renderBefore??null;n._$litPart$=a=new X(t.insertBefore(D(),e),e,void 0,i??{})}return a._$AI(e),a})(t,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return V}}se._$litElement$=!0,se.finalized=!0,re.litElementHydrateSupport?.({LitElement:se});const le=re.litElementPolyfillSupport;le?.({LitElement:se}),(re.litElementVersions??=[]).push("4.2.2");
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */function ut(t){return ct({...t,state:!0,attribute:!1})}
+ */
+const de=e=>(t,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(e,t)}):customElements.define(e,t)},he={attribute:!0,type:String,converter:b,reflect:!1,hasChanged:v},pe=(e=he,t,i)=>{const{kind:n,metadata:a}=i;let o=globalThis.litPropertyMetadata.get(a);if(void 0===o&&globalThis.litPropertyMetadata.set(a,o=new Map),"setter"===n&&((e=Object.create(e)).wrapped=!0),o.set(i.name,e),"accessor"===n){const{name:n}=i;return{set(i){const a=t.get.call(this);t.set.call(this,i),this.requestUpdate(n,a,e,!0,i)},init(t){return void 0!==t&&this.C(n,void 0,e,t),t}}}if("setter"===n){const{name:n}=i;return function(i){const a=this[n];t.call(this,i),this.requestUpdate(n,a,e,!0,i)}}throw Error("Unsupported decorator location: "+n)};
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */function ce(e){return(t,i)=>"object"==typeof i?pe(e,t,i):((e,t,i)=>{const n=t.hasOwnProperty(i);return t.constructor.createProperty(i,e),n?Object.getOwnPropertyDescriptor(t,i):void 0})(e,t,i)}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */function ue(e){return ce({...e,state:!0,attribute:!1})}
 /**
  * @license
  * Copyright 2017 Google LLC
@@ -47,7 +47,7 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-function gt(t,e){return(e,i,n)=>((t,e,i)=>(i.configurable=!0,i.enumerable=!0,Reflect.decorate&&"object"!=typeof e&&Object.defineProperty(t,e,i),i))(e,i,{get(){return(e=>e.renderRoot?.querySelector(t)??null)(this)}})}const ft=s`
+function ge(e,t){return(t,i,n)=>((e,t,i)=>(i.configurable=!0,i.enumerable=!0,Reflect.decorate&&"object"!=typeof t&&Object.defineProperty(e,t,i),i))(t,i,{get(){return(t=>t.renderRoot?.querySelector(e)??null)(this)}})}const fe=r`
   /* The card fills the cell a section grid gives it, so that ha-card's
      max-height has a height to resolve against. With a fixed row count the
      layout's body then scrolls inside the cell instead of the card being drawn
@@ -157,7 +157,7 @@ function gt(t,e){return(e,i,n)=>((t,e,i)=>(i.configurable=!0,i.enumerable=!0,Ref
     --opt-font-family: "Roboto Mono", "Courier New", monospace;
     --opt-font-weight-medium: 600;
   }
-`,mt=s`
+`,me=r`
   :host {
     display: block;
   }
@@ -906,7 +906,185 @@ function gt(t,e){return(e,i,n)=>((t,e,i)=>(i.configurable=!0,i.enumerable=!0,Ref
     border-bottom: none;
   }
 
-  /* Error / Empty states, set back by colour rather than opacity: the error's
+  /* An alternative whose detail can be shown is a real button, not a row that
+     happens to answer a click: it takes focus, responds to Enter and Space, and
+     tells a screen reader that a dialog follows. Its box is the row's exactly —
+     same padding, same rule underneath — so a list of buttons and a list of
+     plain rows occupy the same space, and the card does not change shape on an
+     integration too old to answer. */
+  button.alt-journey {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+    margin: 0;
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--opt-border);
+    border-radius: 0;
+    font-family: inherit;
+    font-size: var(--ha-font-size-s, 12px);
+    color: var(--opt-text-secondary);
+    text-align: left;
+    cursor: pointer;
+  }
+
+  /* The tint reaches 8px past the row on both sides, into the card's own
+     padding, the way Home Assistant highlights a list row — with two offset
+     shadows rather than a wider box, so nothing moves and the row's text stays
+     on the card's column. */
+  button.alt-journey:hover {
+    background: var(--opt-row-hover);
+    box-shadow: -8px 0 0 var(--opt-row-hover), 8px 0 0 var(--opt-row-hover);
+  }
+
+  button.alt-journey:focus-visible {
+    outline: 2px solid var(--opt-accent);
+    outline-offset: -1px;
+  }
+
+  /* The chosen connection's dialog. It is painted in the browser's top layer,
+     which inherits none of the dashboard's appearance — not even the background
+     a card is given for free — so every colour is set here, from the same Home
+     Assistant variables the card is painted with. */
+  .journey-dialog {
+    width: min(calc(100vw - 32px), 460px);
+    max-height: min(calc(100vh - 32px), 640px);
+    padding: 0;
+    border: 1px solid var(--opt-border);
+    border-radius: var(--ha-card-border-radius, 12px);
+    background: var(--opt-bg);
+    color: var(--opt-text);
+    font-family: var(--opt-font-family);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+  }
+
+  /* Only while open: a dialog is display:none until then, and laying it out
+     unconditionally would leave it on the page with nothing to close it. */
+  .journey-dialog[open] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* A plain tint rather than a themed one. ::backdrop inherited from the root
+     element rather than from the dialog until Chrome 122, where a --opt-*
+     defined on the card's host does not reach it; dimming reads correctly on a
+     light and on a dark theme alike. */
+  .journey-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.55);
+  }
+
+  .journey-dialog-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    flex-shrink: 0;
+    padding: 16px 16px 0;
+  }
+
+  /* The title carries the journey's own header, which already has the margin
+     that separates it from what follows; inside the head that margin would
+     push the close button out of line with it. */
+  .journey-dialog-head .trip-header {
+    margin-bottom: 0;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .journey-dialog-close {
+    appearance: none;
+    -webkit-appearance: none;
+    display: inline-flex;
+    padding: 4px;
+    margin: -4px -4px 0 0;
+    background: none;
+    border: none;
+    border-radius: 50%;
+    color: var(--opt-text-secondary);
+    cursor: pointer;
+  }
+
+  .journey-dialog-close:hover {
+    background: var(--opt-row-hover);
+  }
+
+  .journey-dialog-close:focus-visible {
+    outline: 2px solid var(--opt-accent);
+    outline-offset: 0;
+  }
+
+  /* The journey scrolls, the title does not: a connection with many legs stays
+     readable without the dialog growing past the screen. */
+  .journey-dialog-content {
+    padding: 8px 16px 16px;
+    overflow-y: auto;
+  }
+
+  /* The dialog is not held to the card's column, so a leg says everything it
+     has. On the dashboard's 374px a headsign like "Echterdingen
+     Flughafen/Messe …" is cut off, and that cut is what the dialog exists to
+     undo — here the direction wraps instead. */
+  /* The row keeps its one line; it is the headsign inside it that wraps. Letting
+     the row wrap instead put the leg's arrival on a line of its own with the
+     rest of the row empty beside it — measured, 46px against the 38px it takes
+     when the direction wraps in its own box and the duration and the arrival
+     stay with the leg they belong to. */
+  .journey-dialog .leg-details {
+    flex-wrap: nowrap;
+  }
+
+  .journey-dialog .leg-service {
+    overflow: visible;
+  }
+
+  .journey-dialog .leg-direction {
+    overflow: visible;
+    white-space: normal;
+    text-overflow: clip;
+  }
+
+  .journey-dialog-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 24px 0;
+    font-size: var(--ha-font-size-s, 12px);
+    color: var(--opt-text-secondary);
+  }
+
+  .journey-dialog-status.is-error {
+    color: var(--opt-delay-red);
+  }
+
+  .journey-dialog-status ha-icon {
+    --opt-icon-size: 20px;
+  }
+
+  /* A spinner of its own rather than Home Assistant's: the same reason the
+     dialog is the native element and not ha-dialog. */
+  .journey-dialog-spinner {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    border: 2px solid var(--opt-border);
+    border-top-color: var(--opt-accent);
+    border-radius: 50%;
+    animation: opt-spin 0.8s linear infinite;
+  }
+
+  @keyframes opt-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .journey-dialog-spinner {
+      animation-duration: 2.4s;
+    }
+  }
+
+    /* Error / Empty states, set back by colour rather than opacity: the error's
      red at 70% measured 3.2:1 on the light board and 2.8:1 on the dark one. */
   .card-error,
   .card-empty {
@@ -1002,7 +1180,7 @@ function gt(t,e){return(e,i,n)=>((t,e,i)=>(i.configurable=!0,i.enumerable=!0,Ref
     opacity: 0.6;
     margin-bottom: 8px;
   }
-`,_t={layout:"table",max_departures:10,show_header:!0,show_platform:!0,show_delay:!0,show_realtime_indicator:!0,theme:"auto",line_filter:"",destination_filter:"",show_notices:!0,show_disruption_banner:!0,show_data_age:!1},yt={bus:"mdi:bus",tram:"mdi:tram",subway:"mdi:subway-variant",train:"mdi:train",ferry:"mdi:ferry",taxi:"mdi:taxi","s-bahn":"mdi:train","u-bahn":"mdi:subway-variant",regional:"mdi:train",express:"mdi:train",walk:"mdi:walk",footpath:"mdi:walk",fussweg:"mdi:walk","fußweg":"mdi:walk",bicycle:"mdi:bike",fahrrad:"mdi:bike",default:"mdi:transit-connection-variant"},bt={en:{now:"now",in_min:"in {min} min",in_1_min:"in 1 min",in_h_min:"in {h} h {min} min",in_h:"in {h} h",notices:"Notices",disruptions:"Disruptions",more_count:"+{n} more",close:"Close",show_all_disruptions:"Show all disruptions",notices_for:"Notices for {line} to {destination}",fetched_ago:"Fetched {age}",show_notices:"Show Notice Icons",show_disruption_banner:"Show Disruption Banner",show_data_age:"Show Data Age",on_time:"on time",no_departures:"No departures available",no_trip_data:"No trip data available",entity_unavailable:"Entity is unavailable",please_define_entity:"Please define an entity",alternative_connections:"Alternative Connections",connection_at_risk:"Connection at risk",risk:"risk",risk_low:"Low risk",risk_medium:"Medium risk",risk_high:"High risk",min_transfer:"Transfer time",transfer:"Transfer",transfers:"transfers",platform:"Pl.",time:"Time",line:"Line",destination:"Destination",track:"Track",table_layout:"Table (Departure Board)",compact_layout:"Compact (Chips)",trip_layout:"Trip (Journey)",next_layout:"Next Departure (Widget)",entity:"Entity",layout:"Layout",theme:"Theme",theme_ha:"Home Assistant (native)",max_departures:"Max Departures",show_header:"Show Header",show_platform:"Show Platform",show_delay:"Show Delay",show_realtime:"Show Realtime Indicator",display_options:"Display Options",line_filter:"Line Filter",line_filter_hint:"Show only these lines (comma-separated, e.g. U6, S1, RE5). Leave empty to show all.",destination_filter:"Destination Filter",destination_filter_hint:"Show only departures whose destination matches (comma-separated, partial match, e.g. Duisburg, Flughafen). Leave empty to show all.",filters:"Filters",trip_filter_note:"The line and destination filters apply to departure boards only. Filter connections on the device itself: Settings → Devices & services → your trip device → Configure."},de:{now:"jetzt",in_min:"in {min} min",in_1_min:"in 1 min",in_h_min:"in {h} h {min} min",in_h:"in {h} h",notices:"Hinweise",disruptions:"Störungen",more_count:"+{n} weitere",close:"Schließen",show_all_disruptions:"Alle Störungen anzeigen",notices_for:"Hinweise zu {line} nach {destination}",fetched_ago:"Abgerufen {age}",show_notices:"Hinweis-Symbole anzeigen",show_disruption_banner:"Störungsbanner anzeigen",show_data_age:"Datenalter anzeigen",on_time:"pünktlich",no_departures:"Keine Abfahrten verfügbar",no_trip_data:"Keine Verbindungsdaten verfügbar",entity_unavailable:"Entity nicht verfügbar",please_define_entity:"Bitte eine Entity auswählen",alternative_connections:"Alternative Verbindungen",connection_at_risk:"Anschluss gefährdet",risk:"Risiko",risk_low:"Geringes Risiko",risk_medium:"Mittleres Risiko",risk_high:"Hohes Risiko",min_transfer:"Umstiegszeit",transfer:"Umstieg",transfers:"Umstiege",platform:"Gl.",time:"Zeit",line:"Linie",destination:"Ziel",track:"Gleis",table_layout:"Tabelle (Abfahrtstafel)",compact_layout:"Kompakt (Chips)",trip_layout:"Verbindung (Trip)",next_layout:"Nächste Abfahrt (Widget)",entity:"Entity",layout:"Layout",theme:"Design",theme_ha:"Home Assistant (nativ)",max_departures:"Max. Abfahrten",show_header:"Kopfzeile anzeigen",show_platform:"Gleis anzeigen",show_delay:"Verspätung anzeigen",show_realtime:"Echtzeit-Indikator anzeigen",display_options:"Anzeigeoptionen",line_filter:"Linienfilter",line_filter_hint:"Nur diese Linien anzeigen (kommagetrennt, z.B. U6, S1, RE5). Leer lassen für alle.",destination_filter:"Zielfilter",destination_filter_hint:"Nur Abfahrten mit passendem Ziel anzeigen (kommagetrennt, Teiltreffer, z.B. Duisburg, Flughafen). Leer lassen für alle.",filters:"Filter",trip_filter_note:"Linien- und Zielfilter gelten nur für Abfahrtstafeln. Verbindungen filterst du am Gerät selbst: Einstellungen → Geräte & Dienste → dein Trip-Gerät → Konfigurieren."},fr:{now:"maintenant",in_min:"dans {min} min",in_1_min:"dans 1 min",in_h_min:"dans {h} h {min} min",in_h:"dans {h} h",notices:"Informations",disruptions:"Perturbations",more_count:"+{n} autres",close:"Fermer",show_all_disruptions:"Afficher toutes les perturbations",notices_for:"Informations pour {line} vers {destination}",fetched_ago:"Récupéré {age}",show_notices:"Afficher les icônes d'information",show_disruption_banner:"Afficher la bannière de perturbation",show_data_age:"Afficher l'âge des données",on_time:"à l'heure",no_departures:"Aucun départ disponible",no_trip_data:"Aucune donnée de trajet disponible",entity_unavailable:"Entité indisponible",please_define_entity:"Veuillez sélectionner une entité",alternative_connections:"Correspondances alternatives",connection_at_risk:"Correspondance menacée",risk:"risque",risk_low:"Risque faible",risk_medium:"Risque moyen",risk_high:"Risque élevé",min_transfer:"Temps de correspondance",transfer:"Correspondance",transfers:"correspondances",platform:"Voie",time:"Heure",line:"Ligne",destination:"Destination",track:"Voie",table_layout:"Tableau (Panneau de départs)",compact_layout:"Compact (Puces)",trip_layout:"Trajet (Itinéraire)",next_layout:"Prochain départ (Widget)",entity:"Entité",layout:"Disposition",theme:"Thème",theme_ha:"Home Assistant (natif)",max_departures:"Départs max.",show_header:"Afficher l'en-tête",show_platform:"Afficher la voie",show_delay:"Afficher le retard",show_realtime:"Afficher l'indicateur temps réel",display_options:"Options d'affichage",line_filter:"Filtre de lignes",line_filter_hint:"Afficher uniquement ces lignes (séparées par des virgules, ex. U6, S1, RE5). Laisser vide pour tout afficher.",destination_filter:"Filtre de destination",destination_filter_hint:"Afficher uniquement les départs dont la destination correspond (séparées par des virgules, correspondance partielle, ex. Duisburg, Aéroport). Laisser vide pour tout afficher.",filters:"Filtres",trip_filter_note:"Les filtres de lignes et de destination ne s'appliquent qu'aux tableaux de départs. Filtrez les trajets sur l'appareil lui-même : Paramètres → Appareils et services → votre appareil de trajet → Configurer."},nl:{now:"nu",in_min:"over {min} min",in_1_min:"over 1 min",in_h_min:"over {h} h {min} min",in_h:"over {h} h",notices:"Meldingen",disruptions:"Storingen",more_count:"+{n} meer",close:"Sluiten",show_all_disruptions:"Alle storingen tonen",notices_for:"Meldingen voor {line} naar {destination}",fetched_ago:"Opgehaald {age}",show_notices:"Meldingspictogrammen tonen",show_disruption_banner:"Storingsbanner tonen",show_data_age:"Leeftijd van gegevens tonen",on_time:"op tijd",no_departures:"Geen vertrekken beschikbaar",no_trip_data:"Geen reisgegevens beschikbaar",entity_unavailable:"Entity niet beschikbaar",please_define_entity:"Selecteer een entity",alternative_connections:"Alternatieve verbindingen",connection_at_risk:"Aansluiting in gevaar",risk:"risico",risk_low:"Laag risico",risk_medium:"Gemiddeld risico",risk_high:"Hoog risico",min_transfer:"Overstaptijd",transfer:"Overstap",transfers:"overstappen",platform:"Spoor",time:"Tijd",line:"Lijn",destination:"Bestemming",track:"Spoor",table_layout:"Tabel (Vertrekbord)",compact_layout:"Compact (Chips)",trip_layout:"Reis (Route)",next_layout:"Volgend vertrek (Widget)",entity:"Entity",layout:"Layout",theme:"Thema",theme_ha:"Home Assistant (native)",max_departures:"Max. vertrekken",show_header:"Koptekst tonen",show_platform:"Spoor tonen",show_delay:"Vertraging tonen",show_realtime:"Realtime-indicator tonen",display_options:"Weergaveopties",line_filter:"Lijnfilter",line_filter_hint:"Toon alleen deze lijnen (kommagescheiden, bijv. U6, S1, RE5). Leeg laten voor alles.",destination_filter:"Bestemmingsfilter",destination_filter_hint:"Toon alleen vertrekken met een overeenkomende bestemming (kommagescheiden, gedeeltelijke overeenkomst, bijv. Duisburg, Luchthaven). Leeg laten voor alles.",filters:"Filters",trip_filter_note:"Lijn- en bestemmingsfilters gelden alleen voor vertrekborden. Filter verbindingen op het apparaat zelf: Instellingen → Apparaten en diensten → je reis-apparaat → Configureren."},sv:{now:"nu",in_min:"om {min} min",in_1_min:"om 1 min",in_h_min:"om {h} h {min} min",in_h:"om {h} h",notices:"Meddelanden",disruptions:"Störningar",more_count:"+{n} till",close:"Stäng",show_all_disruptions:"Visa alla störningar",notices_for:"Meddelanden för {line} mot {destination}",fetched_ago:"Hämtad {age}",show_notices:"Visa meddelandeikoner",show_disruption_banner:"Visa störningsbanner",show_data_age:"Visa datans ålder",on_time:"i tid",no_departures:"Inga avgångar tillgängliga",no_trip_data:"Inga resedata tillgängliga",entity_unavailable:"Entitet otillgänglig",please_define_entity:"Välj en entitet",alternative_connections:"Alternativa förbindelser",connection_at_risk:"Anslutning hotad",risk:"risk",risk_low:"Låg risk",risk_medium:"Medelrisk",risk_high:"Hög risk",min_transfer:"Bytestid",transfer:"Byte",transfers:"byten",platform:"Spår",time:"Tid",line:"Linje",destination:"Destination",track:"Spår",table_layout:"Tabell (Avgångstavla)",compact_layout:"Kompakt (Chips)",trip_layout:"Resa (Rutt)",next_layout:"Nästa avgång (Widget)",entity:"Entitet",layout:"Layout",theme:"Tema",theme_ha:"Home Assistant (native)",max_departures:"Max avgångar",show_header:"Visa rubrik",show_platform:"Visa spår",show_delay:"Visa försening",show_realtime:"Visa realtidsindikator",display_options:"Visningsalternativ",line_filter:"Linjefilter",line_filter_hint:"Visa bara dessa linjer (kommaseparerade, t.ex. U6, S1, RE5). Lämna tomt för alla.",destination_filter:"Destinationsfilter",destination_filter_hint:"Visa bara avgångar vars destination matchar (kommaseparerade, delvis matchning, t.ex. Duisburg, Flygplats). Lämna tomt för alla.",filters:"Filter",trip_filter_note:"Linje- och destinationsfiltren gäller bara avgångstavlor. Filtrera förbindelser på själva enheten: Inställningar → Enheter och tjänster → din reseenhet → Konfigurera."},pl:{now:"teraz",in_min:"za {min} min",in_1_min:"za 1 min",in_h_min:"za {h} h {min} min",in_h:"za {h} h",notices:"Komunikaty",disruptions:"Utrudnienia",more_count:"+{n} więcej",close:"Zamknij",show_all_disruptions:"Pokaż wszystkie utrudnienia",notices_for:"Komunikaty dla {line} do {destination}",fetched_ago:"Pobrano {age}",show_notices:"Pokaż ikony komunikatów",show_disruption_banner:"Pokaż baner utrudnień",show_data_age:"Pokaż wiek danych",on_time:"punktualnie",no_departures:"Brak dostępnych odjazdów",no_trip_data:"Brak danych o podróży",entity_unavailable:"Encja niedostępna",please_define_entity:"Wybierz encję",alternative_connections:"Alternatywne połączenia",connection_at_risk:"Połączenie zagrożone",risk:"ryzyko",risk_low:"Niskie ryzyko",risk_medium:"Średnie ryzyko",risk_high:"Wysokie ryzyko",min_transfer:"Czas przesiadki",transfer:"Przesiadka",transfers:"przesiadki",platform:"Peron",time:"Czas",line:"Linia",destination:"Kierunek",track:"Tor",table_layout:"Tabela (Tablica odjazdów)",compact_layout:"Kompaktowy (Chipy)",trip_layout:"Podróż (Trasa)",next_layout:"Następny odjazd (Widget)",entity:"Encja",layout:"Układ",theme:"Motyw",theme_ha:"Home Assistant (natywny)",max_departures:"Maks. odjazdów",show_header:"Pokaż nagłówek",show_platform:"Pokaż peron",show_delay:"Pokaż opóźnienie",show_realtime:"Pokaż wskaźnik czasu rzeczywistego",display_options:"Opcje wyświetlania",line_filter:"Filtr linii",line_filter_hint:"Pokaż tylko te linie (oddzielone przecinkami, np. U6, S1, RE5). Zostaw puste, aby pokazać wszystkie.",destination_filter:"Filtr kierunku",destination_filter_hint:"Pokaż tylko odjazdy z pasującym kierunkiem (oddzielone przecinkami, częściowe dopasowanie, np. Duisburg, Lotnisko). Zostaw puste, aby pokazać wszystkie.",filters:"Filtry",trip_filter_note:"Filtry linii i kierunku działają tylko na tablicach odjazdów. Połączenia filtrujesz w samym urządzeniu: Ustawienia → Urządzenia i usługi → twoje urządzenie podróży → Konfiguruj."},it:{now:"adesso",in_min:"tra {min} min",in_1_min:"tra 1 min",in_h_min:"tra {h} h {min} min",in_h:"tra {h} h",notices:"Avvisi",disruptions:"Disservizi",more_count:"+{n} altri",close:"Chiudi",show_all_disruptions:"Mostra tutti i disservizi",notices_for:"Avvisi per {line} verso {destination}",fetched_ago:"Aggiornato {age}",show_notices:"Mostra icone avvisi",show_disruption_banner:"Mostra banner disservizi",show_data_age:"Mostra età dei dati",on_time:"in orario",no_departures:"Nessuna partenza disponibile",no_trip_data:"Nessun dato di viaggio disponibile",entity_unavailable:"Entità non disponibile",please_define_entity:"Seleziona un'entità",alternative_connections:"Connessioni alternative",connection_at_risk:"Connessione a rischio",risk:"rischio",risk_low:"Rischio basso",risk_medium:"Rischio medio",risk_high:"Rischio alto",min_transfer:"Tempo di cambio",transfer:"Cambio",transfers:"cambi",platform:"Bin.",time:"Orario",line:"Linea",destination:"Destinazione",track:"Binario",table_layout:"Tabella (Pannello partenze)",compact_layout:"Compatto (Chip)",trip_layout:"Viaggio (Percorso)",next_layout:"Prossima partenza (Widget)",entity:"Entità",layout:"Layout",theme:"Tema",theme_ha:"Home Assistant (nativo)",max_departures:"Max. partenze",show_header:"Mostra intestazione",show_platform:"Mostra binario",show_delay:"Mostra ritardo",show_realtime:"Mostra indicatore tempo reale",display_options:"Opzioni di visualizzazione",line_filter:"Filtro linee",line_filter_hint:"Mostra solo queste linee (separate da virgola, es. U6, S1, RE5). Lascia vuoto per mostrare tutto.",destination_filter:"Filtro destinazione",destination_filter_hint:"Mostra solo le partenze con destinazione corrispondente (separate da virgola, corrispondenza parziale, es. Duisburg, Aeroporto). Lascia vuoto per mostrare tutto.",filters:"Filtri",trip_filter_note:"I filtri di linea e destinazione valgono solo per i tabelloni delle partenze. Filtra le connessioni sul dispositivo stesso: Impostazioni → Dispositivi e servizi → il tuo dispositivo viaggio → Configura."}};function vt(t,e,i){const n=t?.substring(0,2).toLowerCase()||"en";let a=(bt[n]||bt.en)[e]||bt.en[e]||e;if(i)for(const[t,e]of Object.entries(i))a=a.replace(`{${t}}`,String(e));return a}function wt(t,e){if(t){const e=Date.parse(t);if(!Number.isNaN(e))return Math.floor((e-Date.now())/6e4)}return e}function xt(t,e){if(e<=0)return vt(t,"now");if(1===e)return vt(t,"in_1_min");if(e<60)return vt(t,"in_min",{min:e});const i=Math.floor(e/60),n=e%60;return n?vt(t,"in_h_min",{h:i,min:n}):vt(t,"in_h",{h:i})}function $t(t,e){if(!e.startsWith("sensor."))return!1;if("openpublictransport"===t.entities?.[e]?.platform)return!0;const i=t.states[e]?.attributes;return!!i&&(Array.isArray(i.departures)||Array.isArray(i.legs)||void 0!==i.departure)}function kt(t,e){return(e??Object.keys(t.states)).filter(e=>$t(t,e))}function zt(t,e){const i=t.states[e]?.attributes??{};return Array.isArray(i.departures)?"departures":Array.isArray(i.legs)||void 0!==i.departure||void 0!==i.arrival||/(^|[._-])trip([._-]|$)|_to_|journey|connection/i.test(e)||"mdi:routes"===i.icon?"trip":"unknown"}function At(t){return"trip"===t?"trip":"table"}let Ct=class extends rt{constructor(){super(...arguments),this.transportType=""}_getIcon(){const t=this.transportType.toLowerCase();return yt[t]||yt.default}render(){return B`<ha-icon .icon=${this._getIcon()}></ha-icon>`}};Ct.styles=s`
+`,_e={layout:"table",max_departures:10,show_header:!0,show_platform:!0,show_delay:!0,show_realtime_indicator:!0,theme:"auto",line_filter:"",destination_filter:"",show_notices:!0,show_disruption_banner:!0,show_data_age:!1},ye={bus:"mdi:bus",tram:"mdi:tram",subway:"mdi:subway-variant",train:"mdi:train",ferry:"mdi:ferry",taxi:"mdi:taxi","s-bahn":"mdi:train","u-bahn":"mdi:subway-variant",regional:"mdi:train",express:"mdi:train",walk:"mdi:walk",footpath:"mdi:walk",fussweg:"mdi:walk","fußweg":"mdi:walk",bicycle:"mdi:bike",fahrrad:"mdi:bike",default:"mdi:transit-connection-variant"},be={en:{now:"now",in_min:"in {min} min",in_1_min:"in 1 min",in_h_min:"in {h} h {min} min",in_h:"in {h} h",notices:"Notices",disruptions:"Disruptions",more_count:"+{n} more",close:"Close",show_all_disruptions:"Show all disruptions",notices_for:"Notices for {line} to {destination}",fetched_ago:"Fetched {age}",show_notices:"Show Notice Icons",show_disruption_banner:"Show Disruption Banner",show_data_age:"Show Data Age",on_time:"on time",no_departures:"No departures available",no_trip_data:"No trip data available",entity_unavailable:"Entity is unavailable",please_define_entity:"Please define an entity",alternative_connections:"Alternative Connections",show_details:"Show details",loading_details:"Loading connection…",connection_gone:"This connection is no longer being offered.",details_failed:"The connection could not be loaded.",connection_at_risk:"Connection at risk",risk:"risk",risk_low:"Low risk",risk_medium:"Medium risk",risk_high:"High risk",min_transfer:"Transfer time",transfer:"Transfer",transfers:"transfers",platform:"Pl.",time:"Time",line:"Line",destination:"Destination",track:"Track",table_layout:"Table (Departure Board)",compact_layout:"Compact (Chips)",trip_layout:"Trip (Journey)",next_layout:"Next Departure (Widget)",entity:"Entity",layout:"Layout",theme:"Theme",theme_ha:"Home Assistant (native)",max_departures:"Max Departures",show_header:"Show Header",show_platform:"Show Platform",show_delay:"Show Delay",show_realtime:"Show Realtime Indicator",display_options:"Display Options",line_filter:"Line Filter",line_filter_hint:"Show only these lines (comma-separated, e.g. U6, S1, RE5). Leave empty to show all.",destination_filter:"Destination Filter",destination_filter_hint:"Show only departures whose destination matches (comma-separated, partial match, e.g. Duisburg, Flughafen). Leave empty to show all.",filters:"Filters",trip_filter_note:"The line and destination filters apply to departure boards only. Filter connections on the device itself: Settings → Devices & services → your trip device → Configure."},de:{now:"jetzt",in_min:"in {min} min",in_1_min:"in 1 min",in_h_min:"in {h} h {min} min",in_h:"in {h} h",notices:"Hinweise",disruptions:"Störungen",more_count:"+{n} weitere",close:"Schließen",show_all_disruptions:"Alle Störungen anzeigen",notices_for:"Hinweise zu {line} nach {destination}",fetched_ago:"Abgerufen {age}",show_notices:"Hinweis-Symbole anzeigen",show_disruption_banner:"Störungsbanner anzeigen",show_data_age:"Datenalter anzeigen",on_time:"pünktlich",no_departures:"Keine Abfahrten verfügbar",no_trip_data:"Keine Verbindungsdaten verfügbar",entity_unavailable:"Entity nicht verfügbar",please_define_entity:"Bitte eine Entity auswählen",alternative_connections:"Alternative Verbindungen",show_details:"Details anzeigen",loading_details:"Verbindung wird geladen …",connection_gone:"Diese Verbindung wird nicht mehr angeboten.",details_failed:"Die Verbindung konnte nicht geladen werden.",connection_at_risk:"Anschluss gefährdet",risk:"Risiko",risk_low:"Geringes Risiko",risk_medium:"Mittleres Risiko",risk_high:"Hohes Risiko",min_transfer:"Umstiegszeit",transfer:"Umstieg",transfers:"Umstiege",platform:"Gl.",time:"Zeit",line:"Linie",destination:"Ziel",track:"Gleis",table_layout:"Tabelle (Abfahrtstafel)",compact_layout:"Kompakt (Chips)",trip_layout:"Verbindung (Trip)",next_layout:"Nächste Abfahrt (Widget)",entity:"Entity",layout:"Layout",theme:"Design",theme_ha:"Home Assistant (nativ)",max_departures:"Max. Abfahrten",show_header:"Kopfzeile anzeigen",show_platform:"Gleis anzeigen",show_delay:"Verspätung anzeigen",show_realtime:"Echtzeit-Indikator anzeigen",display_options:"Anzeigeoptionen",line_filter:"Linienfilter",line_filter_hint:"Nur diese Linien anzeigen (kommagetrennt, z.B. U6, S1, RE5). Leer lassen für alle.",destination_filter:"Zielfilter",destination_filter_hint:"Nur Abfahrten mit passendem Ziel anzeigen (kommagetrennt, Teiltreffer, z.B. Duisburg, Flughafen). Leer lassen für alle.",filters:"Filter",trip_filter_note:"Linien- und Zielfilter gelten nur für Abfahrtstafeln. Verbindungen filterst du am Gerät selbst: Einstellungen → Geräte & Dienste → dein Trip-Gerät → Konfigurieren."},fr:{now:"maintenant",in_min:"dans {min} min",in_1_min:"dans 1 min",in_h_min:"dans {h} h {min} min",in_h:"dans {h} h",notices:"Informations",disruptions:"Perturbations",more_count:"+{n} autres",close:"Fermer",show_all_disruptions:"Afficher toutes les perturbations",notices_for:"Informations pour {line} vers {destination}",fetched_ago:"Récupéré {age}",show_notices:"Afficher les icônes d'information",show_disruption_banner:"Afficher la bannière de perturbation",show_data_age:"Afficher l'âge des données",on_time:"à l'heure",no_departures:"Aucun départ disponible",no_trip_data:"Aucune donnée de trajet disponible",entity_unavailable:"Entité indisponible",please_define_entity:"Veuillez sélectionner une entité",alternative_connections:"Correspondances alternatives",show_details:"Afficher les détails",loading_details:"Chargement de la correspondance…",connection_gone:"Cette correspondance n'est plus proposée.",details_failed:"Impossible de charger la correspondance.",connection_at_risk:"Correspondance menacée",risk:"risque",risk_low:"Risque faible",risk_medium:"Risque moyen",risk_high:"Risque élevé",min_transfer:"Temps de correspondance",transfer:"Correspondance",transfers:"correspondances",platform:"Voie",time:"Heure",line:"Ligne",destination:"Destination",track:"Voie",table_layout:"Tableau (Panneau de départs)",compact_layout:"Compact (Puces)",trip_layout:"Trajet (Itinéraire)",next_layout:"Prochain départ (Widget)",entity:"Entité",layout:"Disposition",theme:"Thème",theme_ha:"Home Assistant (natif)",max_departures:"Départs max.",show_header:"Afficher l'en-tête",show_platform:"Afficher la voie",show_delay:"Afficher le retard",show_realtime:"Afficher l'indicateur temps réel",display_options:"Options d'affichage",line_filter:"Filtre de lignes",line_filter_hint:"Afficher uniquement ces lignes (séparées par des virgules, ex. U6, S1, RE5). Laisser vide pour tout afficher.",destination_filter:"Filtre de destination",destination_filter_hint:"Afficher uniquement les départs dont la destination correspond (séparées par des virgules, correspondance partielle, ex. Duisburg, Aéroport). Laisser vide pour tout afficher.",filters:"Filtres",trip_filter_note:"Les filtres de lignes et de destination ne s'appliquent qu'aux tableaux de départs. Filtrez les trajets sur l'appareil lui-même : Paramètres → Appareils et services → votre appareil de trajet → Configurer."},nl:{now:"nu",in_min:"over {min} min",in_1_min:"over 1 min",in_h_min:"over {h} h {min} min",in_h:"over {h} h",notices:"Meldingen",disruptions:"Storingen",more_count:"+{n} meer",close:"Sluiten",show_all_disruptions:"Alle storingen tonen",notices_for:"Meldingen voor {line} naar {destination}",fetched_ago:"Opgehaald {age}",show_notices:"Meldingspictogrammen tonen",show_disruption_banner:"Storingsbanner tonen",show_data_age:"Leeftijd van gegevens tonen",on_time:"op tijd",no_departures:"Geen vertrekken beschikbaar",no_trip_data:"Geen reisgegevens beschikbaar",entity_unavailable:"Entity niet beschikbaar",please_define_entity:"Selecteer een entity",alternative_connections:"Alternatieve verbindingen",show_details:"Details tonen",loading_details:"Verbinding wordt geladen…",connection_gone:"Deze verbinding wordt niet meer aangeboden.",details_failed:"De verbinding kon niet worden geladen.",connection_at_risk:"Aansluiting in gevaar",risk:"risico",risk_low:"Laag risico",risk_medium:"Gemiddeld risico",risk_high:"Hoog risico",min_transfer:"Overstaptijd",transfer:"Overstap",transfers:"overstappen",platform:"Spoor",time:"Tijd",line:"Lijn",destination:"Bestemming",track:"Spoor",table_layout:"Tabel (Vertrekbord)",compact_layout:"Compact (Chips)",trip_layout:"Reis (Route)",next_layout:"Volgend vertrek (Widget)",entity:"Entity",layout:"Layout",theme:"Thema",theme_ha:"Home Assistant (native)",max_departures:"Max. vertrekken",show_header:"Koptekst tonen",show_platform:"Spoor tonen",show_delay:"Vertraging tonen",show_realtime:"Realtime-indicator tonen",display_options:"Weergaveopties",line_filter:"Lijnfilter",line_filter_hint:"Toon alleen deze lijnen (kommagescheiden, bijv. U6, S1, RE5). Leeg laten voor alles.",destination_filter:"Bestemmingsfilter",destination_filter_hint:"Toon alleen vertrekken met een overeenkomende bestemming (kommagescheiden, gedeeltelijke overeenkomst, bijv. Duisburg, Luchthaven). Leeg laten voor alles.",filters:"Filters",trip_filter_note:"Lijn- en bestemmingsfilters gelden alleen voor vertrekborden. Filter verbindingen op het apparaat zelf: Instellingen → Apparaten en diensten → je reis-apparaat → Configureren."},sv:{now:"nu",in_min:"om {min} min",in_1_min:"om 1 min",in_h_min:"om {h} h {min} min",in_h:"om {h} h",notices:"Meddelanden",disruptions:"Störningar",more_count:"+{n} till",close:"Stäng",show_all_disruptions:"Visa alla störningar",notices_for:"Meddelanden för {line} mot {destination}",fetched_ago:"Hämtad {age}",show_notices:"Visa meddelandeikoner",show_disruption_banner:"Visa störningsbanner",show_data_age:"Visa datans ålder",on_time:"i tid",no_departures:"Inga avgångar tillgängliga",no_trip_data:"Inga resedata tillgängliga",entity_unavailable:"Entitet otillgänglig",please_define_entity:"Välj en entitet",alternative_connections:"Alternativa förbindelser",show_details:"Visa detaljer",loading_details:"Förbindelsen laddas …",connection_gone:"Den här förbindelsen erbjuds inte längre.",details_failed:"Förbindelsen kunde inte laddas.",connection_at_risk:"Anslutning hotad",risk:"risk",risk_low:"Låg risk",risk_medium:"Medelrisk",risk_high:"Hög risk",min_transfer:"Bytestid",transfer:"Byte",transfers:"byten",platform:"Spår",time:"Tid",line:"Linje",destination:"Destination",track:"Spår",table_layout:"Tabell (Avgångstavla)",compact_layout:"Kompakt (Chips)",trip_layout:"Resa (Rutt)",next_layout:"Nästa avgång (Widget)",entity:"Entitet",layout:"Layout",theme:"Tema",theme_ha:"Home Assistant (native)",max_departures:"Max avgångar",show_header:"Visa rubrik",show_platform:"Visa spår",show_delay:"Visa försening",show_realtime:"Visa realtidsindikator",display_options:"Visningsalternativ",line_filter:"Linjefilter",line_filter_hint:"Visa bara dessa linjer (kommaseparerade, t.ex. U6, S1, RE5). Lämna tomt för alla.",destination_filter:"Destinationsfilter",destination_filter_hint:"Visa bara avgångar vars destination matchar (kommaseparerade, delvis matchning, t.ex. Duisburg, Flygplats). Lämna tomt för alla.",filters:"Filter",trip_filter_note:"Linje- och destinationsfiltren gäller bara avgångstavlor. Filtrera förbindelser på själva enheten: Inställningar → Enheter och tjänster → din reseenhet → Konfigurera."},pl:{now:"teraz",in_min:"za {min} min",in_1_min:"za 1 min",in_h_min:"za {h} h {min} min",in_h:"za {h} h",notices:"Komunikaty",disruptions:"Utrudnienia",more_count:"+{n} więcej",close:"Zamknij",show_all_disruptions:"Pokaż wszystkie utrudnienia",notices_for:"Komunikaty dla {line} do {destination}",fetched_ago:"Pobrano {age}",show_notices:"Pokaż ikony komunikatów",show_disruption_banner:"Pokaż baner utrudnień",show_data_age:"Pokaż wiek danych",on_time:"punktualnie",no_departures:"Brak dostępnych odjazdów",no_trip_data:"Brak danych o podróży",entity_unavailable:"Encja niedostępna",please_define_entity:"Wybierz encję",alternative_connections:"Alternatywne połączenia",show_details:"Pokaż szczegóły",loading_details:"Wczytywanie połączenia…",connection_gone:"To połączenie nie jest już oferowane.",details_failed:"Nie udało się wczytać połączenia.",connection_at_risk:"Połączenie zagrożone",risk:"ryzyko",risk_low:"Niskie ryzyko",risk_medium:"Średnie ryzyko",risk_high:"Wysokie ryzyko",min_transfer:"Czas przesiadki",transfer:"Przesiadka",transfers:"przesiadki",platform:"Peron",time:"Czas",line:"Linia",destination:"Kierunek",track:"Tor",table_layout:"Tabela (Tablica odjazdów)",compact_layout:"Kompaktowy (Chipy)",trip_layout:"Podróż (Trasa)",next_layout:"Następny odjazd (Widget)",entity:"Encja",layout:"Układ",theme:"Motyw",theme_ha:"Home Assistant (natywny)",max_departures:"Maks. odjazdów",show_header:"Pokaż nagłówek",show_platform:"Pokaż peron",show_delay:"Pokaż opóźnienie",show_realtime:"Pokaż wskaźnik czasu rzeczywistego",display_options:"Opcje wyświetlania",line_filter:"Filtr linii",line_filter_hint:"Pokaż tylko te linie (oddzielone przecinkami, np. U6, S1, RE5). Zostaw puste, aby pokazać wszystkie.",destination_filter:"Filtr kierunku",destination_filter_hint:"Pokaż tylko odjazdy z pasującym kierunkiem (oddzielone przecinkami, częściowe dopasowanie, np. Duisburg, Lotnisko). Zostaw puste, aby pokazać wszystkie.",filters:"Filtry",trip_filter_note:"Filtry linii i kierunku działają tylko na tablicach odjazdów. Połączenia filtrujesz w samym urządzeniu: Ustawienia → Urządzenia i usługi → twoje urządzenie podróży → Konfiguruj."},it:{now:"adesso",in_min:"tra {min} min",in_1_min:"tra 1 min",in_h_min:"tra {h} h {min} min",in_h:"tra {h} h",notices:"Avvisi",disruptions:"Disservizi",more_count:"+{n} altri",close:"Chiudi",show_all_disruptions:"Mostra tutti i disservizi",notices_for:"Avvisi per {line} verso {destination}",fetched_ago:"Aggiornato {age}",show_notices:"Mostra icone avvisi",show_disruption_banner:"Mostra banner disservizi",show_data_age:"Mostra età dei dati",on_time:"in orario",no_departures:"Nessuna partenza disponibile",no_trip_data:"Nessun dato di viaggio disponibile",entity_unavailable:"Entità non disponibile",please_define_entity:"Seleziona un'entità",alternative_connections:"Connessioni alternative",show_details:"Mostra dettagli",loading_details:"Caricamento della coincidenza…",connection_gone:"Questa coincidenza non è più offerta.",details_failed:"Impossibile caricare la coincidenza.",connection_at_risk:"Connessione a rischio",risk:"rischio",risk_low:"Rischio basso",risk_medium:"Rischio medio",risk_high:"Rischio alto",min_transfer:"Tempo di cambio",transfer:"Cambio",transfers:"cambi",platform:"Bin.",time:"Orario",line:"Linea",destination:"Destinazione",track:"Binario",table_layout:"Tabella (Pannello partenze)",compact_layout:"Compatto (Chip)",trip_layout:"Viaggio (Percorso)",next_layout:"Prossima partenza (Widget)",entity:"Entità",layout:"Layout",theme:"Tema",theme_ha:"Home Assistant (nativo)",max_departures:"Max. partenze",show_header:"Mostra intestazione",show_platform:"Mostra binario",show_delay:"Mostra ritardo",show_realtime:"Mostra indicatore tempo reale",display_options:"Opzioni di visualizzazione",line_filter:"Filtro linee",line_filter_hint:"Mostra solo queste linee (separate da virgola, es. U6, S1, RE5). Lascia vuoto per mostrare tutto.",destination_filter:"Filtro destinazione",destination_filter_hint:"Mostra solo le partenze con destinazione corrispondente (separate da virgola, corrispondenza parziale, es. Duisburg, Aeroporto). Lascia vuoto per mostrare tutto.",filters:"Filtri",trip_filter_note:"I filtri di linea e destinazione valgono solo per i tabelloni delle partenze. Filtra le connessioni sul dispositivo stesso: Impostazioni → Dispositivi e servizi → il tuo dispositivo viaggio → Configura."}};function ve(e,t,i){const n=e?.substring(0,2).toLowerCase()||"en";let a=(be[n]||be.en)[t]||be.en[t]||t;if(i)for(const[e,t]of Object.entries(i))a=a.replace(`{${e}}`,String(t));return a}function we(e,t){if(e){const t=Date.parse(e);if(!Number.isNaN(t))return Math.floor((t-Date.now())/6e4)}return t}function xe(e,t){if(t<=0)return ve(e,"now");if(1===t)return ve(e,"in_1_min");if(t<60)return ve(e,"in_min",{min:t});const i=Math.floor(t/60),n=t%60;return n?ve(e,"in_h_min",{h:i,min:n}):ve(e,"in_h",{h:i})}const $e="openpublictransport";function ke(e,t){if(!t.startsWith("sensor."))return!1;if(e.entities?.[t]?.platform===$e)return!0;const i=e.states[t]?.attributes;return!!i&&(Array.isArray(i.departures)||Array.isArray(i.legs)||void 0!==i.departure)}function ze(e,t){return(t??Object.keys(e.states)).filter(t=>ke(e,t))}function Ae(e,t){const i=e.states[t]?.attributes??{};return Array.isArray(i.departures)?"departures":Array.isArray(i.legs)||void 0!==i.departure||void 0!==i.arrival||/(^|[._-])trip([._-]|$)|_to_|journey|connection/i.test(t)||"mdi:routes"===i.icon?"trip":"unknown"}function Ce(e){return"trip"===e?"trip":"table"}let Te=class extends se{constructor(){super(...arguments),this.transportType=""}_getIcon(){const e=this.transportType.toLowerCase();return ye[e]||ye.default}render(){return B`<ha-icon .icon=${this._getIcon()}></ha-icon>`}};Te.styles=r`
     :host {
       display: inline-flex;
       align-items: center;
@@ -1022,13 +1200,13 @@ function gt(t,e){return(e,i,n)=>((t,e,i)=>(i.configurable=!0,i.enumerable=!0,Ref
       align-items: center;
       justify-content: center;
     }
-  `,t([ct({type:String,attribute:"transport-type"})],Ct.prototype,"transportType",void 0),Ct=t([dt("openpublictransport-transport-icon")],Ct);const Tt=B`<svg class="check" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
+  `,e([ce({type:String,attribute:"transport-type"})],Te.prototype,"transportType",void 0),Te=e([de("openpublictransport-transport-icon")],Te);const Se=B`<svg class="check" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
   <path d="M2.5 6.5 5 9l4.5-5.5" />
-</svg>`;let St=class extends rt{constructor(){super(...arguments),this.delay=0,this.isRealtime=!1,this.language=""}render(){if(this.delay>0)return B`
+</svg>`;let Ee=class extends se{constructor(){super(...arguments),this.delay=0,this.isRealtime=!1,this.language=""}render(){if(this.delay>0)return B`
         <span class="delay-badge delayed">+${this.delay}</span>
-      `;if(0===this.delay&&this.isRealtime){const t=vt(this.language,"on_time");return B`
-        <span class="delay-badge on-time" role="img" aria-label=${t} title=${t}>${Tt}</span>
-      `}return q}};St.styles=[mt,s`
+      `;if(0===this.delay&&this.isRealtime){const e=ve(this.language,"on_time");return B`
+        <span class="delay-badge on-time" role="img" aria-label=${e} title=${e}>${Se}</span>
+      `}return q}};Ee.styles=[me,r`
       /* As a block, the host takes its baseline from its own first line box —
          which the template's indentation creates in the inherited font, not in
          the badge's. Aligned against a time beside it the badge then sat a
@@ -1038,24 +1216,24 @@ function gt(t,e){return(e,i,n)=>((t,e,i)=>(i.configurable=!0,i.enumerable=!0,Ref
         display: inline-flex;
         align-items: baseline;
       }
-    `],t([ct({type:Number})],St.prototype,"delay",void 0),t([ct({type:Boolean,attribute:"is-realtime"})],St.prototype,"isRealtime",void 0),t([ct({attribute:!1})],St.prototype,"language",void 0),St=t([dt("openpublictransport-delay-badge")],St);let Et=class extends rt{constructor(){super(...arguments),this.language="en",this.heading="",this.disruptions=[],this.notices=[],this._opener=null,this._onClose=()=>{this._opener?.focus?.(),this._opener=null},this._onClick=t=>{t.target===this._dialog&&this.close()}}async open(){this._opener=this.getRootNode().activeElement,await this.updateComplete,this._dialog.open||this._dialog.showModal()}close(){this._dialog?.close()}_renderList(t,e){const i="disruption"===e?"mdi:alert-circle-outline":"mdi:information-outline";return B`<ul>
-      ${t.map(t=>B`<li class=${e}><ha-icon icon=${i}></ha-icon><span>${t}</span></li>`)}
-    </ul>`}render(){const t=this.language,e=this.disruptions.length>0&&this.notices.length>0;return B`
+    `],e([ce({type:Number})],Ee.prototype,"delay",void 0),e([ce({type:Boolean,attribute:"is-realtime"})],Ee.prototype,"isRealtime",void 0),e([ce({attribute:!1})],Ee.prototype,"language",void 0),Ee=e([de("openpublictransport-delay-badge")],Ee);let je=class extends se{constructor(){super(...arguments),this.language="en",this.heading="",this.disruptions=[],this.notices=[],this._opener=null,this._onClose=()=>{this._opener?.focus?.(),this._opener=null},this._onClick=e=>{e.target===this._dialog&&this.close()}}async open(){this._opener=this.getRootNode().activeElement,await this.updateComplete,this._dialog.open||this._dialog.showModal()}close(){this._dialog?.close()}_renderList(e,t){const i="disruption"===t?"mdi:alert-circle-outline":"mdi:information-outline";return B`<ul>
+      ${e.map(e=>B`<li class=${t}><ha-icon icon=${i}></ha-icon><span>${e}</span></li>`)}
+    </ul>`}render(){const e=this.language,t=this.disruptions.length>0&&this.notices.length>0;return B`
       <dialog aria-labelledby="title" @close=${this._onClose} @click=${this._onClick}>
         <div class="dialog-header">
           <span class="dialog-title" id="title">${this.heading}</span>
-          <button class="close" aria-label=${vt(t,"close")} @click=${()=>this.close()}>
+          <button class="close" aria-label=${ve(e,"close")} @click=${()=>this.close()}>
             <ha-icon icon="mdi:close"></ha-icon>
           </button>
         </div>
         <div class="dialog-body">
-          ${this.disruptions.length?B`${e?B`<h3>${vt(t,"disruptions")}</h3>`:q}
+          ${this.disruptions.length?B`${t?B`<h3>${ve(e,"disruptions")}</h3>`:q}
               ${this._renderList(this.disruptions,"disruption")}`:q}
-          ${this.notices.length?B`${e?B`<h3>${vt(t,"notices")}</h3>`:q}
+          ${this.notices.length?B`${t?B`<h3>${ve(e,"notices")}</h3>`:q}
               ${this._renderList(this.notices,"info")}`:q}
         </div>
       </dialog>
-    `}};Et.styles=s`
+    `}};je.styles=r`
     dialog {
       box-sizing: border-box;
       width: min(440px, calc(100vw - 32px));
@@ -1151,28 +1329,28 @@ function gt(t,e){return(e,i,n)=>((t,e,i)=>(i.configurable=!0,i.enumerable=!0,Ref
     .info ha-icon {
       color: var(--opt-text-secondary);
     }
-  `,t([ct({attribute:!1})],Et.prototype,"language",void 0),t([ct({type:String})],Et.prototype,"heading",void 0),t([ct({attribute:!1})],Et.prototype,"disruptions",void 0),t([ct({attribute:!1})],Et.prototype,"notices",void 0),t([gt("dialog")],Et.prototype,"_dialog",void 0),Et=t([dt("openpublictransport-info-dialog")],Et);let jt=class extends rt{constructor(){super(...arguments),this.departures=[],this.stationName="",this._dialog={heading:"",disruptions:[],notices:[]}}_openDialog(t,e,i){this._dialog={heading:t,disruptions:e,notices:i},this._dialogEl?.open()}_getCurrentTime(){return(new Date).toLocaleTimeString(this.hass?.language||"de-DE",{hour:"2-digit",minute:"2-digit",second:"2-digit"})}_disruptions(t){return t.disruptions??t.notices??[]}_collectDisruptions(){const t=[];for(const e of this.departures)for(const i of this._disruptions(e))t.includes(i)||t.push(i);return t}_departureTime(t){return t.departure_time||t.planned_time||""}_countdown(t){return xt(this.hass.language,t.minutes_until_departure)}_renderHeader(){return this.config.show_header?B`
+  `,e([ce({attribute:!1})],je.prototype,"language",void 0),e([ce({type:String})],je.prototype,"heading",void 0),e([ce({attribute:!1})],je.prototype,"disruptions",void 0),e([ce({attribute:!1})],je.prototype,"notices",void 0),e([ge("dialog")],je.prototype,"_dialog",void 0),je=e([de("openpublictransport-info-dialog")],je);let De=class extends se{constructor(){super(...arguments),this.departures=[],this.stationName="",this._dialog={heading:"",disruptions:[],notices:[]}}_openDialog(e,t,i){this._dialog={heading:e,disruptions:t,notices:i},this._dialogEl?.open()}_getCurrentTime(){return(new Date).toLocaleTimeString(this.hass?.language||"de-DE",{hour:"2-digit",minute:"2-digit",second:"2-digit"})}_disruptions(e){return e.disruptions??e.notices??[]}_collectDisruptions(){const e=[];for(const t of this.departures)for(const i of this._disruptions(t))e.includes(i)||e.push(i);return e}_departureTime(e){return e.departure_time||e.planned_time||""}_countdown(e){return xe(this.hass.language,e.minutes_until_departure)}_renderHeader(){return this.config.show_header?B`
       <div class="card-header">
         <span class="station-name">${this.stationName||"Departures"}</span>
         <span class="current-time">${this._getCurrentTime()}</span>
       </div>
-    `:q}_renderDisruptionBanner(){if(!this.config.show_disruption_banner)return q;const t=this._collectDisruptions();if(0===t.length)return q;const e=this.hass.language,i=t.length-1;return B`
+    `:q}_renderDisruptionBanner(){if(!this.config.show_disruption_banner)return q;const e=this._collectDisruptions();if(0===e.length)return q;const t=this.hass.language,i=e.length-1;return B`
       <button
         class="disruption-banner"
         aria-haspopup="dialog"
-        aria-label=${vt(e,"show_all_disruptions")}
-        @click=${()=>this._openDialog(vt(e,"disruptions"),t,[])}
+        aria-label=${ve(t,"show_all_disruptions")}
+        @click=${()=>this._openDialog(ve(t,"disruptions"),e,[])}
       >
         <ha-icon icon="mdi:alert"></ha-icon>
-        <span class="disruption-text">${t[0]}</span>
-        ${i>0?B`<span class="disruption-more">${vt(e,"more_count",{n:i})}</span>`:q}
+        <span class="disruption-text">${e[0]}</span>
+        ${i>0?B`<span class="disruption-more">${ve(t,"more_count",{n:i})}</span>`:q}
       </button>
-    `}_renderNotices(t){if(!this.config.show_notices)return q;if(!t.notices||0===t.notices.length)return q;const e=this.hass.language,i=this._disruptions(t),n=t.notices.filter(t=>!i.includes(t)),a=i.length>0,o=vt(e,"notices_for",{line:t.line,destination:t.destination});return B`
+    `}_renderNotices(e){if(!this.config.show_notices)return q;if(!e.notices||0===e.notices.length)return q;const t=this.hass.language,i=this._disruptions(e),n=e.notices.filter(e=>!i.includes(e)),a=i.length>0,o=ve(t,"notices_for",{line:e.line,destination:e.destination});return B`
       <button
         class="notice-button"
         aria-haspopup="dialog"
         aria-label=${o}
-        title=${t.notices.join(", ")}
+        title=${e.notices.join(", ")}
         @click=${()=>this._openDialog(o,i,n)}
       >
         <ha-icon
@@ -1187,45 +1365,45 @@ function gt(t,e){return(e,i,n)=>((t,e,i)=>(i.configurable=!0,i.enumerable=!0,Ref
         .disruptions=${this._dialog.disruptions}
         .notices=${this._dialog.notices}
       ></openpublictransport-info-dialog>
-    `}_renderPlatformCell(t){return this.config.show_platform?t.platform?t.platform_changed&&t.planned_platform?B`
+    `}_renderPlatformCell(e){return this.config.show_platform?e.platform?e.platform_changed&&e.planned_platform?B`
         <td class="platform-cell">
-          <span class="platform-changed">${t.planned_platform}</span>
-          <span class="platform-new">${t.platform}</span>
+          <span class="platform-changed">${e.planned_platform}</span>
+          <span class="platform-new">${e.platform}</span>
         </td>
-      `:B`<td class="platform-cell">${t.platform}</td>`:B`<td class="platform-cell"></td>`:q}_renderRow(t){const e=t.line_color?`background:${t.line_color};color:${t.line_text_color||"#000"}`:"";return B`
+      `:B`<td class="platform-cell">${e.platform}</td>`:B`<td class="platform-cell"></td>`:q}_renderRow(e){const t=e.line_color?`background:${e.line_color};color:${e.line_text_color||"#000"}`:"";return B`
       <tr>
         <td class="time-cell">
           <span class="time-line">
-            <span class="time-departure time-planned">${this._departureTime(t)}</span>
+            <span class="time-departure time-planned">${this._departureTime(e)}</span>
             ${this.config.show_delay?B`
                   <openpublictransport-delay-badge
-                    .delay=${t.delay}
-                    ?is-realtime=${t.is_realtime}
+                    .delay=${e.delay}
+                    ?is-realtime=${e.is_realtime}
                     .language=${this.hass.language}
                   ></openpublictransport-delay-badge>
                 `:q}
           </span>
-          <span class="time-countdown">${this._countdown(t)}</span>
+          <span class="time-countdown">${this._countdown(e)}</span>
         </td>
         <td>
           <span class="line-cell">
             <openpublictransport-transport-icon
-              transport-type=${t.transportation_type}
+              transport-type=${e.transportation_type}
             ></openpublictransport-transport-icon>
-            <span class="line-badge" style=${e}>${t.line}</span>
+            <span class="line-badge" style=${t}>${e.line}</span>
           </span>
         </td>
         <td class="destination-cell">
           <span class="destination">
-            <span class="destination-name">${t.destination}</span>
-            ${this._renderNotices(t)}
+            <span class="destination-name">${e.destination}</span>
+            ${this._renderNotices(e)}
           </span>
         </td>
-        ${this._renderPlatformCell(t)}
+        ${this._renderPlatformCell(e)}
       </tr>
-    `}render(){const t=this.departures.slice(0,this.config.max_departures);return 0===t.length?B`
+    `}render(){const e=this.departures.slice(0,this.config.max_departures);return 0===e.length?B`
         ${this._renderHeader()}
-        <div class="card-empty">${vt(this.hass.language,"no_departures")}</div>
+        <div class="card-empty">${ve(this.hass.language,"no_departures")}</div>
       `:B`
       ${this._renderHeader()}
       ${this._renderDisruptionBanner()}
@@ -1233,188 +1411,231 @@ function gt(t,e){return(e,i,n)=>((t,e,i)=>(i.configurable=!0,i.enumerable=!0,Ref
         <table class="departure-table">
           <thead>
             <tr>
-              <th>${vt(this.hass.language,"time")}</th>
-              <th>${vt(this.hass.language,"line")}</th>
-              <th>${vt(this.hass.language,"destination")}</th>
+              <th>${ve(this.hass.language,"time")}</th>
+              <th>${ve(this.hass.language,"line")}</th>
+              <th>${ve(this.hass.language,"destination")}</th>
               ${this.config.show_platform?B`<th>
-                    <span class="label-long">${vt(this.hass.language,"track")}</span>
-                    <span class="label-short">${vt(this.hass.language,"platform")}</span>
+                    <span class="label-long">${ve(this.hass.language,"track")}</span>
+                    <span class="label-short">${ve(this.hass.language,"platform")}</span>
                   </th>`:q}
             </tr>
           </thead>
           <tbody>
-            ${t.map(t=>this._renderRow(t))}
+            ${e.map(e=>this._renderRow(e))}
           </tbody>
         </table>
       </div>
       ${this._renderDialog()}
-    `}};jt.styles=mt,t([ct({attribute:!1})],jt.prototype,"hass",void 0),t([ct({attribute:!1})],jt.prototype,"config",void 0),t([ct({attribute:!1})],jt.prototype,"departures",void 0),t([ct({type:String})],jt.prototype,"stationName",void 0),t([ut()],jt.prototype,"_dialog",void 0),t([gt("openpublictransport-info-dialog")],jt.prototype,"_dialogEl",void 0),jt=t([dt("openpublictransport-table-layout")],jt);let Dt=class extends rt{constructor(){super(...arguments),this.departures=[],this.stationName=""}_shortenDestination(t){if(t.length<=15)return t;const e=t.split(/[,\s-]+/);return e.length>1?e[0]:t.substring(0,13)+"..."}_renderCountdown(t){return function(t,e){if(e<=0)return vt(t,"now");if(e<60)return`${e}'`;const i=Math.floor(e/60),n=e%60;return n?`${i}h ${n}'`:`${i}h`}(this.hass.language,t)}_getChipClass(t){return t.delay>0?"compact-chip delayed":t.is_realtime&&0===t.delay?"compact-chip on-time":"compact-chip"}_renderHeader(){return this.config.show_header?B`
+    `}};De.styles=me,e([ce({attribute:!1})],De.prototype,"hass",void 0),e([ce({attribute:!1})],De.prototype,"config",void 0),e([ce({attribute:!1})],De.prototype,"departures",void 0),e([ce({type:String})],De.prototype,"stationName",void 0),e([ue()],De.prototype,"_dialog",void 0),e([ge("openpublictransport-info-dialog")],De.prototype,"_dialogEl",void 0),De=e([de("openpublictransport-table-layout")],De);let Ne=class extends se{constructor(){super(...arguments),this.departures=[],this.stationName=""}_shortenDestination(e){if(e.length<=15)return e;const t=e.split(/[,\s-]+/);return t.length>1?t[0]:e.substring(0,13)+"..."}_renderCountdown(e){return function(e,t){if(t<=0)return ve(e,"now");if(t<60)return`${t}'`;const i=Math.floor(t/60),n=t%60;return n?`${i}h ${n}'`:`${i}h`}(this.hass.language,e)}_getChipClass(e){return e.delay>0?"compact-chip delayed":e.is_realtime&&0===e.delay?"compact-chip on-time":"compact-chip"}_renderHeader(){return this.config.show_header?B`
       <div class="card-header">
         <span class="station-name">${this.stationName||"Departures"}</span>
       </div>
-    `:q}render(){const t=this.departures.slice(0,this.config.max_departures);return 0===t.length?B`
+    `:q}render(){const e=this.departures.slice(0,this.config.max_departures);return 0===e.length?B`
         ${this._renderHeader()}
-        <div class="card-empty">${vt(this.hass.language,"no_departures")}</div>
+        <div class="card-empty">${ve(this.hass.language,"no_departures")}</div>
       `:B`
       ${this._renderHeader()}
       <div class="compact-container">
-        ${t.map(t=>{const e=t.line_color?`background:${t.line_color};color:${t.line_text_color||"#000"}`:"";return B`
-              <div class=${this._getChipClass(t)}>
+        ${e.map(e=>{const t=e.line_color?`background:${e.line_color};color:${e.line_text_color||"#000"}`:"";return B`
+              <div class=${this._getChipClass(e)}>
                 <openpublictransport-transport-icon
-                  transport-type=${t.transportation_type}
+                  transport-type=${e.transportation_type}
                 ></openpublictransport-transport-icon>
-                <span class="chip-line" style=${e}>${t.line}</span>
-                <span class="chip-destination">${this._shortenDestination(t.destination)}</span>
-                <span class="chip-countdown">${this._renderCountdown(t.minutes_until_departure)}</span>
+                <span class="chip-line" style=${t}>${e.line}</span>
+                <span class="chip-destination">${this._shortenDestination(e.destination)}</span>
+                <span class="chip-countdown">${this._renderCountdown(e.minutes_until_departure)}</span>
               </div>
             `})}
       </div>
-    `}};Dt.styles=mt,t([ct({attribute:!1})],Dt.prototype,"hass",void 0),t([ct({attribute:!1})],Dt.prototype,"config",void 0),t([ct({attribute:!1})],Dt.prototype,"departures",void 0),t([ct({type:String})],Dt.prototype,"stationName",void 0),Dt=t([dt("openpublictransport-compact-layout")],Dt);const Nt=B`<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+    `}};Ne.styles=me,e([ce({attribute:!1})],Ne.prototype,"hass",void 0),e([ce({attribute:!1})],Ne.prototype,"config",void 0),e([ce({attribute:!1})],Ne.prototype,"departures",void 0),e([ce({type:String})],Ne.prototype,"stationName",void 0),Ne=e([de("openpublictransport-compact-layout")],Ne);const Pe=B`<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
   <path d="M3.5 12h15M13.5 6.5 19 12l-5.5 5.5" />
-</svg>`;let Pt=class extends rt{constructor(){super(...arguments),this.trip=null}_formatTime(t){return t||""}_realTime(t,e){return this._formatTime(t||e||"")}_formatDuration(t){const e=Math.max(0,Math.round(t||0)),i=Math.floor(e/60),n=e%60,a=Intl.DurationFormat;if(a)try{return new a(this.hass.language,{style:"narrow"}).format(i?{hours:i,minutes:n}:{minutes:n})}catch{}return i?`${i} h ${n} min`:`${n} min`}_journeyMinutes(t){const e=Date.parse(t.departure_timestamp||""),i=Date.parse(t.arrival_timestamp||"");return Number.isNaN(e)||Number.isNaN(i)?t.duration_minutes:Math.floor(i/6e4)-Math.floor(e/6e4)}_getRiskClass(t){switch(t.toLowerCase()){case"low":return"risk-low";case"medium":return"risk-medium";case"high":return"risk-high";default:return""}}_riskLabel(t,e){const i=`risk_${t.toLowerCase()}`,n=vt(e,i);return n===i?`${t} ${vt(e,"risk")}`:n}_getRiskIcon(t){switch(t.toLowerCase()){case"low":return"mdi:check-circle-outline";case"medium":return"mdi:alert-outline";case"high":return"mdi:alert-octagon";default:return"mdi:help-circle-outline"}}_renderHeader(t){return this.config.show_header?B`
-      <div class="trip-header">
+</svg>`,Me="get_journeys";let Re=class extends se{constructor(){super(...arguments),this.trip=null,this._openSummary=null,this._openJourney=null,this._openError="",this._request=0}_formatTime(e){return e||""}_realTime(e,t){return this._formatTime(e||t||"")}_formatDuration(e){const t=Math.max(0,Math.round(e||0)),i=Math.floor(t/60),n=t%60,a=Intl.DurationFormat;if(a)try{return new a(this.hass.language,{style:"narrow"}).format(i?{hours:i,minutes:n}:{minutes:n})}catch{}return i?`${i} h ${n} min`:`${n} min`}_journeyMinutes(e){const t=Date.parse(e.departure_timestamp||""),i=Date.parse(e.arrival_timestamp||"");return Number.isNaN(t)||Number.isNaN(i)?e.duration_minutes:Math.floor(i/6e4)-Math.floor(t/6e4)}_getRiskClass(e){switch(e.toLowerCase()){case"low":return"risk-low";case"medium":return"risk-medium";case"high":return"risk-high";default:return""}}_riskLabel(e,t){const i=`risk_${e.toLowerCase()}`,n=ve(t,i);return n===i?`${e} ${ve(t,"risk")}`:n}_getRiskIcon(e){switch(e.toLowerCase()){case"low":return"mdi:check-circle-outline";case"medium":return"mdi:alert-outline";case"high":return"mdi:alert-octagon";default:return"mdi:help-circle-outline"}}_renderHeader(e){return this.config.show_header?this._renderJourneyHeader(e):q}_renderJourneyHeader(e,t){return B`
+      <div class="trip-header" id=${t??q}>
         <span class="time-span">
-          <span>${t.departure}</span>
-          <span class="trip-arrow">${Nt}</span>
-          <span>${t.arrival}</span>
+          <span>${e.departure}</span>
+          <span class="trip-arrow">${Pe}</span>
+          <span>${e.arrival}</span>
         </span>
-        <span class="trip-duration">${this._formatDuration(this._journeyMinutes(t))}</span>
+        <span class="trip-duration">${this._formatDuration(this._journeyMinutes(e))}</span>
       </div>
-    `:q}_renderMeta(t){const e=this.hass.language,i=`${t.transfers} ${1!==t.transfers?vt(e,"transfers"):vt(e,"transfer")}`,n=this._riskLabel(t.transfer_risk,e),a=this._formatDuration(t.min_transfer_time),o=`${vt(e,"min_transfer")} ${a}`;return B`
+    `}_renderMeta(e){const t=this.hass.language,i=`${e.transfers} ${1!==e.transfers?ve(t,"transfers"):ve(t,"transfer")}`,n=this._riskLabel(e.transfer_risk,t),a=this._formatDuration(e.min_transfer_time),o=`${ve(t,"min_transfer")} ${a}`;return B`
       <div class="trip-meta">
         <div class="trip-meta-item" title=${i}>
           <ha-icon icon="mdi:transit-transfer"></ha-icon>
           <span>${i}</span>
         </div>
-        <div class="trip-meta-item ${this._getRiskClass(t.transfer_risk)}" title=${n}>
-          <ha-icon icon=${this._getRiskIcon(t.transfer_risk)}></ha-icon>
+        <div class="trip-meta-item ${this._getRiskClass(e.transfer_risk)}" title=${n}>
+          <ha-icon icon=${this._getRiskIcon(e.transfer_risk)}></ha-icon>
           <span>${n}</span>
         </div>
-        ${t.min_transfer_time>0?B`
+        ${e.min_transfer_time>0?B`
               <div class="trip-meta-item" title=${o}>
                 <ha-icon icon="mdi:timer-outline"></ha-icon>
                 <span>${a}</span>
               </div>
             `:q}
-        ${t.connection_feasible?q:B`
+        ${e.connection_feasible?q:B`
               <div class="trip-meta-item risk-high">
                 <ha-icon icon="mdi:close-circle"></ha-icon>
-                <span>${vt(e,"connection_at_risk")}</span>
+                <span>${ve(t,"connection_at_risk")}</span>
               </div>
             `}
       </div>
-    `}_renderLeg(t,e,i){const n=!(!i||!i.transfer&&"number"!=typeof i.transfer_minutes)?"trip-leg transfer":"trip-leg",a=this._realTime(t.arrival_estimated,t.arrival_planned),o=!!e&&!!a&&a!==this._realTime(e.departure_estimated,e.departure_planned);return B`
+    `}_renderLeg(e,t,i){const n=!(!i||!i.transfer&&"number"!=typeof i.transfer_minutes)?"trip-leg transfer":"trip-leg",a=this._realTime(e.arrival_estimated,e.arrival_planned),o=!!t&&!!a&&a!==this._realTime(t.departure_estimated,t.departure_planned);return B`
       <div class=${n}>
         <div class="leg-head">
-          <div class="leg-station">${t.origin}</div>
+          <div class="leg-station">${e.origin}</div>
           <div class="leg-head-time">
-            ${t.delay>0?B`
+            ${e.delay>0?B`
                   <openpublictransport-delay-badge
-                    .delay=${t.delay}
+                    .delay=${e.delay}
                     is-realtime
                   ></openpublictransport-delay-badge>
                 `:q}
             <div class="leg-time leg-departure">
-              ${this._realTime(t.departure_estimated,t.departure_planned)}
+              ${this._realTime(e.departure_estimated,e.departure_planned)}
             </div>
           </div>
         </div>
         <div class="leg-details">
           <openpublictransport-transport-icon
-            transport-type=${t.transport_type||t.product}
+            transport-type=${e.transport_type||e.product}
           ></openpublictransport-transport-icon>
-          ${t.line||t.direction?B`
+          ${e.line||e.direction?B`
                 <span class="leg-service">
-                  ${t.line?B`<span class="leg-line">${t.line}</span>`:q}
-                  ${t.direction?B`
-                        <span class="trip-arrow">${Nt}</span>
-                        <span class="leg-direction">${t.direction}</span>
+                  ${e.line?B`<span class="leg-line">${e.line}</span>`:q}
+                  ${e.direction?B`
+                        <span class="trip-arrow">${Pe}</span>
+                        <span class="leg-direction">${e.direction}</span>
                       `:q}
                 </span>
               `:q}
-          ${t.platform?B`<span>${vt(this.hass.language,"platform")} ${t.platform}</span>`:q}
-          <span class="leg-duration">${this._formatDuration(t.duration_minutes)}</span>
+          ${e.platform?B`<span>${ve(this.hass.language,"platform")} ${e.platform}</span>`:q}
+          <span class="leg-duration">${this._formatDuration(e.duration_minutes)}</span>
           ${o?B`<span class="leg-arrival">${a}</span>`:q}
         </div>
-        ${this._renderTransferNote(t)}
+        ${this._renderTransferNote(e)}
       </div>
-    `}_renderTransferNote(t){const e="number"==typeof t.transfer_minutes;if(!t.transfer&&!e)return q;const i=vt(this.hass.language,"transfer");return B`
+    `}_renderTransferNote(e){const t="number"==typeof e.transfer_minutes;if(!e.transfer&&!t)return q;const i=ve(this.hass.language,"transfer");return B`
       <div class="leg-transfer-info">
         <ha-icon icon="mdi:timer-outline"></ha-icon>
-        <span>${e?`${i} · ${this._formatDuration(t.transfer_minutes)}`:i}</span>
+        <span>${t?`${i} · ${this._formatDuration(e.transfer_minutes)}`:i}</span>
       </div>
-    `}_renderTimeline(t){const e=t.legs[t.legs.length-1];return B`
+    `}_renderTimeline(e){const t=e[e.length-1];return B`
       <div class="trip-timeline">
-        ${t.legs.map((e,i)=>this._renderLeg(e,t.legs[i+1],t.legs[i-1]))}
-        ${e?B`
+        ${e.map((t,i)=>this._renderLeg(t,e[i+1],e[i-1]))}
+        ${t?B`
               <div class="trip-leg" style="border-left-color: transparent; padding-bottom: 0;">
                 <div class="leg-head">
-                  <div class="leg-station">${e.destination}</div>
+                  <div class="leg-station">${t.destination}</div>
                   <div class="leg-head-time">
                     <div class="leg-time leg-departure">
-                      ${this._realTime(e.arrival_estimated,e.arrival_planned)}
+                      ${this._realTime(t.arrival_estimated,t.arrival_planned)}
                     </div>
                   </div>
                 </div>
               </div>
             `:q}
       </div>
-    `}_renderAlternatives(t){if(!t.next_journeys||0===t.next_journeys.length)return q;const e=this.hass.language;return B`
+    `}_renderJourney(e){return B`
+      ${this._renderMeta(e)}
+      ${this._renderTimeline(e.legs||[])}
+    `}_canOpen(e){return!!(e.legs&&e.legs.length>0)||!!this.hass?.callService&&!!this.hass?.services?.[$e]?.[Me]}_altSummary(e,t){return[`${this._formatTime(e.departure)} – ${this._formatTime(e.arrival)}`,this._formatDuration(this._journeyMinutes(e)),`${e.transfers} ${1!==e.transfers?ve(t,"transfers"):ve(t,"transfer")}`,this._riskLabel(e.transfer_risk,t)]}_renderAltRow(e,t){return B`
+      <span class="time-span">
+        <span class="leg-time">${this._formatTime(e.departure)}</span>
+        <span class="trip-arrow">${Pe}</span>
+        <span class="leg-time">${this._formatTime(e.arrival)}</span>
+      </span>
+      <span>${this._formatDuration(this._journeyMinutes(e))}</span>
+      <span>${e.transfers} ${1!==e.transfers?ve(t,"transfers"):ve(t,"transfer")}</span>
+      <span class="alt-risk ${this._getRiskClass(e.transfer_risk)}">
+        <ha-icon
+          icon=${this._getRiskIcon(e.transfer_risk)}
+          title=${this._riskLabel(e.transfer_risk,t)}
+          style="--opt-icon-size:16px;"
+        ></ha-icon>
+      </span>
+    `}_renderAlternatives(e){if(!e.next_journeys||0===e.next_journeys.length)return q;const t=this.hass.language;return B`
       <div class="alt-journeys">
-        <div class="alt-journeys-title">${vt(e,"alternative_connections")}</div>
-        ${t.next_journeys.map(t=>B`
-            <div class="alt-journey">
-              <span class="time-span">
-                <span class="leg-time">${this._formatTime(t.departure)}</span>
-                <span class="trip-arrow">${Nt}</span>
-                <span class="leg-time">${this._formatTime(t.arrival)}</span>
-              </span>
-              <span>${this._formatDuration(this._journeyMinutes(t))}</span>
-              <span>${t.transfers} ${1!==t.transfers?vt(e,"transfers"):vt(e,"transfer")}</span>
-              <span class="alt-risk ${this._getRiskClass(t.transfer_risk)}">
-                <ha-icon
-                  icon=${this._getRiskIcon(t.transfer_risk)}
-                  title=${this._riskLabel(t.transfer_risk,e)}
-                  style="--opt-icon-size:16px;"
-                ></ha-icon>
-              </span>
+        <div class="alt-journeys-title">${ve(t,"alternative_connections")}</div>
+        ${e.next_journeys.map(e=>this._canOpen(e)?B`
+                <button
+                  type="button"
+                  class="alt-journey"
+                  aria-haspopup="dialog"
+                  aria-label=${`${ve(t,"show_details")}: ${this._altSummary(e,t).join(", ")}`}
+                  @click=${()=>this._open(e)}
+                >
+                  ${this._renderAltRow(e,t)}
+                </button>
+              `:B`<div class="alt-journey">${this._renderAltRow(e,t)}</div>`)}
+      </div>
+    `}_open(e){const t=++this._request;this._openSummary=e,this._openError="",this._openJourney=e.legs&&e.legs.length>0?e:null,this._dialog?.showModal(),this._openJourney||this._fetch(e,t)}_isSameJourney(e,t){if(e.id&&t.id)return e.id===t.id;const i=e.departure_timestamp&&t.departure_timestamp?e.departure_timestamp===t.departure_timestamp:e.departure===t.departure,n=e.arrival_timestamp&&t.arrival_timestamp?e.arrival_timestamp===t.arrival_timestamp:e.arrival===t.arrival;return i&&n&&e.transfers===t.transfers&&e.duration_minutes===t.duration_minutes}async _fetch(e,t){try{const i=await this.hass.callService($e,Me,{entity_id:this.config.entity},void 0,!1,!0);if(t!==this._request)return;const n=(i?.response?.journeys??[]).find(t=>this._isSameJourney(t,e));n?.legs?.length?this._openJourney=n:this._openError=ve(this.hass.language,"connection_gone")}catch(e){if(t!==this._request)return;this._openError=ve(this.hass.language,"details_failed"),console.error("openpublictransport-card: could not load connection detail",e)}}_close(){this._dialog?.close()}_onDialogClick(e){e.target===e.currentTarget&&this._close()}_onDialogClose(){this._dialog?.open||(this._request++,this._openSummary=null,this._openJourney=null,this._openError="")}_renderDialogBody(){return this._openJourney?this._renderJourney(this._openJourney):this._openError?B`
+        <div class="journey-dialog-status is-error">
+          <ha-icon icon="mdi:alert-circle-outline"></ha-icon>
+          <span>${this._openError}</span>
+        </div>
+      `:B`
+      <div class="journey-dialog-status">
+        <span class="journey-dialog-spinner" aria-hidden="true"></span>
+        <span>${ve(this.hass.language,"loading_details")}</span>
+      </div>
+    `}_renderDialog(){const e=this.hass.language;return B`
+      <dialog
+        class="journey-dialog"
+        aria-labelledby="journey-dialog-title"
+        @click=${this._onDialogClick}
+        @close=${this._onDialogClose}
+      >
+        <div class="journey-dialog-head">
+          ${this._openSummary?this._renderJourneyHeader(this._openSummary,"journey-dialog-title"):B`<div class="trip-header" id="journey-dialog-title"></div>`}
+          <button
+            type="button"
+            class="journey-dialog-close"
+            aria-label=${ve(e,"close")}
+            @click=${this._close}
+          >
+            <ha-icon icon="mdi:close"></ha-icon>
+          </button>
+        </div>
+        <div class="journey-dialog-content">${this._renderDialogBody()}</div>
+      </dialog>
+    `}render(){return B`
+      ${this.trip?B`
+            <div class="trip-container">
+              ${this._renderHeader(this.trip)}
+              ${this._renderJourney(this.trip)}
+              ${this._renderAlternatives(this.trip)}
             </div>
-          `)}
-      </div>
-    `}render(){return this.trip?B`
-      <div class="trip-container">
-        ${this._renderHeader(this.trip)}
-        ${this._renderMeta(this.trip)}
-        ${this._renderTimeline(this.trip)}
-        ${this._renderAlternatives(this.trip)}
-      </div>
-    `:B`<div class="card-empty">${vt(this.hass.language,"no_trip_data")}</div>`}};Pt.styles=mt,t([ct({attribute:!1})],Pt.prototype,"hass",void 0),t([ct({attribute:!1})],Pt.prototype,"config",void 0),t([ct({attribute:!1})],Pt.prototype,"trip",void 0),Pt=t([dt("openpublictransport-trip-layout")],Pt);let Mt=class extends rt{constructor(){super(...arguments),this.departures=[],this.stationName="",this.emptyKey="no_departures"}_renderCountdown(t){return xt(this.hass?.language||"en",t)}render(){const t=this.hass?.language||"en",e=this.departures[0];if(!e)return B`<div class="next-empty">${vt(t,this.emptyKey)}</div>`;const i=e.line_color?`background:${e.line_color};color:${e.line_text_color||"#000"}`:"",n=e.minutes_until_departure,a=n<=2?"next-countdown imminent":"next-countdown";return B`
+          `:B`<div class="card-empty">${ve(this.hass.language,"no_trip_data")}</div>`}
+      ${this._renderDialog()}
+    `}};Re.styles=me,e([ce({attribute:!1})],Re.prototype,"hass",void 0),e([ce({attribute:!1})],Re.prototype,"config",void 0),e([ce({attribute:!1})],Re.prototype,"trip",void 0),e([ue()],Re.prototype,"_openSummary",void 0),e([ue()],Re.prototype,"_openJourney",void 0),e([ue()],Re.prototype,"_openError",void 0),e([ge("dialog.journey-dialog")],Re.prototype,"_dialog",void 0),Re=e([de("openpublictransport-trip-layout")],Re);let Le=class extends se{constructor(){super(...arguments),this.departures=[],this.stationName="",this.emptyKey="no_departures"}_renderCountdown(e){return xe(this.hass?.language||"en",e)}render(){const e=this.hass?.language||"en",t=this.departures[0];if(!t)return B`<div class="next-empty">${ve(e,this.emptyKey)}</div>`;const i=t.line_color?`background:${t.line_color};color:${t.line_text_color||"#000"}`:"",n=t.minutes_until_departure,a=n<=2?"next-countdown imminent":"next-countdown";return B`
       <div class="next-container">
         ${this.config.show_header&&this.stationName?B`<div class="next-station">${this.stationName}</div>`:q}
 
         <div class="next-main">
           <openpublictransport-transport-icon
             class="next-icon"
-            transport-type=${e.transportation_type}
+            transport-type=${t.transportation_type}
           ></openpublictransport-transport-icon>
-          <span class="next-line-badge" style=${i}>${e.line}</span>
-          <span class="next-destination">${e.destination}</span>
+          <span class="next-line-badge" style=${i}>${t.line}</span>
+          <span class="next-destination">${t.destination}</span>
         </div>
 
         <div class="next-bottom">
           <span class=${a}>${this._renderCountdown(n)}</span>
           <span class="time-line">
-            <span class="next-time">${e.departure_time||e.planned_time}</span>
+            <span class="next-time">${t.departure_time||t.planned_time}</span>
             ${this.config.show_delay?B`<openpublictransport-delay-badge
-                  .delay=${e.delay}
-                  ?is-realtime=${e.is_realtime}
-                  .language=${t}
+                  .delay=${t.delay}
+                  ?is-realtime=${t.is_realtime}
+                  .language=${e}
                 ></openpublictransport-delay-badge>`:q}
           </span>
-          ${this.config.show_platform&&e.platform?B`<span class="next-platform">${vt(t,"platform")} ${e.platform}</span>`:q}
+          ${this.config.show_platform&&t.platform?B`<span class="next-platform">${ve(e,"platform")} ${t.platform}</span>`:q}
         </div>
       </div>
-    `}};Mt.styles=[mt,s`
+    `}};Le.styles=[me,r`
       .next-container {
         padding: 16px;
         display: flex;
@@ -1507,10 +1728,10 @@ function gt(t,e){return(e,i,n)=>((t,e,i)=>(i.configurable=!0,i.enumerable=!0,Ref
         color: var(--opt-text-secondary);
         font-size: var(--ha-font-size-s, 12px);
       }
-    `],t([ct({attribute:!1})],Mt.prototype,"hass",void 0),t([ct({attribute:!1})],Mt.prototype,"config",void 0),t([ct({attribute:!1})],Mt.prototype,"departures",void 0),t([ct({type:String})],Mt.prototype,"stationName",void 0),t([ct({type:String})],Mt.prototype,"emptyKey",void 0),Mt=t([dt("openpublictransport-next-layout")],Mt);let Rt=class extends rt{constructor(){super(...arguments),this._entityFilter=t=>$t(this.hass,t.entity_id)}setConfig(t){this._config={..._t,...t}}_fireConfigChanged(){const t=new CustomEvent("config-changed",{detail:{config:this._config},bubbles:!0,composed:!0});this.dispatchEvent(t)}_entityChanged(t){if(!this._config)return;const e=t.detail?.value??"";this._config={...this._config,entity:e},this._fireConfigChanged()}_layoutChanged(t){const e=t.target.value;this._config&&e&&(this._config={...this._config,layout:e},this._fireConfigChanged())}_themeChanged(t){const e=t.target.value;this._config&&e&&(this._config={...this._config,theme:e},this._fireConfigChanged())}_maxDeparturesChanged(t){if(!this._config)return;const e=t.target,i=parseInt(e.value,10);isNaN(i)||i<1||(this._config={...this._config,max_departures:i},this._fireConfigChanged())}_toggleChanged(t){return e=>{this._config&&(this._config={...this._config,[t]:e.target.checked},this._fireConfigChanged())}}render(){if(!this.hass||!this._config)return B``;const t=this.hass.language;return B`
+    `],e([ce({attribute:!1})],Le.prototype,"hass",void 0),e([ce({attribute:!1})],Le.prototype,"config",void 0),e([ce({attribute:!1})],Le.prototype,"departures",void 0),e([ce({type:String})],Le.prototype,"stationName",void 0),e([ce({type:String})],Le.prototype,"emptyKey",void 0),Le=e([de("openpublictransport-next-layout")],Le);let He=class extends se{constructor(){super(...arguments),this._entityFilter=e=>ke(this.hass,e.entity_id)}setConfig(e){this._config={..._e,...e}}_fireConfigChanged(){const e=new CustomEvent("config-changed",{detail:{config:this._config},bubbles:!0,composed:!0});this.dispatchEvent(e)}_entityChanged(e){if(!this._config)return;const t=e.detail?.value??"";this._config={...this._config,entity:t},this._fireConfigChanged()}_layoutChanged(e){const t=e.target.value;this._config&&t&&(this._config={...this._config,layout:t},this._fireConfigChanged())}_themeChanged(e){const t=e.target.value;this._config&&t&&(this._config={...this._config,theme:t},this._fireConfigChanged())}_maxDeparturesChanged(e){if(!this._config)return;const t=e.target,i=parseInt(t.value,10);isNaN(i)||i<1||(this._config={...this._config,max_departures:i},this._fireConfigChanged())}_toggleChanged(e){return t=>{this._config&&(this._config={...this._config,[e]:t.target.checked},this._fireConfigChanged())}}render(){if(!this.hass||!this._config)return B``;const e=this.hass.language;return B`
       <div class="card-config">
         <div class="config-row">
-          <label>${vt(t,"entity")}</label>
+          <label>${ve(e,"entity")}</label>
           <ha-entity-picker
             .hass=${this.hass}
             .value=${this._config.entity}
@@ -1522,27 +1743,27 @@ function gt(t,e){return(e,i,n)=>((t,e,i)=>(i.configurable=!0,i.enumerable=!0,Ref
         </div>
 
         <div class="config-row">
-          <label>${vt(t,"layout")}</label>
+          <label>${ve(e,"layout")}</label>
           <select .value=${this._config.layout} @change=${this._layoutChanged}>
-            <option value="table" ?selected=${"table"===this._config.layout}>${vt(t,"table_layout")}</option>
-            <option value="compact" ?selected=${"compact"===this._config.layout}>${vt(t,"compact_layout")}</option>
-            <option value="trip" ?selected=${"trip"===this._config.layout}>${vt(t,"trip_layout")}</option>
-            <option value="next" ?selected=${"next"===this._config.layout}>${vt(t,"next_layout")}</option>
+            <option value="table" ?selected=${"table"===this._config.layout}>${ve(e,"table_layout")}</option>
+            <option value="compact" ?selected=${"compact"===this._config.layout}>${ve(e,"compact_layout")}</option>
+            <option value="trip" ?selected=${"trip"===this._config.layout}>${ve(e,"trip_layout")}</option>
+            <option value="next" ?selected=${"next"===this._config.layout}>${ve(e,"next_layout")}</option>
           </select>
         </div>
 
         <div class="config-row">
-          <label>${vt(t,"theme")}</label>
+          <label>${ve(e,"theme")}</label>
           <select .value=${this._config.theme} @change=${this._themeChanged}>
             <option value="auto" ?selected=${"auto"===this._config.theme}>Auto</option>
             <option value="dark" ?selected=${"dark"===this._config.theme}>Dark</option>
             <option value="light" ?selected=${"light"===this._config.theme}>Light</option>
-            <option value="ha" ?selected=${"ha"===this._config.theme}>${vt(t,"theme_ha")}</option>
+            <option value="ha" ?selected=${"ha"===this._config.theme}>${ve(e,"theme_ha")}</option>
           </select>
         </div>
 
         <div class="config-row">
-          <label>${vt(t,"max_departures")}</label>
+          <label>${ve(e,"max_departures")}</label>
           <ha-textfield
             type="number"
             .value=${String(this._config.max_departures)}
@@ -1552,10 +1773,10 @@ function gt(t,e){return(e,i,n)=>((t,e,i)=>(i.configurable=!0,i.enumerable=!0,Ref
           ></ha-textfield>
         </div>
 
-        <div class="section-title">${vt(t,"display_options")}</div>
+        <div class="section-title">${ve(e,"display_options")}</div>
 
         <div class="toggle-row">
-          <label>${vt(t,"show_header")}</label>
+          <label>${ve(e,"show_header")}</label>
           <ha-switch
             .checked=${this._config.show_header}
             @change=${this._toggleChanged("show_header")}
@@ -1563,7 +1784,7 @@ function gt(t,e){return(e,i,n)=>((t,e,i)=>(i.configurable=!0,i.enumerable=!0,Ref
         </div>
 
         <div class="toggle-row">
-          <label>${vt(t,"show_platform")}</label>
+          <label>${ve(e,"show_platform")}</label>
           <ha-switch
             .checked=${this._config.show_platform}
             @change=${this._toggleChanged("show_platform")}
@@ -1571,7 +1792,7 @@ function gt(t,e){return(e,i,n)=>((t,e,i)=>(i.configurable=!0,i.enumerable=!0,Ref
         </div>
 
         <div class="toggle-row">
-          <label>${vt(t,"show_delay")}</label>
+          <label>${ve(e,"show_delay")}</label>
           <ha-switch
             .checked=${this._config.show_delay}
             @change=${this._toggleChanged("show_delay")}
@@ -1579,7 +1800,7 @@ function gt(t,e){return(e,i,n)=>((t,e,i)=>(i.configurable=!0,i.enumerable=!0,Ref
         </div>
 
         <div class="toggle-row">
-          <label>${vt(t,"show_realtime")}</label>
+          <label>${ve(e,"show_realtime")}</label>
           <ha-switch
             .checked=${this._config.show_realtime_indicator}
             @change=${this._toggleChanged("show_realtime_indicator")}
@@ -1588,7 +1809,7 @@ function gt(t,e){return(e,i,n)=>((t,e,i)=>(i.configurable=!0,i.enumerable=!0,Ref
 
         ${"table"===this._config.layout?B`
               <div class="toggle-row">
-                <label>${vt(t,"show_notices")}</label>
+                <label>${ve(e,"show_notices")}</label>
                 <ha-switch
                   .checked=${!1!==this._config.show_notices}
                   @change=${this._toggleChanged("show_notices")}
@@ -1596,7 +1817,7 @@ function gt(t,e){return(e,i,n)=>((t,e,i)=>(i.configurable=!0,i.enumerable=!0,Ref
               </div>
 
               <div class="toggle-row">
-                <label>${vt(t,"show_disruption_banner")}</label>
+                <label>${ve(e,"show_disruption_banner")}</label>
                 <ha-switch
                   .checked=${!1!==this._config.show_disruption_banner}
                   @change=${this._toggleChanged("show_disruption_banner")}
@@ -1605,43 +1826,43 @@ function gt(t,e){return(e,i,n)=>((t,e,i)=>(i.configurable=!0,i.enumerable=!0,Ref
             `:""}
 
         <div class="toggle-row">
-          <label>${vt(t,"show_data_age")}</label>
+          <label>${ve(e,"show_data_age")}</label>
           <ha-switch
             .checked=${!0===this._config.show_data_age}
             @change=${this._toggleChanged("show_data_age")}
           ></ha-switch>
         </div>
 
-        ${this._isTripEntity()?this._renderTripFilterNote(t):this._renderFilters(t)}
+        ${this._isTripEntity()?this._renderTripFilterNote(e):this._renderFilters(e)}
       </div>
-    `}_isTripEntity(){return!(!this.hass||!this._config?.entity)&&"trip"===zt(this.hass,this._config.entity)}_renderTripFilterNote(t){return B`
-      <div class="section-title">${vt(t,"filters")}</div>
-      <div class="filter-note">${vt(t,"trip_filter_note")}</div>
-    `}_renderFilters(t){return B`
-        <div class="section-title">${vt(t,"line_filter")}</div>
+    `}_isTripEntity(){return!(!this.hass||!this._config?.entity)&&"trip"===Ae(this.hass,this._config.entity)}_renderTripFilterNote(e){return B`
+      <div class="section-title">${ve(e,"filters")}</div>
+      <div class="filter-note">${ve(e,"trip_filter_note")}</div>
+    `}_renderFilters(e){return B`
+        <div class="section-title">${ve(e,"line_filter")}</div>
         <div class="config-row">
           <ha-textfield
             type="text"
             .value=${this._config.line_filter||""}
             placeholder="U6, S1, RE5"
-            helper=${vt(t,"line_filter_hint")}
-            @change=${t=>{this._config&&(this._config={...this._config,line_filter:t.target.value},this._fireConfigChanged())}}
+            helper=${ve(e,"line_filter_hint")}
+            @change=${e=>{this._config&&(this._config={...this._config,line_filter:e.target.value},this._fireConfigChanged())}}
             style="width:100%"
           ></ha-textfield>
         </div>
 
-        <div class="section-title">${vt(t,"destination_filter")}</div>
+        <div class="section-title">${ve(e,"destination_filter")}</div>
         <div class="config-row">
           <ha-textfield
             type="text"
             .value=${this._config.destination_filter||""}
             placeholder="Duisburg, Flughafen"
-            helper=${vt(t,"destination_filter_hint")}
-            @change=${t=>{this._config&&(this._config={...this._config,destination_filter:t.target.value},this._fireConfigChanged())}}
+            helper=${ve(e,"destination_filter_hint")}
+            @change=${e=>{this._config&&(this._config={...this._config,destination_filter:e.target.value},this._fireConfigChanged())}}
             style="width:100%"
           ></ha-textfield>
         </div>
-    `}};Rt.styles=s`
+    `}};He.styles=r`
     .card-config {
       padding: 16px;
     }
@@ -1694,19 +1915,19 @@ function gt(t,e){return(e,i,n)=>((t,e,i)=>(i.configurable=!0,i.enumerable=!0,Ref
       border: 1px solid var(--divider-color, #ccc);
       background: var(--secondary-background-color, transparent);
     }
-  `,t([ct({attribute:!1})],Rt.prototype,"hass",void 0),t([ut()],Rt.prototype,"_config",void 0),Rt=t([dt("openpublictransport-card-editor")],Rt),console.info("%c OPENPUBLICTRANSPORT-CARD %c v1.11.0 ","color: #ffd700; background: #1a1a1a; font-weight: bold; padding: 2px 4px;","color: #1a1a1a; background: #ffd700; font-weight: bold; padding: 2px 4px;");let Lt=class extends rt{static getConfigElement(){return document.createElement("openpublictransport-card-editor")}static getStubConfig(t,e,i){const n=kt(t,e)[0]??kt(t,i)[0]??"",a=n?zt(t,n):"unknown";return{..._t,entity:n,layout:At(a),theme:"ha"}}setConfig(t){if(!t.entity)throw new Error(vt("en","please_define_entity"));this._config={..._t,...t}}getCardSize(){if(!this._config)return 3;switch(this._config.layout){case"compact":case"next":return 2;case"trip":return 5;default:return Math.min(2+(this._config.max_departures||10),12)}}getGridOptions(){return{rows:"auto",min_rows:2,columns:12}}connectedCallback(){super.connectedCallback(),this._timeInterval=setInterval(()=>{this.requestUpdate()},1e4)}disconnectedCallback(){super.disconnectedCallback(),this._timeInterval&&(clearInterval(this._timeInterval),this._timeInterval=void 0)}updated(t){super.updated(t),this._applyTheme()}_applyTheme(){if(!this._config)return;let t=this._config.theme;"auto"===t&&(t=this.hass?.themes?.darkMode?"dark":"light"),this.setAttribute("data-theme",t)}_getDepartures(){if(!this.hass||!this._config)return[];const t=this.hass.states[this._config.entity];if(!t)return[];const e=t.attributes.departures;if(!Array.isArray(e))return[];let i=e.map(t=>t.departure_timestamp?{...t,minutes_until_departure:wt(t.departure_timestamp,t.minutes_until_departure)}:t).filter(t=>!t.departure_timestamp||t.minutes_until_departure>=0);const n=(this._config.line_filter||"").trim();if(n){const t=n.split(",").map(t=>t.trim().toLowerCase()).filter(Boolean);i=i.filter(e=>t.some(t=>e.line.toLowerCase()===t))}const a=(this._config.destination_filter||"").trim();if(a){const t=a.split(",").map(t=>t.trim().toLowerCase()).filter(Boolean);i=i.filter(e=>t.some(t=>(e.destination||"").toLowerCase().includes(t)))}return i}_getTripData(){if(!this.hass||!this._config)return null;const t=this.hass.states[this._config.entity];if(!t)return null;const e=t.attributes;return e.departure&&e.legs?{departure:e.departure,arrival:e.arrival,departure_timestamp:e.departure_timestamp,arrival_timestamp:e.arrival_timestamp,in_minutes:e.in_minutes,destination:e.destination,duration_minutes:e.duration_minutes,transfers:e.transfers,connection_feasible:e.connection_feasible,transfer_risk:e.transfer_risk,min_transfer_time:e.min_transfer_time,legs:e.legs,next_journeys:e.next_journeys}:null}_tripAsDeparture(t){const e=t.legs??[],i=e.find(t=>"walk"!==(t.transport_type||"").toLowerCase())??e[0];if(!i)return null;const n=i.departure_estimated||i.departure_planned||t.departure,a=e[e.length-1];return{line:i.line,destination:t.destination||a?.destination||"",departure_time:n,planned_time:n,delay:i.delay??0,platform:i.platform||"",transportation_type:i.transport_type||i.product||"",is_realtime:Boolean(i.departure_estimated),minutes_until_departure:this._minutesUntilTrip(t)}}_minutesUntilTrip(t){return wt(t.departure_timestamp,t.in_minutes??0)}_getStationName(){if(!this.hass||!this._config)return"";const t=this.hass.states[this._config.entity];return t?t.attributes.friendly_name||t.attributes.station_name||t.entity_id:""}_renderError(t){return B`
+  `,e([ce({attribute:!1})],He.prototype,"hass",void 0),e([ue()],He.prototype,"_config",void 0),He=e([de("openpublictransport-card-editor")],He),console.info("%c OPENPUBLICTRANSPORT-CARD %c v1.11.0 ","color: #ffd700; background: #1a1a1a; font-weight: bold; padding: 2px 4px;","color: #1a1a1a; background: #ffd700; font-weight: bold; padding: 2px 4px;");let Oe=class extends se{static getConfigElement(){return document.createElement("openpublictransport-card-editor")}static getStubConfig(e,t,i){const n=ze(e,t)[0]??ze(e,i)[0]??"",a=n?Ae(e,n):"unknown";return{..._e,entity:n,layout:Ce(a),theme:"ha"}}setConfig(e){if(!e.entity)throw new Error(ve("en","please_define_entity"));this._config={..._e,...e}}getCardSize(){if(!this._config)return 3;switch(this._config.layout){case"compact":case"next":return 2;case"trip":return 5;default:return Math.min(2+(this._config.max_departures||10),12)}}getGridOptions(){return{rows:"auto",min_rows:2,columns:12}}connectedCallback(){super.connectedCallback(),this._timeInterval=setInterval(()=>{this.requestUpdate()},1e4)}disconnectedCallback(){super.disconnectedCallback(),this._timeInterval&&(clearInterval(this._timeInterval),this._timeInterval=void 0)}updated(e){super.updated(e),this._applyTheme()}_applyTheme(){if(!this._config)return;let e=this._config.theme;"auto"===e&&(e=this.hass?.themes?.darkMode?"dark":"light"),this.setAttribute("data-theme",e)}_getDepartures(){if(!this.hass||!this._config)return[];const e=this.hass.states[this._config.entity];if(!e)return[];const t=e.attributes.departures;if(!Array.isArray(t))return[];let i=t.map(e=>e.departure_timestamp?{...e,minutes_until_departure:we(e.departure_timestamp,e.minutes_until_departure)}:e).filter(e=>!e.departure_timestamp||e.minutes_until_departure>=0);const n=(this._config.line_filter||"").trim();if(n){const e=n.split(",").map(e=>e.trim().toLowerCase()).filter(Boolean);i=i.filter(t=>e.some(e=>t.line.toLowerCase()===e))}const a=(this._config.destination_filter||"").trim();if(a){const e=a.split(",").map(e=>e.trim().toLowerCase()).filter(Boolean);i=i.filter(t=>e.some(e=>(t.destination||"").toLowerCase().includes(e)))}return i}_getTripData(){if(!this.hass||!this._config)return null;const e=this.hass.states[this._config.entity];if(!e)return null;const t=e.attributes;return t.departure&&t.legs?{id:t.id,departure:t.departure,arrival:t.arrival,departure_timestamp:t.departure_timestamp,arrival_timestamp:t.arrival_timestamp,in_minutes:t.in_minutes,destination:t.destination,duration_minutes:t.duration_minutes,transfers:t.transfers,connection_feasible:t.connection_feasible,transfer_risk:t.transfer_risk,min_transfer_time:t.min_transfer_time,legs:t.legs,next_journeys:t.next_journeys}:null}_tripAsDeparture(e){const t=e.legs??[],i=t.find(e=>"walk"!==(e.transport_type||"").toLowerCase())??t[0];if(!i)return null;const n=i.departure_estimated||i.departure_planned||e.departure,a=t[t.length-1];return{line:i.line,destination:e.destination||a?.destination||"",departure_time:n,planned_time:n,delay:i.delay??0,platform:i.platform||"",transportation_type:i.transport_type||i.product||"",is_realtime:Boolean(i.departure_estimated),minutes_until_departure:this._minutesUntilTrip(e)}}_minutesUntilTrip(e){return we(e.departure_timestamp,e.in_minutes??0)}_getStationName(){if(!this.hass||!this._config)return"";const e=this.hass.states[this._config.entity];return e?e.attributes.friendly_name||e.attributes.station_name||e.entity_id:""}_renderError(e){return B`
       <ha-card>
         <div class="card-error">
           <ha-icon icon="mdi:alert-circle"></ha-icon>
-          <div>${t}</div>
+          <div>${e}</div>
         </div>
       </ha-card>
-    `}render(){if(!this._config||!this.hass)return q;const t=this.hass.states[this._config.entity];return t?"unavailable"===t.state?this._renderError(vt(this.hass.language,"entity_unavailable")):B`
+    `}render(){if(!this._config||!this.hass)return q;const e=this.hass.states[this._config.entity];return e?"unavailable"===e.state?this._renderError(ve(this.hass.language,"entity_unavailable")):B`
       <ha-card>
         ${this._renderLayout()}
-        ${this._renderDataAge(t.attributes)}
+        ${this._renderDataAge(e.attributes)}
       </ha-card>
-    `:this._renderError(`Entity not found: ${this._config.entity}`)}_renderDataAge(t){if(!this._config.show_data_age)return q;const e=function(t,e){if(!e)return null;const i=Date.parse(e);if(Number.isNaN(i))return null;const n=Math.max(0,Math.round((Date.now()-i)/1e3)),[a,o]=n<60?[n,"second"]:n<3600?[Math.floor(n/60),"minute"]:[Math.floor(n/3600),"hour"];try{return new Intl.RelativeTimeFormat(t||"en",{numeric:"always"}).format(-a,o)}catch{return`${a} ${"second"===o?"s":"minute"===o?"min":"h"}`}}(this.hass.language,t.last_fetched);return e?B`<div class="data-age">${vt(this.hass.language,"fetched_ago",{age:e})}</div>`:q}_renderLayout(){switch(this._config.layout){case"compact":return B`
+    `:this._renderError(`Entity not found: ${this._config.entity}`)}_renderDataAge(e){if(!this._config.show_data_age)return q;const t=function(e,t){if(!t)return null;const i=Date.parse(t);if(Number.isNaN(i))return null;const n=Math.max(0,Math.round((Date.now()-i)/1e3)),[a,o]=n<60?[n,"second"]:n<3600?[Math.floor(n/60),"minute"]:[Math.floor(n/3600),"hour"];try{return new Intl.RelativeTimeFormat(e||"en",{numeric:"always"}).format(-a,o)}catch{return`${a} ${"second"===o?"s":"minute"===o?"min":"h"}`}}(this.hass.language,e.last_fetched);return t?B`<div class="data-age">${ve(this.hass.language,"fetched_ago",{age:t})}</div>`:q}_renderLayout(){switch(this._config.layout){case"compact":return B`
           <openpublictransport-compact-layout
             .hass=${this.hass}
             .config=${this._config}
@@ -1719,13 +1940,13 @@ function gt(t,e){return(e,i,n)=>((t,e,i)=>(i.configurable=!0,i.enumerable=!0,Ref
             .config=${this._config}
             .trip=${this._getTripData()}
           ></openpublictransport-trip-layout>
-        `;case"next":{const t="trip"===zt(this.hass,this._config.entity),e=t?this._getTripData():null,i=e?this._tripAsDeparture(e):null;return B`
+        `;case"next":{const e="trip"===Ae(this.hass,this._config.entity),t=e?this._getTripData():null,i=t?this._tripAsDeparture(t):null;return B`
           <openpublictransport-next-layout
             .hass=${this.hass}
             .config=${this._config}
-            .departures=${t?i?[i]:[]:this._getDepartures()}
+            .departures=${e?i?[i]:[]:this._getDepartures()}
             .stationName=${this._getStationName()}
-            .emptyKey=${t?"no_trip_data":"no_departures"}
+            .emptyKey=${e?"no_trip_data":"no_departures"}
           ></openpublictransport-next-layout>
         `}default:return B`
           <openpublictransport-table-layout
@@ -1734,4 +1955,4 @@ function gt(t,e){return(e,i,n)=>((t,e,i)=>(i.configurable=!0,i.enumerable=!0,Ref
             .departures=${this._getDepartures()}
             .stationName=${this._getStationName()}
           ></openpublictransport-table-layout>
-        `}}};Lt.styles=[ft,mt],t([ct({attribute:!1})],Lt.prototype,"hass",void 0),t([ut()],Lt.prototype,"_config",void 0),t([ut()],Lt.prototype,"_timeInterval",void 0),Lt=t([dt("openpublictransport-card")],Lt);const Ht=window;Ht.customCards=Ht.customCards||[],Ht.customCards.push({type:"openpublictransport-card",name:"Public Transport Departures",description:"Display public transport departures in table, compact, or trip layout",preview:!0,getEntitySuggestion:function(t,e){if(!$t(t,e))return null;const i=zt(t,e),n=[];return"departures"===i?(n.push({label:"Table layout",config:{type:"custom:openpublictransport-card",entity:e,layout:"table"}}),n.push({label:"Compact layout",config:{type:"custom:openpublictransport-card",entity:e,layout:"compact",max_departures:6}}),n.push({label:"Next departure",config:{type:"custom:openpublictransport-card",entity:e,layout:"next"}})):"trip"===i?(n.push({label:"Trip layout",config:{type:"custom:openpublictransport-card",entity:e,layout:"trip"}}),n.push({label:"Next departure",config:{type:"custom:openpublictransport-card",entity:e,layout:"next"}})):n.push({label:"Table layout",config:{type:"custom:openpublictransport-card",entity:e,layout:At(i)}}),1===n.length?n[0]:n}});export{Lt as OpenpublictransportCard};
+        `}}};Oe.styles=[fe,me],e([ce({attribute:!1})],Oe.prototype,"hass",void 0),e([ue()],Oe.prototype,"_config",void 0),e([ue()],Oe.prototype,"_timeInterval",void 0),Oe=e([de("openpublictransport-card")],Oe);const Ue=window;Ue.customCards=Ue.customCards||[],Ue.customCards.push({type:"openpublictransport-card",name:"Public Transport Departures",description:"Display public transport departures in table, compact, or trip layout",preview:!0,getEntitySuggestion:function(e,t){if(!ke(e,t))return null;const i=Ae(e,t),n=[];return"departures"===i?(n.push({label:"Table layout",config:{type:"custom:openpublictransport-card",entity:t,layout:"table"}}),n.push({label:"Compact layout",config:{type:"custom:openpublictransport-card",entity:t,layout:"compact",max_departures:6}}),n.push({label:"Next departure",config:{type:"custom:openpublictransport-card",entity:t,layout:"next"}})):"trip"===i?(n.push({label:"Trip layout",config:{type:"custom:openpublictransport-card",entity:t,layout:"trip"}}),n.push({label:"Next departure",config:{type:"custom:openpublictransport-card",entity:t,layout:"next"}})):n.push({label:"Table layout",config:{type:"custom:openpublictransport-card",entity:t,layout:Ce(i)}}),1===n.length?n[0]:n}});export{Oe as OpenpublictransportCard};
