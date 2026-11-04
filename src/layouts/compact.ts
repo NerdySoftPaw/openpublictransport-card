@@ -3,6 +3,7 @@ import { customElement, property } from "lit/decorators.js";
 import { cardStyles } from "../styles";
 import { Departure, CardConfig, HomeAssistant } from "../types";
 import { localize } from "../localize";
+import { formatCountdownShort } from "../format";
 import "../components/transport-icon";
 
 @customElement("openpublictransport-compact-layout")
@@ -25,8 +26,7 @@ export class CompactLayout extends LitElement {
   }
 
   private _renderCountdown(mins: number): string {
-    if (mins <= 0) return localize(this.hass.language, "now");
-    return `${mins}'`;
+    return formatCountdownShort(this.hass.language, mins);
   }
 
   private _getChipClass(dep: Departure): string {

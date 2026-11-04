@@ -1,23 +1,34 @@
 # OpenPublicTransport Card
 
-[![HACS][hacsbadge]][hacs]
+[![Marketplace][hacsbadge]][hacs]
 
-[hacs]: https://github.com/hacs/integration
-[hacsbadge]: https://img.shields.io/badge/HACS-Default-blue.svg?style=for-the-badge
+[hacs]: https://my.home-assistant.io/redirect/hacs_repository/?owner=NerdySoftPaw&repository=openpublictransport-card&category=plugin
+[hacsbadge]: https://img.shields.io/badge/Marketplace-Default-blue.svg?style=for-the-badge
 
-A custom Home Assistant Lovelace card for displaying public transport departures. Works with the [openpublictransport](https://github.com/NerdySoftPaw/hacs-publictransport) integration.
+A custom Home Assistant Lovelace card for displaying public transport departures. Works with the [openpublictransport](https://github.com/NerdySoftPaw/openpublictransport) integration.
 
 ![Screenshot placeholder](screenshot.png)
 
 ## Installation
 
-### HACS (Recommended)
+### Marketplace (Recommended)
 
-1. Open HACS in your Home Assistant instance.
-2. Go to **Frontend** > **+ Explore & Download Repositories**.
-3. Search for **OpenPublicTransport Card**.
-4. Click **Download**.
-5. Restart Home Assistant.
+1. Open **Settings** > **Marketplace** (Home Assistant 2026.11 or newer).
+2. Search for **OpenPublicTransport Card** and click **Download**.
+3. Reload the browser.
+
+The Marketplace adds the dashboard resource for you. If you manage resources in YAML, add it yourself:
+
+```yaml
+lovelace:
+  resources:
+    - url: /local/community/openpublictransport-card/openpublictransport-card.js
+      type: module
+```
+
+A resource still pointing at `/hacsfiles/openpublictransport-card/...` keeps working; Home Assistant raises a repair asking you to switch it.
+
+On Home Assistant before 2026.11, install it from **HACS** > **Frontend** the same way. The Marketplace takes over that install when you update.
 
 ### Manual
 
@@ -97,6 +108,9 @@ show_header: true
 | `show_platform`           | boolean | `true`  | Show platform/track column                                                  |
 | `show_delay`              | boolean | `true`  | Show delay badges                                                           |
 | `show_realtime_indicator` | boolean | `true`  | Show green checkmark for on-time realtime                                   |
+| `show_notices`            | boolean | `true`  | Table: show the icon beside a destination with notices. Tap it to read them; disruptions are listed first |
+| `show_disruption_banner`  | boolean | `true`  | Table: show the red banner with the current disruptions. Tap it to read all of them |
+| `show_data_age`           | boolean | `false` | Show how long ago the integration last fetched the data ("Fetched 20 seconds ago"). Needs integration 2026.11.0 or newer; on a multi-stop sensor this is its oldest source |
 | `theme`                   | string  | `auto`  | Theme: `dark`, `light`, `auto`, `ha`. `dark` and `light` are the departure board — gold on black or dark on white, in a monospace face — and `auto` picks one of the two by the dashboard's dark mode. `ha` takes colours and font from the Home Assistant theme, so the card looks like the cards around it |
 
 ## Line Colors
